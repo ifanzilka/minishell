@@ -10,7 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= minishell
+NAME_MINISHELL	= minishell
+
+LIBFT = libft.a
+LIB_DIR =  ./libft/
+LIB_NAME =	libft/libft.a
 
 CC		= gcc
 
@@ -31,7 +35,15 @@ F_BLUE		= \033[34m
 
 SRCS.O = $(SRCS:.c=.o)
 
-$(NAME):	$(SRCS.O) $(HEADERS)
+all: $(LIB_NAME)  $(NAME_MINISHELL)
+
+
+$(LIB_NAME):
+		@echo "$(F_YELLOW)START RUN Makefile in libft $(F_NONE)"
+		@$(MAKE) -C $(LIB_DIR)
+		@echo "$(F_YELLOW)END RUN Makefile in libft $(F_NONE)"
+
+$(NAME_MINISHELL):	$(SRCS.O) $(HEADERS)
 
 
 $(SRCS.O): %.o:%.c
@@ -39,7 +51,7 @@ $(SRCS.O): %.o:%.c
 	@echo "$(F_BLUE)Object files minishell in ready! $(F_NONE)"
 
 
-code:
+	code:
 	@echo " ~~~~~~~~~~~~~~~~"
 	@echo "$(F_BOLD)  * Make code, *"
 	@echo "$(F_BOLD)   * not war! *"
