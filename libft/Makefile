@@ -110,11 +110,11 @@ $(SRCS.O): $(OBJ_DIR)%.o:%.c
 clean:
 		$(RM) $(OBJS) $(OBJBNS)
 		rm -rf $(OBJ_DIR)
-		@echo "$(F_GREEN)Cleaned! $(F_NONE)"
+		@echo "$(F_GREEN)Object files libft delete! $(F_NONE)"
 
 fclean:		clean
 			$(RM) $(NAME)
-			@echo "$(F_GREEN)FCleaned! $(F_NONE)"
+			@echo "$(F_GREEN)Delete $(NAME) FCleaned! $(F_NONE)"
 
 re:	fclean all
 
