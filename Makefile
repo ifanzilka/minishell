@@ -74,9 +74,6 @@ re: fclean all
 norm:
 	norminette *.c *.h
 
-
-
-
 code:
 	@echo " ~~~~~~~~~~~~~~~~"
 	@echo "$(F_BOLD)  * Make code, *"
