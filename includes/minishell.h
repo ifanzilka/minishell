@@ -10,7 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINISHELL_H
+ #define MINISHELL_H(args)
+
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
+#include <string.h>
+#include <errno.h>
 
+#endif
