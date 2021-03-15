@@ -159,4 +159,17 @@ int					ft_l_lstsize(t_l_list *lst);
 t_l_list			*ft_l_lst_cr_front(t_l_list **lst, void *content);
 t_l_list			*ft_l_lst_cr_back(t_l_list **lst, void *content);
 
+/*
+** Dict
+*/
+
+typedef struct		s_dict
+{
+    void			*key;
+    void            *value;
+}					t_dict;
+
+t_dict              *ft_cr_dict(void *key, void *value);
+void               *ft_find_key(t_list *dict, void *key, int (*cmp)(void *, void *));
+
 #endif

@@ -57,7 +57,10 @@ MEMORY_DIR = $(addprefix $(DIR),memory/)
 SRC_MEMORY = $(addprefix $(MEMORY_DIR), calloc_gc.c            free_gc.c              ft_garbage_collector.c malloc_gc.c) 
 
 GNL_DIR = $(addprefix $(DIR),gnl/)
-SRC_GNL = $(addprefix $(GNL_DIR), get_next_line.c) 
+SRC_GNL = $(addprefix $(GNL_DIR), get_next_line.c)
+
+DICT_DIR =  $(addprefix $(DIR),dictonary/)
+SRC_DICT = $(addprefix $(DICT_DIR),ft_cr_dict.c ft_find_key.c)
 
 SRCS	= 	$(SRC_MEM)	\
 			$(SRC_IS) 	\
@@ -68,6 +71,7 @@ SRCS	= 	$(SRC_MEM)	\
 			$(SRC_LIST)	\
 			$(SRC_L_LIST)\
 			$(SRC_GNL)	\
+			$(SRC_DICT)\
 			$(SRC_MEMORY)
 
 SRCS.O = $(addprefix $(OBJ_DIR),$(SRCS:.c=.o))
@@ -98,7 +102,7 @@ $(OBJ_DIR):
 		mkdir $(OBJ_DIR)
 		mkdir  $(addprefix $(OBJ_DIR),$(DIR))
 		mkdir $(addprefix	$(OBJ_DIR), $(MEM_DIR) $(IS_DIR) $(TO_DIR) $(STR_DIR) $(PUT_DIR) \
-						$(NBR_DIR) $(LIST_DIR) $(L_LIST_DIR) $(GNL_DIR) $(MEMORY_DIR))
+						$(NBR_DIR) $(LIST_DIR) $(L_LIST_DIR) $(GNL_DIR) $(MEMORY_DIR) $(DICT_DIR))
 $(SRCS.O): $(OBJ_DIR)%.o:%.c 
 	$(CC) $(FLAGS) -I$(HEADER) -c $< -o $@
 	@echo "$(F_BLUE)Object files libft in ready! $(F_NONE)"

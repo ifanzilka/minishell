@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_cr_dict.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/20 14:40:24 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/02/20 14:40:27 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/16 00:05:28 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/16 00:05:29 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
- #define MINISHELL_H
+#include "libft.h"
 
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <string.h>
-#include <errno.h>
-
-/*
-**  envp_copy -> is envp
-**  comands -> list comand divided with ";"
-**
-*/
-
-
-typedef struct		s_shell
+t_dict  *ft_cr_dict(void *key, void *value)
 {
-    char            **envp_copy;
-    t_list          *envp_dict;
-    t_list          *comands;
+    t_dict *new;
 
-}					t_shell;
+    new = malloc(sizeof(t_dict));
+    if (!new)
+        return (NULL);
+    new->key = key;
+    new->value = value;
+    return (new);
+}
 
-#endif

@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_find_key.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/20 14:40:24 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/02/20 14:40:27 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/16 00:45:35 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/16 00:45:36 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
- #define MINISHELL_H
+#include "libft.h"
 
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <string.h>
-#include <errno.h>
-
-/*
-**  envp_copy -> is envp
-**  comands -> list comand divided with ";"
-**
-*/
-
-
-typedef struct		s_shell
+void                *ft_find_key(t_list *dict, void *key, int (*cmp)(void *, void *))
 {
-    char            **envp_copy;
-    t_list          *envp_dict;
-    t_list          *comands;
+    t_list  *iter;
+    t_dict  *tmp;
 
-}					t_shell;
+    iter = dict;
+    while(iter)
+    {
+        tmp = iter->content;
+        if (cmp(tmp->key ,key) == 0)
+            return (tmp->value);
+        iter = iter->next;
+    }
+    return (NULL);
+}
 
-#endif

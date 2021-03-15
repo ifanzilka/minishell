@@ -21,6 +21,7 @@ CC		= gcc
 FLAGS	= -Wall -Wextra -Werror
 
 HEADER	= ./includes
+#HEADER_LIB = ./libft/includes
 HEADERS = $(addprefix $(HEADER)/,libft.h get_next_line.h minishell.h)
 
 DIR		= ./srcs/
@@ -39,7 +40,7 @@ SRCS = $(DIR)main.c
 SRCS.O = $(SRCS:.c=.o)
 
 .c.o:
-	$(CC) $(FLAGS) -I$(HEADER) -c $< -o $@
+	$(CC) $(FLAGS) -I$(HEADER)  -c $< -o $@
 	@echo "$(F_BLUE)Object files minishell in ready! $(F_NONE)"
 #$(SRCS.O): %.o:%.c
 #	$(CC) $(FLAGS) -I$(HEADER) -c $< -o $@
@@ -52,18 +53,20 @@ all: $(LIB_NAME) $(NAME_MINISHELL)
 $(LIB_NAME):
 		@echo "$(F_YELLOW)START RUN Makefile in libft $(F_NONE)"
 		@$(MAKE) -C $(LIB_DIR)
+		rm includes/libft.h
+		cp  libft/includes/libft.h includes/
 		@echo "$(F_YELLOW)END RUN Makefile in libft $(F_NONE)"
 
 $(NAME_MINISHELL): $(SRCS.O) $(HEADERS)
 		@echo "$(F_CYAN)Compile minishell ...$(F_NONE)"
-		$(CC) $(FLAGS)  -I$(HEADER) $(SRCS.O) -L. $(LIB_NAME)	-o $(NAME_MINISHELL)
+		$(CC) $(FLAGS)  -I$(HEADER)  $(SRCS.O) -L. $(LIB_NAME)	-o $(NAME_MINISHELL)
 		@echo "$(F_GREEN)minishell is Ready! GOOD LUCK:) $(F_NONE)"
 
 
 clean:
 
 	rm -rf $(SRCS.O)
-	@echo "$(F_GREEN)Object files delete!$(F_NONE)"
+	@echo "$(F_GREEN)Object files minishell delete!$(F_NONE)"
 fclean: clean
 	make fclean -C $(LIB_DIR)
 	rm -rf $(NAME_MINISHELL)
