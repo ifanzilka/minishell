@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <signal.h>
 
 /*
 **  envp_copy -> is envp

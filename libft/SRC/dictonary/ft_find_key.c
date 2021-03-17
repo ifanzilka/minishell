@@ -12,7 +12,8 @@
 
 #include "libft.h"
 
-void                *ft_find_key(t_list *dict, void *key, int (*cmp)(void *, void *))
+void                *ft_find_key(t_list *dict, void *key,
+                                 int (*cmp)(void *, void *))
 {
     t_list  *iter;
     t_dict  *tmp;
