@@ -63,6 +63,34 @@ void    ft_print_envp(char **envp)
     }
 }
 
+char *ft_find_envp(char *key, char **envp)
+{
+    char* value;
+    int i;
+    size_t len;
+    int j;
+
+    j = 0;
+    len = ft_strlen(key);
+    i = 0;
+
+    while(envp[i])
+    {
+        if (ft_strncmp(key,envp[i],len) == 0)
+        {
+            while (envp[i][j] != 0 && envp[i][j] != '=')
+                j++;
+            value = ft_strdup((envp[i] + j + 1));
+            if (value != NULL)
+                return (value);
+        }
+        i++;
+    }
+    return (NULL);
+}
+
+
+
 void ft_execve(char *filename, char **argv, char **envp)
 {
     int res;
@@ -73,7 +101,7 @@ void ft_execve(char *filename, char **argv, char **envp)
         printf("Error\n");
 }
 
-int     ft_strlen_mas_ch(char **array)
+int     ft_arrlen(char **array)
 {
     int i;
 
@@ -89,17 +117,17 @@ char **ft_copy_envp(char **envp)
     int i;
     int len;
 
-    len = ft_strlen_mas_ch(envp);
+    len = ft_arrlen(envp);
     i = 0;
     envp_copy = malloc(sizeof(char *) * (len + 1));
     if (envp_copy == NULL)
         return (NULL);
+    envp_copy[len] = NULL;
     while (i < len)
     {
         envp_copy[i] = ft_strdup(envp[i]);
         i++;
     }
-    envp_copy[len] = NULL;
     return (envp_copy);
 }
 
@@ -120,7 +148,6 @@ char **ft_copy_envp(char **envp)
 void ft_init_shell(t_shell *shell,char **envp)
 {
     shell->envp_copy = ft_copy_envp(envp);
-    shell->envp_dict = NULL;
     shell->comands = NULL;
 
 }
@@ -144,6 +171,7 @@ int main(int argc, char **argv, char **envp)
     int i;
     int status;
 
+    write(2,"hello\n",6);
 
     char ** argvls = NULL;
 
@@ -154,14 +182,25 @@ int main(int argc, char **argv, char **envp)
     pid_t pid;
     pid = fork();
 
+    char ** argv_export = NULL;
 
+    argv_export = malloc(sizeof (char *) *3);
+    argv_export[0] = "hello=love";
+    argv_export[1] = "myde";
+    argv_export[2] = NULL;
+
+    printf("old envp:\n");
+    ft_print_envp(envp);
     if (pid == 0)
     {
         //ft_execve("/bin/ls",argvls,envp);
         //printf("GoodBye!\n");
         pid_t pid_child = getpid();
         printf("ПОТОМОК!\n");
+
         printf("PID CHILD : %d\n",pid_child);
+
+
         exit(0);
     }
     else if (pid == -1)
@@ -177,6 +216,15 @@ int main(int argc, char **argv, char **envp)
         printf("РОДИТЕЛЬ!\n");
         pid_t pid_parent = getpid();
         printf("PID PARENT : %d\n",pid_parent);
+        char *key = "LOGNAME";
+        char *value = ft_find_envp(key,envp);
+        if (value != NULL)
+            printf("key %s: value: %s\n",key,value);
+        else
+            printf("FIND NULL\n");
+            ft_export(argv_export,&shell.envp_copy);
+            printf("new envp:\n");
+            ft_print_envp(envp);
        // signal (SIGINT, onintr);
 //        while(1)
 //            ;

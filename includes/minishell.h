@@ -13,12 +13,14 @@
 #ifndef MINISHELL_H
  #define MINISHELL_H
 
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
 #include <signal.h>
+#include <libft.h>
 
 /*
 **  envp_copy -> is envp
@@ -30,9 +32,11 @@
 typedef struct		s_shell
 {
     char            **envp_copy;
-    t_list          *envp_dict;
+    t_l_list       *history;
     t_list          *comands;
 
 }					t_shell;
+
+void ft_export(char **argv,char ***envp);
 
 #endif

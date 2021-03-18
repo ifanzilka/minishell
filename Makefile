@@ -24,6 +24,8 @@ HEADER	= ./includes
 #HEADER_LIB = ./libft/includes
 HEADERS = $(addprefix $(HEADER)/,libft.h get_next_line.h minishell.h)
 
+
+
 DIR		= ./srcs/
 
 F_NONE		= \033[37m
@@ -35,7 +37,13 @@ F_GREEN		= \033[32m
 F_CYAN		= \033[36m
 F_BLUE		= \033[34m
 
-SRCS = $(DIR)main.c
+
+MEM_EXPORT = $(addprefix $(DIR),export/)
+SRC_EXPORT = $(addprefix $(MEM_EXPORT), ft_export.c)
+
+
+SRCS = $(DIR)main.c\
+		$(SRC_EXPORT)
 
 SRCS.O = $(SRCS:.c=.o)
 
