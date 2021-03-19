@@ -25,9 +25,9 @@ int ft_not_valid(char *str)
 int ft_check_export(char *str)
 {
     int i;
-    char flag;
+    //char flag;
 
-    flag = 0;
+    //flag = 0;
     i = 0;
     while (str[i] && str[i] != '=')
     {
@@ -64,7 +64,7 @@ static int     ft_arrlen(char **array)
 //    }
 //}
 
-char **ft_realloc_envp(char *str,char ***envp)
+/*char **ft_realloc_envp(char *str,char ***envp)
 {
     int size;
     int i;
@@ -84,57 +84,66 @@ char **ft_realloc_envp(char *str,char ***envp)
     envp_new[i + 1] = NULL;
     //free старого
     i = 0;
-//    while(i <  size )
-//    {
-//    char **tmp;
-//    tmp = *envp;
 
-//    printf("TYT%s", tmp[i]);
-//    write(1, "1\n", 2);
-//    while (tmp[i])
-//    {
-//        write(1, "1\n", 2);
-//        free(tmp[i]);
-//        i++;
-//    }
-    //ft_print_envp(*envp);
-    //free(*envp);
     return (envp_new);
+}*/
+
+
+int ft_add_array(char *str, char ***envp)
+{
+    char **new_array;
+    char **old_array;
+    int size;
+    int i;
+
+    i = 0;
+    size = ft_arrlen(*envp);
+    new_array = malloc(sizeof(char *) * (size + 2));
+    if (new_array == NULL)
+        return (1);
+    while (i < size)
+    {
+        new_array[i] = ft_strdup((*envp)[i]);
+        i++;
+    }
+    new_array[i] = ft_strdup(str);
+    new_array[i + 1] = NULL;
+    i = 0 ;
+    old_array = *envp;
+    *envp = new_array;
+    while (old_array[i] != NULL)
+    {
+        //write(1, "1\n", 2);
+        free(old_array[i]);
+        i++;
+    }
+    free(old_array);
+    return (0);
 }
-
-
 
 int ft_add_envp(char *str,char ***envp)
 {
-    int i;
-    char **tmp;
+    //char **tmp;
+    //int i;
 
-    i = 0;
+    //i = 0;
     if (ft_check_export(str) == 1)
         return (1);
-    write(1,"new\n",4);
-    tmp = *envp;
-//    *envp = ft_realloc_envp(str,envp);
-    while (tmp[i] != NULL)
-    {
-        write(1, "1\n", 2);
-        free(tmp[i]);
-        i++;
-    }
+    //tmp = *envp;
+    //*envp = ft_realloc_envp(str,envp);
+    ft_add_array(str, envp);
     //ft_print_envp(*envp);
-    return (1);
+    return (0);
 }
 
 void ft_export(char **argv,char ***envp)
 {
     int i;
 
-    i =0;
+    i = 0;
     while (argv[i])
     {
-        //printf("ITER argv : %d\n",i);
         ft_add_envp(argv[i], envp);
-        //ft_print_envp(*envp);
         i++;
     }
 }

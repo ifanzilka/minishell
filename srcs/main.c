@@ -221,10 +221,13 @@ int main(int argc, char **argv, char **envp)
         if (value != NULL)
             printf("key %s: value: %s\n",key,value);
         else
+        {
             printf("FIND NULL\n");
-            ft_export(argv_export,&shell.envp_copy);
-            printf("new envp:\n");
-            ft_print_envp(envp);
+        }
+        ft_export(argv_export,&shell.envp_copy);
+        printf("new envp:\n");
+        ft_print_envp(shell.envp_copy);
+        
        // signal (SIGINT, onintr);
 //        while(1)
 //            ;
