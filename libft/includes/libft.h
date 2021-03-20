@@ -113,6 +113,18 @@ void				*malloc_gc(size_t sizemem);
 void				free_gc(void *ptr);
 
 /*
+** Sorts Algo
+*/
+
+typedef struct		s_arrinfo
+{
+    int             len;
+    size_t          bytes;
+}					t_arrinfo;
+
+void    ft_bubble_sort(void *arr, t_arrinfo inf, int (*cmp)(void * ,void *), void (*swap_func)(void*, void*));
+
+/*
 ** Array of string
 */
 
@@ -121,6 +133,9 @@ void    ft_print_arr(char **arr);
 int     ft_append_arr(char *str, char ***array);
 int     ft_copy_arr(char **new, char **old, int len);
 void    ft_free_arr(char **arr, int size);
+int     ft_str_cmp(void *s1, void *s2);
+void    ft_swap_str(void *p1, void *p2);
+void    ft_str_bubble_sort(char **array, int len);
 
 /*
 ** List

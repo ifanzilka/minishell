@@ -142,13 +142,39 @@ void ft_init_shell(t_shell *shell,char **envp)
 {
     shell->envp = ft_copy_envp(envp);
     shell->export = ft_copy_envp(envp);
+    ft_bubble_sort(shell->export, (t_arrinfo){ft_arrlen(shell->export) ,sizeof (char **)}, ft_str_cmp, ft_swap_str);
     shell->comands = NULL;
-
 }
 
 void onintr(){       /* sig - номер сигнала  */
     //signal (sig, onintr); /* восстановить реакцию */
     printf("Cltr^c\n");
+}
+
+void swap_str (void *p1, void *p2)
+{
+    char *pp1, *pp2, tmp;
+
+    pp1 = (char *) p1;
+    pp2 = (char *) p2;
+
+    tmp = *pp1;
+    *pp1 = *pp2;
+    *pp2 = tmp;
+}
+
+void ft_swap_int(void *a, void *b)
+{
+    int tmp;
+
+    tmp = *(int *)b;
+    *(int *)b = *(int *)a;
+    *(int *)a = tmp;
+}
+
+int cmp_int(void *a, void *b)
+{
+    return (*(int*)a - *(int*)b);
 }
 
 int main(int argc, char **argv, char **envp)
@@ -173,8 +199,7 @@ int main(int argc, char **argv, char **envp)
     argvls[0] = "ls";
     argvls[1] = "l";
     argvls[2] = NULL;
-    pid_t pid;
-    pid = fork();
+
 
     char ** argv_export = NULL;
 
@@ -183,10 +208,28 @@ int main(int argc, char **argv, char **envp)
     argv_export[1] = "myde=hu";
     argv_export[2] = NULL;
 
-    //printf("old envp:\n");
+    //printf("!!!old envp:\n");
+    printf("Test : %lu\n",sizeof(char **));
     //ft_env(shell.envp);
+    //ft_bubble_sort(shell.envp,ft_arrlen(shell.envp),sizeof (char *),ft_str_cmp,swap_str);
 
+    printf("!!!new envp:\n\n\n");
+    //ft_str_bubble_sort(shell.envp,ft_arrlen(shell.envp));
 
+//    int a[] = {1,24,435,3,24,5,1111};
+//
+//    ft_bubble_sort(a,(t_arrinfo){7,4},cmp_int,ft_swap_int);
+//    int gh= 0;
+//    while (gh < 7)
+//    {
+//        printf("%d\n",a[gh]);
+//        gh++;
+//    }
+
+    ft_env(shell.export);
+
+    pid_t pid;
+    pid = fork();
     if (pid == 0)
     {
         //ft_execve("/bin/ls",argvls,envp);
@@ -220,9 +263,9 @@ int main(int argc, char **argv, char **envp)
         {
             printf("FIND NULL\n");
         }
-        ft_export(argv_export,&shell.envp);
+        //ft_export(argv_export,&shell.envp);
         printf("new envp:\n");
-        ft_env(shell.envp);
+        //ft_env(shell.envp);
         
        // signal (SIGINT, onintr);
 //        while(1)

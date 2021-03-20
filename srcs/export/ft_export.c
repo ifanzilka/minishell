@@ -86,16 +86,21 @@ int ft_add_envp(char *str,char ***envp)
     return (0);
 }
 
+void ft_print_export(char **export)
+{
+
+}
+
 void ft_export(char **argv,char ***envp)
 {
     int i;
-    //int len;
+    int len;
 
-    //
-    // len = ft_arrlen(envp);
 
-    //if (len == 0)
-      //  ft_print_export(envp);
+     len = ft_arrlen(envp);
+
+    if (len == 0)
+        ft_print_export(envp);
     i = 0;
     while (argv[i])
     {
