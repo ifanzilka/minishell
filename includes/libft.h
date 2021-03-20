@@ -113,6 +113,16 @@ void				*malloc_gc(size_t sizemem);
 void				free_gc(void *ptr);
 
 /*
+** Array of string
+*/
+
+int     ft_arrlen(char **array);
+void    ft_print_arr(char **arr);
+int     ft_append_arr(char *str, char ***array);
+int     ft_copy_arr(char **new, char **old, int len);
+void    ft_free_arr(char **arr, int size);
+
+/*
 ** List
 */
 

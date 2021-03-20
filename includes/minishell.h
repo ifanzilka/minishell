@@ -32,12 +32,14 @@
 
 typedef struct		s_shell
 {
-    char            **envp_copy;
+    char            **envp;
+    char            **export;
     t_l_list       *history;
     t_list          *comands;
 
 }					t_shell;
 
+void ft_env(char **envp);
 void ft_export(char **argv,char ***envp);
 
 #endif

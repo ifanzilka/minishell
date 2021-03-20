@@ -38,13 +38,16 @@ F_CYAN		= \033[36m
 F_BLUE		= \033[34m
 
 
-MEM_EXPORT = $(addprefix $(DIR),export/)
-SRC_EXPORT = $(addprefix $(MEM_EXPORT), ft_export.c)
+DIR_EXPORT = $(addprefix $(DIR),export/)
+SRC_EXPORT = $(addprefix $(DIR_EXPORT), ft_export.c)
+
+DIR_ENV = $(addprefix $(DIR),env/)
+SRC_ENV = $(addprefix $(DIR_ENV), ft_env.c)
 
 
 SRCS = $(DIR)main.c\
-		$(SRC_EXPORT)
-
+		$(SRC_EXPORT)\
+		$(SRC_ENV)
 SRCS.O = $(SRCS:.c=.o)
 
 .c.o:

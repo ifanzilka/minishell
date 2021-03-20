@@ -101,15 +101,6 @@ void ft_execve(char *filename, char **argv, char **envp)
         printf("Error\n");
 }
 
-int     ft_arrlen(char **array)
-{
-    int i;
-
-    i = 0;
-    while (array[i])
-        i++;
-    return (i);
-}
 
 char **ft_copy_envp(char **envp)
 {
@@ -126,6 +117,8 @@ char **ft_copy_envp(char **envp)
     while (i < len)
     {
         envp_copy[i] = ft_strdup(envp[i]);
+        if (envp_copy[i] == NULL)
+            return (NULL);
         i++;
     }
     return (envp_copy);
@@ -147,7 +140,8 @@ char **ft_copy_envp(char **envp)
 //}
 void ft_init_shell(t_shell *shell,char **envp)
 {
-    shell->envp_copy = ft_copy_envp(envp);
+    shell->envp = ft_copy_envp(envp);
+    shell->export = ft_copy_envp(envp);
     shell->comands = NULL;
 
 }
@@ -186,11 +180,13 @@ int main(int argc, char **argv, char **envp)
 
     argv_export = malloc(sizeof (char *) *3);
     argv_export[0] = "hello=love";
-    argv_export[1] = "myde";
+    argv_export[1] = "myde=hu";
     argv_export[2] = NULL;
 
-    printf("old envp:\n");
-    ft_print_envp(envp);
+    //printf("old envp:\n");
+    //ft_env(shell.envp);
+
+
     if (pid == 0)
     {
         //ft_execve("/bin/ls",argvls,envp);
@@ -224,9 +220,9 @@ int main(int argc, char **argv, char **envp)
         {
             printf("FIND NULL\n");
         }
-        ft_export(argv_export,&shell.envp_copy);
+        ft_export(argv_export,&shell.envp);
         printf("new envp:\n");
-        ft_print_envp(shell.envp_copy);
+        ft_env(shell.envp);
         
        // signal (SIGINT, onintr);
 //        while(1)

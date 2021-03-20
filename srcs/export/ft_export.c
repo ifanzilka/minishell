@@ -42,51 +42,7 @@ int ft_check_export(char *str)
     return (1);
 }
 
-static int     ft_arrlen(char **array)
-{
-    int i;
 
-    i = 0;
-    while (array[i])
-        i++;
-    return (i);
-}
-
-//static void    ft_print_envp(char **envp)
-//{
-//    int i = 0;
-//
-//    while(envp[i])
-//    {
-//        ft_putstr_fd(envp[i],1);
-//        write(1, "\n" ,1);
-//        i++;
-//    }
-//}
-
-/*char **ft_realloc_envp(char *str,char ***envp)
-{
-    int size;
-    int i;
-    char **envp_new;
-
-    size = ft_arrlen(*envp);
-    i = 0;
-    envp_new = malloc(sizeof(char *) * (size + 2));
-    if (envp_new == NULL)
-        return (NULL);
-    while (i < size)
-    {
-        envp_new[i] = ft_strdup((*envp)[i]);
-        i++;
-    }
-    envp_new[i] = ft_strdup(str);
-    envp_new[i + 1] = NULL;
-    //free старого
-    i = 0;
-
-    return (envp_new);
-}*/
 
 
 int ft_add_array(char *str, char ***envp)
@@ -113,7 +69,6 @@ int ft_add_array(char *str, char ***envp)
     *envp = new_array;
     while (old_array[i] != NULL)
     {
-        //write(1, "1\n", 2);
         free(old_array[i]);
         i++;
     }
@@ -123,23 +78,24 @@ int ft_add_array(char *str, char ***envp)
 
 int ft_add_envp(char *str,char ***envp)
 {
-    //char **tmp;
-    //int i;
 
-    //i = 0;
     if (ft_check_export(str) == 1)
         return (1);
-    //tmp = *envp;
-    //*envp = ft_realloc_envp(str,envp);
-    ft_add_array(str, envp);
-    //ft_print_envp(*envp);
+    if (ft_append_arr(str, envp) == 1)
+        ft_putstr_fd("ERROR!\n",2);
     return (0);
 }
 
 void ft_export(char **argv,char ***envp)
 {
     int i;
+    //int len;
 
+    //
+    // len = ft_arrlen(envp);
+
+    //if (len == 0)
+      //  ft_print_export(envp);
     i = 0;
     while (argv[i])
     {
