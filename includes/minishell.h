@@ -39,7 +39,10 @@ typedef struct		s_shell
 
 }					t_shell;
 
+void ft_init_shell(t_shell *shell,char **envp);
 void ft_env(char **envp);
-void ft_export(char **argv,char ***envp);
+char *ft_find_envp(char *key, char **envp);
+void ft_export(char **argv,char ***envp,char ***export);
+void ft_print_export(char **export);
 
 #endif

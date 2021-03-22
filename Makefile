@@ -39,13 +39,16 @@ F_BLUE		= \033[34m
 
 
 DIR_EXPORT = $(addprefix $(DIR),export/)
-SRC_EXPORT = $(addprefix $(DIR_EXPORT), ft_export.c)
+SRC_EXPORT = $(addprefix $(DIR_EXPORT), ft_export.c  ft_print_export.c)
 
 DIR_ENV = $(addprefix $(DIR),env/)
-SRC_ENV = $(addprefix $(DIR_ENV), ft_env.c)
+SRC_ENV = $(addprefix $(DIR_ENV), ft_env.c ft_find_envp.c )
 
+DIR_SH = $(addprefix $(DIR),minishell/)
+SRC_SH = $(addprefix $(DIR_SH), ft_init_shell.c)
 
 SRCS = $(DIR)main.c\
+		$(SRC_SH)\
 		$(SRC_EXPORT)\
 		$(SRC_ENV)
 SRCS.O = $(SRCS:.c=.o)

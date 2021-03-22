@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrlen.c                                        :+:      :+:    :+:   */
+/*   ft_del_str_ind.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 13:51:06 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/20 13:51:07 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/22 19:26:03 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/22 19:26:17 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_arrlen(char **array)
+void ft_del_str_ind(char ***array, int index)
 {
+    char **new;
+    int len;
     int i;
+    int j;
 
     i = 0;
-    if (array == NULL)
-        return (0);
-    while (array[i] != NULL)
+    j = 0;
+    len = ft_arrlen(*array);
+    new = (char **)malloc(sizeof (char *) * len);
+    while (j < len)
+    {
+        if (j == index)
+        {
+            j++;
+            continue;
+        }
+        //write(1,"1\n",2);
+        new[i] = ft_strdup((*array)[i]);
         i++;
-    return (i);
+        j++;
+    }
+    new[i] = NULL;
+    *array = new;
+    ft_free_arr(*array,len);
 }

@@ -63,31 +63,7 @@ void    ft_print_envp(char **envp)
     }
 }
 
-char *ft_find_envp(char *key, char **envp)
-{
-    char* value;
-    int i;
-    size_t len;
-    int j;
 
-    j = 0;
-    len = ft_strlen(key);
-    i = 0;
-
-    while(envp[i])
-    {
-        if (ft_strncmp(key,envp[i],len) == 0)
-        {
-            while (envp[i][j] != 0 && envp[i][j] != '=')
-                j++;
-            value = ft_strdup((envp[i] + j + 1));
-            if (value != NULL)
-                return (value);
-        }
-        i++;
-    }
-    return (NULL);
-}
 
 
 
@@ -102,27 +78,7 @@ void ft_execve(char *filename, char **argv, char **envp)
 }
 
 
-char **ft_copy_envp(char **envp)
-{
-    char **envp_copy;
-    int i;
-    int len;
 
-    len = ft_arrlen(envp);
-    i = 0;
-    envp_copy = malloc(sizeof(char *) * (len + 1));
-    if (envp_copy == NULL)
-        return (NULL);
-    envp_copy[len] = NULL;
-    while (i < len)
-    {
-        envp_copy[i] = ft_strdup(envp[i]);
-        if (envp_copy[i] == NULL)
-            return (NULL);
-        i++;
-    }
-    return (envp_copy);
-}
 
 //void ft_echo(char *s,char **arvg,char *s)
 //{
@@ -138,13 +94,10 @@ char **ft_copy_envp(char **envp)
 //{
 //
 //}
-void ft_init_shell(t_shell *shell,char **envp)
-{
-    shell->envp = ft_copy_envp(envp);
-    shell->export = ft_copy_envp(envp);
-    ft_bubble_sort(shell->export, (t_arrinfo){ft_arrlen(shell->export) ,sizeof (char **)}, ft_str_cmp, ft_swap_str);
-    shell->comands = NULL;
-}
+
+
+
+
 
 void onintr(){       /* sig - номер сигнала  */
     //signal (sig, onintr); /* восстановить реакцию */
@@ -177,6 +130,7 @@ int cmp_int(void *a, void *b)
     return (*(int*)a - *(int*)b);
 }
 
+
 int main(int argc, char **argv, char **envp)
 {
     (void) argc;
@@ -191,7 +145,7 @@ int main(int argc, char **argv, char **envp)
     int i;
     int status;
 
-    write(2,"hello\n",6);
+    //write(2,"hello\n",6);
 
     char ** argvls = NULL;
 
@@ -209,11 +163,24 @@ int main(int argc, char **argv, char **envp)
     argv_export[2] = NULL;
 
     //printf("!!!old envp:\n");
-    printf("Test : %lu\n",sizeof(char **));
+    //printf("Test : %lu\n",sizeof(char **));
     //ft_env(shell.envp);
     //ft_bubble_sort(shell.envp,ft_arrlen(shell.envp),sizeof (char *),ft_str_cmp,swap_str);
 
     printf("!!!new envp:\n\n\n");
+    //ft_env(shell.envp);
+    //ft_env(shell.export);
+
+    ft_env(shell.envp);
+    ft_del_str_ind(&shell.envp,0);
+    printf("!!!end envp:\n\n\n");
+
+    printf("!!!new envp:\n\n\n");
+    ft_env(shell.envp);
+    //ft_del_str_ind(&shell.envp,0);
+    printf("!!!end envp:\n\n\n");
+
+    //ft_export(NULL,&shell.envp,&shell.export);
     //ft_str_bubble_sort(shell.envp,ft_arrlen(shell.envp));
 
 //    int a[] = {1,24,435,3,24,5,1111};
@@ -226,13 +193,13 @@ int main(int argc, char **argv, char **envp)
 //        gh++;
 //    }
 
-    ft_env(shell.export);
+    //ft_env(shell.export);
 
     pid_t pid;
     pid = fork();
     if (pid == 0)
     {
-        //ft_execve("/bin/ls",argvls,envp);
+        //ft_execve("./minishell",NULL,shell.envp);
         //printf("GoodBye!\n");
         pid_t pid_child = getpid();
         printf("ПОТОМОК!\n");
@@ -264,12 +231,12 @@ int main(int argc, char **argv, char **envp)
             printf("FIND NULL\n");
         }
         //ft_export(argv_export,&shell.envp);
-        printf("new envp:\n");
+        //printf("new envp:\n");
         //ft_env(shell.envp);
         
        // signal (SIGINT, onintr);
-//        while(1)
-//            ;
+    //        while(1)
+    //            ;
         }
 
 

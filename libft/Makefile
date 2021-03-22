@@ -39,7 +39,7 @@ TO_DIR = $(addprefix $(DIR),to/)
 SRC_TO = $(addprefix $(TO_DIR), ft_tolower.c ft_toupper.c)
 
 STR_DIR = $(addprefix $(DIR),str/)
-SRC_STR = $(addprefix $(STR_DIR), ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strnstr.c ft_strrchr.c ft_strncmp.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_split.c ft_strdup.c ft_strnew.c ft_strdel.c ft_create_str.c ft_add_forward.c ft_add_back.c)
+SRC_STR = $(addprefix $(STR_DIR), ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strnstr.c ft_strrchr.c ft_strncmp.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_split.c ft_strdup.c ft_strnew.c ft_strdel.c ft_create_str.c ft_add_forward.c ft_add_back.c ft_str_find.c)
 
 PUT_DIR = $(addprefix $(DIR),put/)
 SRC_PUT = $(addprefix $(PUT_DIR), ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_print_n_char.c)
@@ -63,7 +63,7 @@ DICT_DIR =  $(addprefix $(DIR),dictonary/)
 SRC_DICT = $(addprefix $(DICT_DIR),ft_cr_dict.c ft_find_key.c)
 
 ARRAY_STRINGS_DIR =  $(addprefix $(DIR),arrays_strings/)
-SRC_ARRAY_STRINGS = $(addprefix $(ARRAY_STRINGS_DIR),ft_arrlen.c ft_print_arr.c ft_append_arr.c ft_copy_arr.c ft_free_arr.c  ft_str_cmp.c ft_str_bubble_sort.c  ft_swap_str.c)
+SRC_ARRAY_STRINGS = $(addprefix $(ARRAY_STRINGS_DIR),ft_arrlen.c ft_print_arr.c ft_append_arr.c ft_copy_arr.c ft_free_arr.c  ft_str_cmp.c ft_str_bubble_sort.c  ft_swap_str.c ft_del_str_ind.c)
 
 SORT_DIR =  $(addprefix $(DIR),sort/)
 SRC_SORT = $(addprefix $(SORT_DIR),ft_bubble_sort.c)

@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrlen.c                                        :+:      :+:    :+:   */
+/*   ft_str_find.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 13:51:06 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/20 13:51:07 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/22 19:05:32 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/22 19:06:20 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_arrlen(char **array)
+int                 ft_str_find(char *str, char c)
 {
-    int i;
-
-    i = 0;
-    if (array == NULL)
-        return (0);
-    while (array[i] != NULL)
-        i++;
-    return (i);
+    while (str)
+    {
+        if (*str == c)
+            return (1);
+        str++;
+    }
+    return (0);
 }
