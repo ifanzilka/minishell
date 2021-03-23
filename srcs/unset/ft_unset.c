@@ -43,7 +43,6 @@ int ft_check_unset(char *str)
 int ft_envp_unset(char *str, char ***envp)
 {
     char **arr;
-    //int i;
     int id;
 
     arr = *envp;
