@@ -138,6 +138,7 @@ void    ft_free_arr(char **arr, int size);
 int     ft_str_cmp(void *s1, void *s2);
 void    ft_swap_str(void *p1, void *p2);
 void    ft_str_bubble_sort(char **array, int len);
+int     ft_find_str_in_arr(char **array, char *str);
 
 /*
 ** List

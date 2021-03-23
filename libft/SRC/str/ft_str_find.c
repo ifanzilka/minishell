@@ -14,11 +14,14 @@
 
 int                 ft_str_find(char *str, char c)
 {
-    while (str)
+    int i;
+
+    i = 0;
+    while (str[i])
     {
-        if (*str == c)
-            return (1);
-        str++;
+        if (str[i] == c)
+            return (i);
+        i++;
     }
     return (0);
 }

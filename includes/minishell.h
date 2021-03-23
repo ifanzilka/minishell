@@ -42,7 +42,11 @@ typedef struct		s_shell
 void ft_init_shell(t_shell *shell,char **envp);
 void ft_env(char **envp);
 char *ft_find_envp(char *key, char **envp);
+int ft_find_envp_id(char *key, char **envp);
 void ft_export(char **argv,char ***envp,char ***export);
+int ft_check_export(char *str);
+int ft_add_envp_export(char *str,char ***export, char ***envp);
 void ft_print_export(char **export);
+void ft_unset(char **argv,char ***envp, char ***export);
 
 #endif

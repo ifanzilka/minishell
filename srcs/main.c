@@ -104,17 +104,6 @@ void onintr(){       /* sig - номер сигнала  */
     printf("Cltr^c\n");
 }
 
-void swap_str (void *p1, void *p2)
-{
-    char *pp1, *pp2, tmp;
-
-    pp1 = (char *) p1;
-    pp2 = (char *) p2;
-
-    tmp = *pp1;
-    *pp1 = *pp2;
-    *pp2 = tmp;
-}
 
 void ft_swap_int(void *a, void *b)
 {
@@ -157,30 +146,46 @@ int main(int argc, char **argv, char **envp)
 
     char ** argv_export = NULL;
 
-    argv_export = malloc(sizeof (char *) *3);
+    argv_export = malloc(sizeof (char *) *5);
     argv_export[0] = "hello=love";
-    argv_export[1] = "myde=hu";
-    argv_export[2] = NULL;
+    argv_export[1] = "hello123=2";
+    argv_export[2] = "hello12=3";
+    argv_export[3] = "123";
+    argv_export[4] = NULL;
 
-    //printf("!!!old envp:\n");
-    //printf("Test : %lu\n",sizeof(char **));
-    //ft_env(shell.envp);
-    //ft_bubble_sort(shell.envp,ft_arrlen(shell.envp),sizeof (char *),ft_str_cmp,swap_str);
 
-    printf("!!!new envp:\n\n\n");
-    //ft_env(shell.envp);
-    //ft_env(shell.export);
 
-    ft_env(shell.envp);
-    ft_del_str_ind(&shell.envp,0);
-    printf("!!!end envp:\n\n\n");
-
-    printf("!!!new envp:\n\n\n");
-    ft_env(shell.envp);
+    printf("!!old envp:\n");
+    ft_env(shell.export);
     //ft_del_str_ind(&shell.envp,0);
-    printf("!!!end envp:\n\n\n");
+    printf("!!!end envp:\n");
 
-    //ft_export(NULL,&shell.envp,&shell.export);
+
+    printf("!!!new envp:\n\n");
+
+    ft_export(argv_export,&shell.envp,&shell.export);
+    ft_export(NULL,&shell.envp,&shell.export);
+
+    ft_env(shell.envp);
+    write(1,"\n\n",2);
+    //ft_env(shell.export);
+    printf("!!!end envp:\n");
+
+    char ** argv_unset = NULL;
+
+    argv_unset = malloc(sizeof (char *) *5);
+    argv_unset[0] = "1hello12";
+    argv_unset[1] = "1hello123";
+    argv_unset[2] = "1hello12=3";
+    argv_unset[3] = "123";
+    argv_unset[4] = NULL;
+
+    printf("!!!UNSET!!!:\n\n");
+    ft_unset(argv_unset,&shell.envp,&shell.export);
+    ft_env(shell.export);
+
+
+
     //ft_str_bubble_sort(shell.envp,ft_arrlen(shell.envp));
 
 //    int a[] = {1,24,435,3,24,5,1111};
@@ -222,8 +227,8 @@ int main(int argc, char **argv, char **envp)
         printf("РОДИТЕЛЬ!\n");
         pid_t pid_parent = getpid();
         printf("PID PARENT : %d\n",pid_parent);
-        char *key = "LOGNAME";
-        char *value = ft_find_envp(key,envp);
+        char *key = "hello12";
+        char *value = ft_find_envp(key, shell.envp);
         if (value != NULL)
             printf("key %s: value: %s\n",key,value);
         else

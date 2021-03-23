@@ -63,7 +63,7 @@ DICT_DIR =  $(addprefix $(DIR),dictonary/)
 SRC_DICT = $(addprefix $(DICT_DIR),ft_cr_dict.c ft_find_key.c)
 
 ARRAY_STRINGS_DIR =  $(addprefix $(DIR),arrays_strings/)
-SRC_ARRAY_STRINGS = $(addprefix $(ARRAY_STRINGS_DIR),ft_arrlen.c ft_print_arr.c ft_append_arr.c ft_copy_arr.c ft_free_arr.c  ft_str_cmp.c ft_str_bubble_sort.c  ft_swap_str.c ft_del_str_ind.c)
+SRC_ARRAY_STRINGS = $(addprefix $(ARRAY_STRINGS_DIR),ft_arrlen.c ft_print_arr.c ft_append_arr.c ft_copy_arr.c ft_free_arr.c  ft_str_cmp.c ft_str_bubble_sort.c  ft_swap_str.c ft_del_str_ind.c ft_find_str_in_arr.c)
 
 SORT_DIR =  $(addprefix $(DIR),sort/)
 SRC_SORT = $(addprefix $(SORT_DIR),ft_bubble_sort.c)

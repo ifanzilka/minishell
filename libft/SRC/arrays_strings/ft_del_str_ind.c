@@ -30,12 +30,11 @@ void ft_del_str_ind(char ***array, int index)
             j++;
             continue;
         }
-        //write(1,"1\n",2);
-        new[i] = ft_strdup((*array)[i]);
+        new[i] = ft_strdup((*array)[j]);
         i++;
         j++;
     }
     new[i] = NULL;
-    *array = new;
     ft_free_arr(*array,len);
+    *array = new;
 }

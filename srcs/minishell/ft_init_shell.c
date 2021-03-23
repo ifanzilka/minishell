@@ -38,6 +38,7 @@ char **ft_copy_envp(char **envp)
 static void ft_add_shell_lvl(char **envp)
 {
     char *new;
+    char *str_lvl;
     int i;
     int lvl;
 
@@ -49,9 +50,10 @@ static void ft_add_shell_lvl(char **envp)
         {
             lvl = ft_atoi(envp[i] + 6);
             lvl++;
-            envp[i] = ft_strjoin(new, ft_itoa(lvl));
-            //if (envp[i] == NULL)
-            //  error
+            free(envp[i]);
+            str_lvl = ft_itoa(lvl);
+            envp[i] = ft_strjoin(new, str_lvl);
+            free(str_lvl);
         }
         i++;
     }

@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   ft_find_str_in_arr.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/18 20:21:37 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/18 20:21:38 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/22 23:41:09 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/22 23:41:15 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
-#include <libft.h>
+#include "libft.h"
 
-
-
-void ft_export(char **argv,char ***envp, char ***export)
+int  ft_find_str_in_arr(char **array, char *str)
 {
+    size_t len;
     int i;
-    int len;
 
     i = 0;
-    len = ft_arrlen(argv);
-    if (len == 0)
-        ft_print_export(*export);
-    else
+    len = ft_strlen(str);
+    while (array[i])
     {
-        while (argv[i])
+        if (ft_strlen(array[i]) == len && ft_strncmp(str,array[i],len) == 0)
         {
-            ft_add_envp_export(argv[i], export, envp);
-            ft_putstr_fd("\n",1);
-            i++;
+            return (i);
         }
-        ft_bubble_sort(*export,(t_arrinfo){ft_arrlen(*export),8},ft_str_cmp,ft_swap_str);
+        i++;
     }
+
+    return(0);
 }
