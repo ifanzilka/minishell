@@ -50,11 +50,21 @@ SRC_SH = $(addprefix $(DIR_SH), ft_init_shell.c)
 DIR_UNSET = $(addprefix $(DIR),unset/)
 SRC_UNSET = $(addprefix $(DIR_UNSET), ft_unset.c)
 
+DIR_CD = $(addprefix $(DIR),cd/)
+SRC_CD = $(addprefix $(DIR_CD), ft_cd.c)
+
+DIR_PWD = $(addprefix $(DIR),pwd/)
+SRC_PWD = $(addprefix $(DIR_PWD), ft_pwd.c)
+
+
 SRCS = $(DIR)main.c\
 		$(SRC_SH)\
 		$(SRC_EXPORT)\
 		$(SRC_UNSET)\
-		$(SRC_ENV)
+		$(SRC_ENV)\
+		$(SRC_CD)\
+		$(SRC_PWD)
+
 SRCS.O = $(SRCS:.c=.o)
 
 .c.o:

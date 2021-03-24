@@ -21,35 +21,35 @@ void    ft_print_name_shell()
     ft_putstr_fd("minishell$", 1);
 }
 //int	ft_strncmp(const char *s1, const char *s2, size_t n);
-void ft_pwd()
-{
-    ft_print_name_shell();
-    errno = 0;
-    char *pwd;
-    if (!(pwd = getcwd(NULL,1024)))
-    {
-        //malloc error
-        char *errorbuf = strerror( errno);
-        printf("%s\n",errorbuf);
-        return;
-    }
-    printf("%s\n", pwd);
-    free(pwd);
-}
+//void ft_pwd()
+//{
+//    ft_print_name_shell();
+//    errno = 0;
+//    char *pwd;
+//    if (!(pwd = getcwd(NULL,1024)))
+//    {
+//        //malloc error
+//        char *errorbuf = strerror( errno);
+//        printf("%s\n",errorbuf);
+//        return;
+//    }
+//    printf("%s\n", pwd);
+//    free(pwd);
+//}
 
-void ft_cd(char *path)
-{
-    errno = 0;
-    if (chdir(path) == -1)
-    {
-        //error
-        //perror("");
-        char *errorbuf = strerror(errno);
-        printf("%s\n",errorbuf);
-        return;
-    }
-    ft_pwd();
-}
+//void ft_cd(char *path)
+//{
+//    errno = 0;
+//    if (chdir(path) == -1)
+//    {
+//        //error
+//        perror(NULL);
+//        //char *errorbuf = strerror(errno);
+//        //printf("%s\n",errorbuf);
+//        return;
+//    }
+//    ft_pwd();
+//}
 
 void    ft_print_envp(char **envp)
 {
@@ -262,7 +262,7 @@ int main(int argc, char **argv, char **envp)
     while (buf[i])
     {
         if (ft_strnstr((buf + i), "pwd", 3)) {
-            ft_pwd();
+            ft_pwd(NULL,NULL);
         }
         if (ft_strnstr((buf + i), "cd", 2)) {
 
@@ -280,11 +280,17 @@ int main(int argc, char **argv, char **envp)
             char *path = ft_substr(buf,start,end - start);
 
             printf("path : !%s!\n",path);
-            ft_cd(path);
+            char **argv_cd;
+
+            argv_cd = NULL;
+            argv_cd = malloc (sizeof (char *) * 2);
+            argv_cd[0] = path;
+            argv_cd[1] = NULL;
+            ft_cd(argv_cd,shell.envp);
         }
         if (ft_strnstr((buf + i), "env", 3))
         {
-            ft_print_envp(envp);
+            ft_env(envp);
         }
         i++;
     }
