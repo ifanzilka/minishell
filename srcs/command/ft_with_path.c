@@ -131,10 +131,12 @@ int     ft_with_path(char *comand, char *path, char **argv, char **envp)
         way = ft_join_dir(dir, comand);
         return (ft_fork_and_execve_command(way,argv,envp));
     }
-    if (ft_strnstr("./",comand,2) != 0)
+
+    if (ft_strncmp("./",comand,2) != 0)
+    {
         return (ft_comand_not_found(comand));
-
-
+    }
+    return (ft_fork_and_execve_command(comand,argv,envp));
     //execve(comand,argv,envp);
     //printf("FJJF!\n");
     return (0);

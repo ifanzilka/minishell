@@ -260,12 +260,12 @@ int main(int argc, char **argv, char **envp)
     argv_cmd = NULL;
 
     argv_cmd= malloc(sizeof (char *) * 3);
-    argv_cmd[0] = "-l";
-    argv_cmd[1] = "-a";
+    argv_cmd[0] = "ls";
+    argv_cmd[1] = "-la";
     argv_cmd[2] = NULL;
 
     printf("CMD!!!\n");
-    ft_command("./minishell",argv_cmd, shell.envp);
+    ft_command("./ls",argv_cmd, shell.envp);
 
     i = 0;
     ft_print_name_shell();

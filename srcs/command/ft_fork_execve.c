@@ -20,6 +20,8 @@ static void ft_descendant(char *comand, char **argv, char **envp)
     res = execve(comand, argv, envp);
     if (res == -1)
     {
+        ft_putstr_fd(comand,2);
+        ft_putstr_fd(": ",2);
         ft_print_errno();
         exit(1);
     }
