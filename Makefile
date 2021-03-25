@@ -38,6 +38,9 @@ F_CYAN		= \033[36m
 F_BLUE		= \033[34m
 
 
+DIR_ERR = $(addprefix $(DIR),error/)
+SRC_ERR = $(addprefix $(DIR_ERR), ft_print_errno.c)
+
 DIR_EXPORT = $(addprefix $(DIR),export/)
 SRC_EXPORT = $(addprefix $(DIR_EXPORT), ft_export.c  ft_print_export.c  ft_check_export.c  ft_envp_export.c)
 
@@ -60,9 +63,10 @@ DIR_ECHO = $(addprefix $(DIR),echo/)
 SRC_ECHO = $(addprefix $(DIR_ECHO), ft_echo.c)
 
 DIR_CMD = $(addprefix $(DIR),command/)
-SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c ft_current_dir.c)
+SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c ft_current_dir.c ft_dont_path.c ft_with_path.c  ft_fork_execve.c)
 
 SRCS = $(DIR)main.c\
+		$(SRC_ERR)\
 		$(SRC_SH)\
 		$(SRC_EXPORT)\
 		$(SRC_UNSET)\

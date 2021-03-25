@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_find.c                                      :+:      :+:    :+:   */
+/*   ft_print_errno.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/22 19:05:32 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/22 19:06:20 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/25 15:13:13 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/25 15:13:16 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
+#include <libft.h>
 
-int                 ft_str_find(char *str, char c)
+void ft_print_errno()
 {
-    int i;
+    char *errorbuf;
 
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == c)
-            return (i);
-        i++;
-    }
-    return (-1);
+    errorbuf = strerror(errno);
+    ft_putstr_fd(errorbuf,2);
+    write(2, "\n",1);
 }
+

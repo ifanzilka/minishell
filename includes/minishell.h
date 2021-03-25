@@ -41,6 +41,8 @@ typedef struct		s_shell
 
 }					t_shell;
 
+void ft_print_errno();
+
 void ft_init_shell(t_shell *shell,char **envp);
 void ft_env(char **envp);
 char *ft_find_envp(char *key, char **envp);
@@ -55,5 +57,11 @@ int     ft_pwd(char **argv, char **envp);
 int     ft_echo(char **argv, char **envp);
 int     ft_command(char *comand,char **argv, char **envp);
 int     ft_current_dir(char *dir, char **argv, char **envp);
+
+int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);
+
+int     ft_dont_path(char *comand, char **argv, char **envp);
+int     ft_with_path(char *comand, char *path, char **argv, char **envp);
+
 
 #endif

@@ -13,7 +13,7 @@
 #include <minishell.h>
 #include <libft.h>
 
-int     ft_is_a_directory(char *comand)
+static int     ft_is_a_directory(char *comand)
 {
     ft_putstr_fd(comand,2);
     ft_putstr_fd(": is a directory",2);
@@ -21,34 +21,36 @@ int     ft_is_a_directory(char *comand)
     return (126);
 }
 
-int     ft_dont_path(char comand, char *argv, char **envp)
+static int     ft_check_directory(char *dir)
 {
     struct stat sb;
-    char *errorbuf;
-    int res;
     int res_stat;
 
-
-    res = 0;
-    res_stat = stat(comand, &sb);
+    res_stat = stat(dir, &sb);
     if (res_stat == 0)
     {
         if (sb.st_mode & S_IFDIR)
-            return (ft_is_a_directory(comand));
+        {
+            return (ft_is_a_directory(dir));
+        }
     }
     else if (res_stat == -1)
     {
-        errorbuf = strerror(errno);
-        ft_putstr_fd(errorbuf,2);
-        write(2, "\n",1);
-        return (1);
-    }
-    res = execve(comand, argv, envp);
-    if (res == -1)
-    {
-        errorbuf = strerror(errno);
-        ft_putstr_fd(errorbuf,2);
-        write(2, "\n",1);
+        ft_print_errno();
         return (127);
     }
+    return (0);
+}
+
+
+
+int     ft_dont_path(char *comand, char **argv, char **envp)
+{
+    int res;
+
+    if ((res = ft_check_directory(comand)) != 0)
+    {
+        return (res);
+    }
+    return (ft_fork_and_execve_command(comand,argv,envp));
 }

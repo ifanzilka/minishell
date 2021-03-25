@@ -265,7 +265,7 @@ int main(int argc, char **argv, char **envp)
     argv_cmd[2] = NULL;
 
     printf("CMD!!!\n");
-    ft_command("./",argv_cmd, shell.envp);
+    ft_command("./minishell",argv_cmd, shell.envp);
 
     i = 0;
     ft_print_name_shell();
