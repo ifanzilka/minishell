@@ -15,10 +15,12 @@
 
 #include <stdio.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include <sys/uio.h>
 #include <unistd.h>
 #include <string.h>
+#include <dirent.h>
 #include <errno.h>
 #include <signal.h>
 #include <libft.h>
@@ -50,5 +52,8 @@ void ft_print_export(char **export);
 void ft_unset(char **argv,char ***envp, char ***export);
 int     ft_cd(char **argv, char **envp);
 int     ft_pwd(char **argv, char **envp);
+int     ft_echo(char **argv, char **envp);
+int     ft_command(char *comand,char **argv, char **envp);
+int     ft_current_dir(char *dir, char **argv, char **envp);
 
 #endif

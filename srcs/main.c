@@ -244,6 +244,28 @@ int main(int argc, char **argv, char **envp)
     //            ;
         }
 
+    char **argv_echo;
+
+    argv_echo = NULL;
+
+    argv_echo= malloc(sizeof (char *) * 3);
+    argv_echo[0] = "n";
+    argv_echo[1] = "sdf";
+    argv_echo[2] = NULL;
+
+    ft_echo(argv_echo,NULL);
+
+    char **argv_cmd;
+
+    argv_cmd = NULL;
+
+    argv_cmd= malloc(sizeof (char *) * 3);
+    argv_cmd[0] = "-l";
+    argv_cmd[1] = "-a";
+    argv_cmd[2] = NULL;
+
+    printf("CMD!!!\n");
+    ft_command("./",argv_cmd, shell.envp);
 
     i = 0;
     ft_print_name_shell();
@@ -287,6 +309,7 @@ int main(int argc, char **argv, char **envp)
             argv_cd[0] = path;
             argv_cd[1] = NULL;
             ft_cd(argv_cd,shell.envp);
+            ft_pwd(NULL,NULL);
         }
         if (ft_strnstr((buf + i), "env", 3))
         {

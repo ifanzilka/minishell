@@ -56,6 +56,11 @@ SRC_CD = $(addprefix $(DIR_CD), ft_cd.c)
 DIR_PWD = $(addprefix $(DIR),pwd/)
 SRC_PWD = $(addprefix $(DIR_PWD), ft_pwd.c)
 
+DIR_ECHO = $(addprefix $(DIR),echo/)
+SRC_ECHO = $(addprefix $(DIR_ECHO), ft_echo.c)
+
+DIR_CMD = $(addprefix $(DIR),command/)
+SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c ft_current_dir.c)
 
 SRCS = $(DIR)main.c\
 		$(SRC_SH)\
@@ -63,7 +68,9 @@ SRCS = $(DIR)main.c\
 		$(SRC_UNSET)\
 		$(SRC_ENV)\
 		$(SRC_CD)\
-		$(SRC_PWD)
+		$(SRC_PWD)\
+		$(SRC_ECHO)\
+		$(SRC_CMD)
 
 SRCS.O = $(SRCS:.c=.o)
 
