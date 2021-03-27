@@ -13,28 +13,24 @@
 #include <minishell.h>
 #include <libft.h>
 
-
-//
-//static int     ft_comand_not_found(char *cmd)
-//{
-//    ft_putstr_fd(cmd, 2);
-//    ft_putstr_fd(": ", 2);
-//    ft_putstr_fd("command not found\n", 2);
-//    return (127);
-//}
-
-
+int ft_builtin(char *comand,char **argv, char ***envp, char ***export)
+{
+    (void) comand;
+    (void) argv;
+    (void) envp;
+    (void) export;
+    //fork for command  (change fd )
+    return (0);
+}
 
 int     ft_command(char *comand,char **argv, char ***envp, char ***export)
 {
     char *path;
-	int res;
-
+    (void) export;
 
     path = ft_find_envp("PATH", *envp);
-	res = ft_find_builtins(comand, argv, envp, export);
-	if (res != -1)
-		return (res);
+	if (ft_find_builtins(comand))
+		return (ft_builtin(comand, argv, envp, export));
     if (path)
         return (ft_with_path(comand, path, argv, *envp));
     else

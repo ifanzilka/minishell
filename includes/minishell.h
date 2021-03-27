@@ -51,7 +51,7 @@ int ft_find_envp_id(char *key, char **envp);
 int ft_check_export(char *str);
 int ft_add_envp_export(char *str,char ***export, char ***envp);
 void ft_print_export(char **export);
-int		ft_find_builtins(char *comand, char **argv, char ***envp, char ***export);
+int		ft_find_builtins(char *comand);
 int     ft_env(char **envp);
 int     ft_export(char **argv,char ***envp, char ***export);
 int     ft_unset(char **argv,char ***envp, char ***export);
@@ -59,7 +59,6 @@ int     ft_cd(char **argv, char **envp);
 int     ft_pwd(char **argv, char **envp);
 int     ft_echo(char **argv, char **envp);
 int     ft_command(char *comand,char **argv, char ***envp, char ***export);
-int     ft_current_dir(char *dir, char **argv, char **envp);
 
 int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);
 

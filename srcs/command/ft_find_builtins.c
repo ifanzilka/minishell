@@ -13,21 +13,21 @@
 #include "libft.h"
 #include "minishell.h"
 
-int		ft_find_builtins(char *comand, char **argv, char ***envp, char ***export)
+int		ft_find_builtins(char *comand)
 {
 	if (ft_strcmp(comand, "echo") == 0)
-		return (ft_echo(argv, *envp));
+		return (1);
 	if (ft_strcmp(comand, "cd") == 0)
-		return (ft_cd(argv, *envp));
+		return (1);
 	if (ft_strcmp(comand, "pwd") == 0)
-		return (ft_pwd(argv, *envp));
+		return (1);
 	if (ft_strcmp(comand, "export") == 0)
-		return (ft_export(argv, envp, export));
+		return (1);
 	if (ft_strcmp(comand, "unset") == 0)
-		return (ft_unset(argv, envp, export));
+		return (1);
 	if (ft_strcmp(comand, "env") == 0)
-		return (ft_env(*envp));
+		return (1);
 	if (ft_strcmp(comand, "exit") == 0)
 		return (1);
-	return (-1);
+	return (0);
 }
