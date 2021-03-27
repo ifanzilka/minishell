@@ -15,7 +15,7 @@
 
 
 
-void ft_export(char **argv,char ***envp, char ***export)
+int ft_export(char **argv,char ***envp, char ***export)
 {
     int i;
     int len;
@@ -34,4 +34,5 @@ void ft_export(char **argv,char ***envp, char ***export)
         }
         ft_bubble_sort(*export,(t_arrinfo){ft_arrlen(*export),8},ft_str_cmp,ft_swap_str);
     }
+    return (0);
 }

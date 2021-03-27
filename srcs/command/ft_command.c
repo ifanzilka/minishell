@@ -6,7 +6,7 @@
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 17:50:02 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/24 17:50:05 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:27:29 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,20 @@
 
 
 
-int     ft_command(char *comand,char **argv, char **envp)
+int     ft_command(char *comand,char **argv, char ***envp, char ***export)
 {
     char *path;
+	int res;
 
 
-    path = ft_find_envp("PATH",envp);
-
+    path = ft_find_envp("PATH", *envp);
+	res = ft_find_builtins(comand, argv, envp, export);
+	if (res != -1)
+		return (res);
     if (path)
-    {
-//        ft_find_bin(path,comand,argv,envp);
-//        printf("good!\n");
-//        res = execve("./libft", argv, envp);
-//        if (res == -1)
-//        {
-//            errorbuf = strerror(errno);
-//            ft_putstr_fd(errorbuf,2);
-//            write(2, "\n",1);
-//            return (ft_comand_not_found(comand));
-//        }
-        ft_with_path(comand, path, argv, envp);
-        //ft_dont_path(comand,argv,envp);
-    }
+        return (ft_with_path(comand, path, argv, *envp));
     else
-    {
-        ft_dont_path(comand,argv,envp);
-    }
+        return (ft_dont_path(comand,argv, *envp));
     return (0);
 }
 

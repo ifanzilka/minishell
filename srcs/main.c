@@ -260,12 +260,12 @@ int main(int argc, char **argv, char **envp)
     argv_cmd = NULL;
 
     argv_cmd= malloc(sizeof (char *) * 3);
-    argv_cmd[0] = "ls";
+    argv_cmd[0] = "-n";
     argv_cmd[1] = "-la";
     argv_cmd[2] = NULL;
 
     printf("CMD!!!\n");
-    ft_command("./ls",argv_cmd, shell.envp);
+    ft_command("echo1",argv_cmd, &shell.envp, &shell.export);
 
     i = 0;
     ft_print_name_shell();

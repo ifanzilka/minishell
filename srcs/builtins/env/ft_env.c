@@ -13,7 +13,7 @@
 #include <minishell.h>
 #include <libft.h>
 
-void ft_env(char **envp)
+int ft_env(char **envp)
 {
     int i;
 
@@ -24,5 +24,6 @@ void ft_env(char **envp)
         write(1, "\n", 1);
         i++;
     }
+    return (0);
 }
 

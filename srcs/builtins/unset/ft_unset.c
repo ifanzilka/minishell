@@ -82,7 +82,7 @@ int ft_unset_envp_export(char *str, char ***export, char ***envp)
     return(0);
 }
 
-void ft_unset(char **argv,char ***envp, char ***export)
+int ft_unset(char **argv,char ***envp, char ***export)
 {
     int i;
     int len;
@@ -90,7 +90,7 @@ void ft_unset(char **argv,char ***envp, char ***export)
     i = 0;
     len = ft_arrlen(argv);
     if (len == 0)
-        return;
+        return (0);
     else
     {
         while (argv[i])
@@ -100,4 +100,5 @@ void ft_unset(char **argv,char ***envp, char ***export)
         }
         //ft_bubble_sort(*export,(t_arrinfo){ft_arrlen(*export),8},ft_str_cmp,ft_swap_str);
     }
+    return (0);
 }

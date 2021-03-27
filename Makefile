@@ -27,6 +27,7 @@ HEADERS = $(addprefix $(HEADER)/,libft.h get_next_line.h minishell.h)
 
 
 DIR		= ./srcs/
+DIR_BUILTINS = ./srcs/builtins/
 
 F_NONE		= \033[37m
 F_BOLD		= \033[1m
@@ -38,32 +39,32 @@ F_CYAN		= \033[36m
 F_BLUE		= \033[34m
 
 
-DIR_ERR = $(addprefix $(DIR),error/)
-SRC_ERR = $(addprefix $(DIR_ERR), ft_print_errno.c)
-
-DIR_EXPORT = $(addprefix $(DIR),export/)
-SRC_EXPORT = $(addprefix $(DIR_EXPORT), ft_export.c  ft_print_export.c  ft_check_export.c  ft_envp_export.c)
-
-DIR_ENV = $(addprefix $(DIR),env/)
-SRC_ENV = $(addprefix $(DIR_ENV), ft_env.c ft_find_envp.c )
-
 DIR_SH = $(addprefix $(DIR),minishell/)
 SRC_SH = $(addprefix $(DIR_SH), ft_init_shell.c)
 
-DIR_UNSET = $(addprefix $(DIR),unset/)
+DIR_ERR = $(addprefix $(DIR),error/)
+SRC_ERR = $(addprefix $(DIR_ERR), ft_print_errno.c)
+
+DIR_EXPORT = $(addprefix $(DIR_BUILTINS),export/)
+SRC_EXPORT = $(addprefix $(DIR_EXPORT), ft_export.c  ft_print_export.c  ft_check_export.c  ft_envp_export.c)
+
+DIR_ENV = $(addprefix $(DIR_BUILTINS),env/)
+SRC_ENV = $(addprefix $(DIR_ENV), ft_env.c ft_find_envp.c )
+
+DIR_UNSET = $(addprefix $(DIR_BUILTINS),unset/)
 SRC_UNSET = $(addprefix $(DIR_UNSET), ft_unset.c)
 
-DIR_CD = $(addprefix $(DIR),cd/)
+DIR_CD = $(addprefix $(DIR_BUILTINS),cd/)
 SRC_CD = $(addprefix $(DIR_CD), ft_cd.c)
 
-DIR_PWD = $(addprefix $(DIR),pwd/)
+DIR_PWD = $(addprefix $(DIR_BUILTINS),pwd/)
 SRC_PWD = $(addprefix $(DIR_PWD), ft_pwd.c)
 
-DIR_ECHO = $(addprefix $(DIR),echo/)
+DIR_ECHO = $(addprefix $(DIR_BUILTINS),echo/)
 SRC_ECHO = $(addprefix $(DIR_ECHO), ft_echo.c)
 
 DIR_CMD = $(addprefix $(DIR),command/)
-SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c ft_current_dir.c ft_dont_path.c ft_with_path.c  ft_fork_execve.c)
+SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c ft_current_dir.c ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c)
 
 SRCS = $(DIR)main.c\
 		$(SRC_ERR)\
