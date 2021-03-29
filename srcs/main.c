@@ -13,7 +13,7 @@
 #include <libft.h>
 #include <stdio.h>
 #include <minishell.h>
-#include<fcntl.h>
+#include <fcntl.h>
 
 
 void    ft_print_name_shell()
@@ -76,24 +76,110 @@ int main(int argc, char **argv, char **envp)
     char ** argv_unset = NULL;
 
     argv_unset = malloc(sizeof (char *) *5);
-    argv_unset[0] = "1hello12";
+    argv_unset[0] = "PATH";
     argv_unset[1] = "1hello123";
     argv_unset[2] = "1hello12=3";
     argv_unset[3] = "123";
     argv_unset[4] = NULL;
 
+    //ft_command("unset",argv_unset,&shell);
+
+    ft_print_arr(shell.export);
+    //ft_command("export", NULL,&shell.envp,&shell.export);
+
+    char ** argv_echo = NULL;
+
+    argv_echo = malloc(sizeof (char *) *5);
+    argv_echo[0] = "n";
+    argv_echo[1] = "sdmf";
+    argv_echo[2] = NULL;
+    argv_echo[3] = NULL;
+    argv_echo[4] = NULL;
+    int fptr;
+    fptr = open("test", O_CREAT|O_RDWR,S_IREAD|S_IWRITE);
+
+    //ft_command("echo",argv_echo, &shell, (t_change_fd){0 , fptr});
+
+    int fd[2];
+    int old_in;
+    int old_out;
+
+    int old_in2;
+    int old_out2;
+
+    old_out = dup(1);
+    old_in = dup(0);
     
+    pipe(fd);
+    //close(fd[0]);
+    dup2(fd[1], 1);
 
-
-    char *argv_ls[3];
+    char ** argv_ls = NULL; 
+    argv_ls = malloc(sizeof (char *) *5);
     argv_ls[0] = "ls";
-    argv_ls[1] = "-la";
+    argv_ls[1] = NULL;
     argv_ls[2] = NULL;
+    argv_ls[3] = NULL;
+    argv_ls[4] = NULL;
+    ft_command("ls",argv_ls, &shell, (t_change_fd){0 , fptr});
+    
+    
+    close(fd[1]);
+    dup2(old_out, 1);
 
-       char *argv_grep[3];
-    argv_grep[0] = "grep";
-    argv_grep[1] = "in";
-    argv_grep[2] = NULL;
+
+    old_out2 = dup(1);
+    old_in2 = dup(0);
+    int fd2[2];
+
+    pipe(fd2);
+
+    dup2(fd2[1], 1);
+
+
+    dup2(fd[0], 0);
+    char ** argv_grep = NULL;
+
+    argv_grep  = malloc(sizeof (char *) *5);
+    argv_grep [0] = "grep";
+    argv_grep [1] = "in";
+    argv_grep [2] = NULL;
+    argv_grep [3] = NULL;
+    argv_grep [4] = NULL;
+
+    ft_command("grep",argv_grep, &shell, (t_change_fd){0 , 1});
+    
+    close(fd[0]);
+    dup2(old_in, 0);
+
+    close(fd2[1]);
+    dup2(old_out2,1);
+
+
+    dup2(fd2[0], 0);
+    
+    char **argv_wc = NULL;
+
+    argv_wc  = malloc(sizeof (char *) *5);
+    argv_wc [0] = "wc";
+    argv_wc [1] = NULL;
+    argv_wc [2] = NULL;
+    argv_wc [3] = NULL;
+    argv_wc [4] = NULL;
+
+    ft_command("wc",argv_wc, &shell, (t_change_fd){0 , 1});
+    
+    close(fd2[0]);
+    dup2(old_in2,0);
+    // char *argv_ls[3];
+    // argv_ls[0] = "ls";
+    // argv_ls[1] = "-la";
+    // argv_ls[2] = NULL;
+
+    //    char *argv_grep[3];
+    // argv_grep[0] = "wc";
+    // argv_grep[1] = NULL;
+    // argv_grep[2] = NULL;
 
     // int fd[2];
     // pipe(fd);
@@ -111,7 +197,7 @@ int main(int argc, char **argv, char **envp)
     // {
     //     dup2(fd[0], 0);
     //     close(fd[1]);
-    //     execve("/usr/bin/grep", argv_grep, envp);
+    //     execve("/usr/bin/wc", argv_grep, envp);
     // }
     // close(fd[1]);
     // int a;
@@ -119,30 +205,30 @@ int main(int argc, char **argv, char **envp)
     //     wait(&a);
 
 
-    int fptr,oldstdout;
-   char msg[] = "Тестовый пример";
-   /* создание файла */
-   fptr = open("DUMMY.FIL",O_CREAT|O_RDWR,S_IREAD|S_IWRITE);
-   if(fptr)
-   {
-      /* создать дополнительный дескриптор для stdout */
-      oldstdout = dup(1);
-      /* перенаправить стандартный вывод в файл, путем
-         дублирования его дескриптора */
-      dup2(fptr,1);
-      /* закрыть файл */
-      close(fptr);
-      /* было перенаправлено в DUMMY.FIL */
-      write(1,msg,strlen(msg));
-      /* восстановить исходный дескриптор stdout */
-      dup2(oldstdout,1);
-      /* закрыть второй дескриптор stdout */
-      close(oldstdout);
-   }
-   else
-   {
-      printf("Ошибка при открытии файла. \n");
-   }
+//     int fptr,oldstdout;
+//    char msg[] = "Тестовый пример";
+//    /* создание файла */
+//    fptr = open("DUMMY.FIL",O_CREAT|O_RDWR,S_IREAD|S_IWRITE);
+//    if(fptr)
+//    {
+//       /* создать дополнительный дескриптор для stdout */
+//       oldstdout = dup(1);
+//       /* перенаправить стандартный вывод в файл, путем
+//          дублирования его дескриптора */
+//       dup2(fptr,1);
+//       /* закрыть файл */
+//       close(fptr);
+//       /* было перенаправлено в DUMMY.FIL */
+//       write(1,msg,strlen(msg));
+//       /* восстановить исходный дескриптор stdout */
+//       dup2(oldstdout,1);
+//       /* закрыть второй дескриптор stdout */
+//       close(oldstdout);
+//    }
+//    else
+//    {
+//       printf("Ошибка при открытии файла. \n");
+//    }
 
 
     ft_print_name_shell();

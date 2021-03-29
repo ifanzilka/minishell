@@ -46,7 +46,7 @@ static void ft_add_shell_lvl(char **envp)
     i = 0;
     while (envp[i])
     {
-        if (ft_strnstr(envp[i],new,6))
+        if (ft_strnstr(envp[i], new , 6))
         {
             lvl = ft_atoi(envp[i] + 6);
             lvl++;
@@ -54,6 +54,7 @@ static void ft_add_shell_lvl(char **envp)
             str_lvl = ft_itoa(lvl);
             envp[i] = ft_strjoin(new, str_lvl);
             free(str_lvl);
+            break;
         }
         i++;
     }

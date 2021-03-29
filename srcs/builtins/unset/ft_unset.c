@@ -16,9 +16,9 @@
 static int ft_not_valid_unset(char *str)
 {
     write(2, "unset: ", 7);
-    write(1,"'",1);
+    write(2,"'",1);
     write(2, str, ft_strlen(str));
-    write(1,"'",1);
+    write(2,"'",1);
     write(2, ": not a valid identifier\n", 25);
     return (1);
 }
@@ -45,6 +45,7 @@ int ft_envp_unset(char *str, char ***envp)
     char **arr;
     int id;
 
+    
     arr = *envp;
     if (ft_find_envp(str, *envp) == NULL)
         return (0);
@@ -70,13 +71,13 @@ int ft_unset_envp_export(char *str, char ***export, char ***envp)
         return (1);
     if (ft_envp_unset(str, envp) == 1)
     {
-        ft_putstr_fd("ERROR!\n", 2); //malloc
+        ft_putstr_fd("ERROR MALLOC!\n", 2); //malloc
         return (1);
     }
 
     if (ft_export_unset(str, export) == 1)
     {
-        ft_putstr_fd("ERROR!\n", 2); //malloc
+        ft_putstr_fd("ERROR MAllOC!\n", 2); //malloc
         return (1);
     }
     return(0);
@@ -95,6 +96,7 @@ int ft_unset(char **argv,char ***envp, char ***export)
     {
         while (argv[i])
         {
+            printf("str : %s\n", argv[i]);
             ft_unset_envp_export(argv[i], export, envp);
             i++;
         }

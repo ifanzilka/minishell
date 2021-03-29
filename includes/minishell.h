@@ -41,6 +41,12 @@ typedef struct		s_shell
 
 }					t_shell;
 
+typedef struct		s_change_fd
+{
+    int fd_0;
+    int fd_1;
+}					t_change_fd;
+
 void ft_print_errno();
 
 void ft_init_shell(t_shell *shell,char **envp);
@@ -48,17 +54,18 @@ void ft_init_shell(t_shell *shell,char **envp);
 char *ft_find_envp(char *key, char **envp);
 int ft_find_envp_id(char *key, char **envp);
 
-int ft_check_export(char *str);
-int ft_add_envp_export(char *str,char ***export, char ***envp);
-void ft_print_export(char **export);
+int     ft_check_export(char *str);
+int     ft_add_envp_export(char *str,char ***export, char ***envp);
+void    ft_print_export(char **export);
 int		ft_find_builtins(char *comand);
+int     ft_builtin(char *comand,char **argv, char ***envp, char ***export);
 int     ft_env(char **envp);
 int     ft_export(char **argv,char ***envp, char ***export);
 int     ft_unset(char **argv,char ***envp, char ***export);
 int     ft_cd(char **argv, char **envp);
 int     ft_pwd(char **argv, char **envp);
 int     ft_echo(char **argv, char **envp);
-int     ft_command(char *comand,char **argv, char ***envp, char ***export);
+int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd new_fd);
 
 int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);
 

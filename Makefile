@@ -64,7 +64,7 @@ DIR_ECHO = $(addprefix $(DIR_BUILTINS),echo/)
 SRC_ECHO = $(addprefix $(DIR_ECHO), ft_echo.c)
 
 DIR_CMD = $(addprefix $(DIR),command/)
-SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c)
+SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c ft_builtin.c)
 
 SRCS = $(DIR)main.c\
 		$(SRC_ERR)\

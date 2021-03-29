@@ -13,28 +13,54 @@
 #include <minishell.h>
 #include <libft.h>
 
-int ft_builtin(char *comand,char **argv, char ***envp, char ***export)
-{
-    (void) comand;
-    (void) argv;
-    (void) envp;
-    (void) export;
-    //fork for command  (change fd )
-    return (0);
-}
+// static void ft_change_fd(t_)
+// {
 
-int     ft_command(char *comand,char **argv, char ***envp, char ***export)
+// }
+
+int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd fd)
 {
     char *path;
-    (void) export;
+    int res;
+    int oldstd_in;
+    int oldstd_out;
 
-    path = ft_find_envp("PATH", *envp);
+    if (fd.fd_0 != 0 || fd.fd_1 != 1)
+    {  
+        if (fd.fd_0 != 0)
+        {
+            oldstd_in = dup(0);
+            dup2(fd.fd_0, 0);
+            close(fd.fd_0);
+        }
+        if (fd.fd_1 != 1)
+        {
+            oldstd_out = dup(1);
+            dup2(fd.fd_1, 1);
+            close(fd.fd_1);
+        }
+    }
+    path = ft_find_envp("PATH", (shell->envp));
 	if (ft_find_builtins(comand))
-		return (ft_builtin(comand, argv, envp, export));
+		res = ft_builtin(comand, argv, &shell->envp, &shell->export);
     if (path)
-        return (ft_with_path(comand, path, argv, *envp));
+        res = ft_with_path(comand, path, argv, shell->envp);
     else
-        return (ft_dont_path(comand,argv, *envp));
-    return (0);
+        res = ft_dont_path(comand, argv, shell->envp);
+    if (fd.fd_0 != 0 || fd.fd_1 != 1)
+    {
+        if (fd.fd_0 != 0)
+        {
+            dup2(oldstd_in, 0);
+            close(oldstd_in);
+        }
+        if (fd.fd_1 != 1)
+        {
+            dup2(oldstd_out, 1);
+            close(oldstd_out);
+        }
+         
+    }    
+    return (res);
 }
 

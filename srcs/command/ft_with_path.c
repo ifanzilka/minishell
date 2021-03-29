@@ -13,45 +13,6 @@
 #include <minishell.h>
 #include <libft.h>
 
-//
-//void ft_descendant(char *comand, char **argv, char **envp)
-//{
-//    int res;
-//
-//    res = execve(comand, argv, envp);
-//    if (res == -1)
-//    {
-//        ft_print_errno();
-//        exit(1);
-//    }
-//    exit (0);
-//}
-//
-//
-//int     ft_fork_and_execve_command(char *comand, char **argv, char **envp)
-//{
-//    pid_t pid;
-//    int status;
-//
-//
-//    status = 0;
-//    pid = fork();
-//    if (pid == 0)
-//    {
-//        ft_descendant(comand,argv,envp);
-//    }
-//    else if (pid == -1)
-//    {
-//        ft_print_errno();
-//        return (1);
-//    }
-//    else
-//    {
-//        wait(&status);
-//    }
-//    return (WEXITSTATUS(status));
-//}
-
 static int    ft_check_file_in_dir(char *dir, char *file)
 {
     struct dirent *dir_point;
@@ -132,7 +93,7 @@ int     ft_with_path(char *comand, char *path, char **argv, char **envp)
         return (ft_fork_and_execve_command(way,argv,envp));
     }
 
-    if (ft_strncmp("./",comand,2) != 0)
+    if (ft_strncmp("./", comand, 2) != 0)
     {
         return (ft_comand_not_found(comand));
     }
