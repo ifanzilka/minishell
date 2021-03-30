@@ -21,12 +21,12 @@ int  ft_find_str_in_arr(char **array, char *str)
     len = ft_strlen(str);
     while (array[i])
     {
-        if (ft_strlen(array[i]) == len && ft_strncmp(str,array[i],len) == 0)
+        if (ft_strncmp(str,array[i],len) == 0)
         {
             return (i);
         }
         i++;
     }
 
-    return(0);
+    return(-1);
 }

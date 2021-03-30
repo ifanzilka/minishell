@@ -27,7 +27,6 @@ int ft_find_envp_id(char *key, char **envp)
         j = 0;
         if (ft_strncmp(key, envp[i], len) == 0)
         {
-
             while (envp[i][j] != 0 && envp[i][j] != '=')
                 j++;
             if ((size_t)j == len)

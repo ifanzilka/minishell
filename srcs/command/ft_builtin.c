@@ -13,33 +13,32 @@
 #include <minishell.h>
 #include <libft.h>
 
-static int ft_descendant_bultin(char *comand,char **argv,
-	char ***envp, char ***export)
+static int ft_descendant_bultin(char *comand,char **argv, t_shell *shell)
 {
     int res;
 
     res = 0;
     if (ft_strcmp(comand, "echo") == 0)
-		res = ft_echo(argv, *envp);
+		res = ft_echo(argv, shell->envp);
 	if (ft_strcmp(comand, "cd") == 0)
-		res = ft_cd(argv, *envp);
+		res = ft_cd(argv, shell);
 	if (ft_strcmp(comand, "pwd") == 0)
-		res = ft_pwd(argv, *envp);
+		res = ft_pwd(argv, shell->envp);
 	if (ft_strcmp(comand, "export") == 0)
-		res = ft_export(argv, envp, export);
+		res = ft_export(argv, &shell->envp, &shell->export);
 	if (ft_strcmp(comand, "unset") == 0)
-		res =  ft_unset(argv, envp, export);
+		res =  ft_unset(argv, &shell->envp, &shell->export);
 	if (ft_strcmp(comand, "env") == 0)
-		res = ft_env(*envp);
+		res = ft_env( shell->envp);
 	if (ft_strcmp(comand, "exit") == 0)
 		res = ft_exit(argv);
     return (res);    
 }
 
 
-int ft_builtin(char *comand,char **argv, char ***envp, char ***export)
+int ft_builtin(char *comand,char **argv, t_shell *shell)
 {
     
-    return (ft_descendant_bultin(comand, argv, envp, export));
+    return (ft_descendant_bultin(comand, argv, shell));
 
 }

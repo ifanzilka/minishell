@@ -51,19 +51,21 @@ typedef struct		s_change_fd
 void ft_print_errno();
 
 void ft_init_shell(t_shell *shell,char **envp);
+int ft_oldpwd( char *oldpwd, t_shell *shell);
+int ft_new_pwd(t_shell *shell);
 
-char *ft_find_envp(char *key, char **envp);
-int ft_find_envp_id(char *key, char **envp);
+char    *ft_find_envp(char *key, char **envp);
+int     ft_find_envp_id(char *key, char **envp);
 
 int     ft_check_export(char *str);
 int     ft_add_envp_export(char *str,char ***export, char ***envp);
 void    ft_print_export(char **export);
 int		ft_find_builtins(char *comand);
-int     ft_builtin(char *comand,char **argv, char ***envp, char ***export);
+int     ft_builtin(char *comand,char **argv, t_shell *shell);
 int     ft_env(char **envp);
 int     ft_export(char **argv,char ***envp, char ***export);
 int     ft_unset(char **argv,char ***envp, char ***export);
-int     ft_cd(char **argv, char **envp);
+int     ft_cd(char **argv, t_shell *shell);
 int     ft_pwd(char **argv, char **envp);
 int     ft_echo(char **argv, char **envp);
 int     ft_exit(char **argv);

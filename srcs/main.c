@@ -56,11 +56,37 @@ int main(int argc, char **argv, char **envp)
     ft_init_shell(&shell,envp);
 
 
-  
+    //ft_print_arr(shell.export);
+    //ft_print_arr(envp);
+    char **argv_ex = NULL;
+
+    argv_ex = malloc(sizeof (char *) *3);
+    argv_ex[0] = "export";
+    argv_ex[1] = NULL;
+    argv_ex[2] = NULL;
+    
+
+    ft_command("export", argv_ex ,&shell,(t_change_fd){0 , 1});
+
+    char ** argv_cd = NULL;
+
+    argv_cd = malloc(sizeof (char *) *3);
+    argv_cd[0] = "cd";
+    argv_cd[1] = "libft";
+    argv_cd[2] = NULL;
+    
+
+    ft_command("cd", argv_cd ,&shell,(t_change_fd){0 , 1});
+
+    ft_command("pwd",NULL,&shell,(t_change_fd){0 , 1});
+    //write(1,"\n\n\n",3);
+
+    //ft_print_arr(shell.export);
+    ft_command("export", argv_ex ,&shell,(t_change_fd){0 , 1});
     char ** argvls = NULL;
 
     argvls = malloc(sizeof (char *) *3);
-    argvls[0] = "/bin/ls";
+    argvls[0] = "ls";
     argvls[1] = "l";
     argvls[2] = NULL;
 
@@ -112,50 +138,50 @@ int main(int argc, char **argv, char **envp)
 
    // ft_command("exit",argv_exit,&shell, (t_change_fd){0 , 1});
     
-    int fd[2];
-    int old_in = dup(0);
-    int old_out = dup(1);
+    // int fd[2];
+    // int old_in = dup(0);
+    // int old_out = dup(1);
 
-    pipe(fd);
+    // pipe(fd);
 
-    dup2(fd[1], 1);
+    // dup2(fd[1], 1);
     
-    char ** argv_ls = NULL; 
-    argv_ls = malloc(sizeof (char *) *5);
-    argv_ls[0] = "ls";
-    argv_ls[1] = NULL;
-    argv_ls[2] = NULL;
-    argv_ls[3] = NULL;
-    argv_ls[4] = NULL;
-    ft_command("ls",argv_ls, &shell, (t_change_fd){0 , 1});
+    // char ** argv_ls = NULL; 
+    // argv_ls = malloc(sizeof (char *) *5);
+    // argv_ls[0] = "ls";
+    // argv_ls[1] = NULL;
+    // argv_ls[2] = NULL;
+    // argv_ls[3] = NULL;
+    // argv_ls[4] = NULL;
+    // ft_command("ls",argv_ls, &shell, (t_change_fd){0 , 1});
     
-    close(fd[1]);
-    dup2(old_out, 1);
+    // close(fd[1]);
+    // dup2(old_out, 1);
 
     
-    // int fd2[2];
+    // // int fd2[2];
 
-    // pipe(fd2);
-
-
-    // dup2(fd2[1],1);
-
-    dup2(fd[0], 0);
+    // // pipe(fd2);
 
 
-    char **argv_grep = NULL;
-    argv_grep  = malloc(sizeof (char *) *5);
-    argv_grep[0] = "usr/bin/grep";
-    argv_grep[1] =  "in";
-    argv_grep[2] = NULL;
-    argv_grep[3] = NULL;
-    argv_grep[4] = NULL;
-    ft_command("grep", argv_grep, &shell, (t_change_fd){0 , 1});
+    // // dup2(fd2[1],1);
+
+    // dup2(fd[0], 0);
+
+
+    // char **argv_grep = NULL;
+    // argv_grep  = malloc(sizeof (char *) *5);
+    // argv_grep[0] = "grep";
+    // argv_grep[1] =  "in";
+    // argv_grep[2] = NULL;
+    // argv_grep[3] = NULL;
+    // argv_grep[4] = NULL;
+    // ft_command("grep", argv_grep, &shell, (t_change_fd){0 , 1});
     
     
-    close(fd[0]);
+    // close(fd[0]);
 
-    dup2(old_in, 0);
+    // dup2(old_in, 0);
 
     // //close(fd2[1]);
     // dup2(old_out,1);

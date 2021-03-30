@@ -24,7 +24,10 @@ static int ft_replace(char *str,char *key, char **envp)
     {
         if (ft_strncmp(key, envp[i], len) == 0)
         {
+            //printf("rep : %s\n",envp[i]);
+            free(envp[i]);
             envp[i] = ft_strdup(str);
+            //printf("rep : %s\n",envp[i]);
             if (envp[i] == NULL)
                 return (1);
             return (0);
@@ -40,9 +43,8 @@ static int ft_envp_apppend(char *str, char ***envp)
     int index;
 
 
-    if ((index = ft_str_find(str, '=')) == 0)
+    if ((index = ft_str_find(str, '=')) == -1)
         return (0);
-
     key = ft_substr(str,0,index);
     if (ft_find_envp(key, *envp) == NULL)
     {
@@ -62,10 +64,11 @@ static int ft_export_apppend(char *str, char ***export, char ***envp)
     char *key;
     int index;
 
-    if ((index = ft_str_find(str, '=')) != 0)
+    if ((index = ft_str_find(str, '=')) != -1)
     {
-        key = ft_substr(str,0,index);
-        if (ft_find_str_in_arr(*export,key) == 0)
+        key = ft_substr(str, 0, index);
+        printf("Key !%s!\n",key );
+        if (ft_find_str_in_arr(*export, key) == 0)
         {
             if (ft_append_arr(str, export) == 1)
                 ft_putstr_fd("ERROR!\n", 2);
@@ -94,7 +97,6 @@ int ft_add_envp_export(char *str,char ***export, char ***envp)
         ft_putstr_fd("ERROR!\n", 2); //malloc
         return (1);
     }
-
     if (ft_export_apppend(str, export,envp) == 1)
     {
         ft_putstr_fd("ERROR!\n", 2); //malloc

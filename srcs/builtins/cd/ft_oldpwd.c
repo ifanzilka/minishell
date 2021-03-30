@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   ft_oldpwd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/18 20:21:37 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/18 20:21:38 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/30 18:58:42 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/30 18:58:52 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <libft.h>
 
-
-
-int ft_export(char **argv,char ***envp, char ***export)
+int ft_oldpwd(char *oldpwd, t_shell *shell)
 {
-    int i;
-    int len;
+    char *argv_ex[3];
+    char *pwds;
+    int  o_pw;
 
-    i = 1;
-    len = ft_arrlen(argv);
-    if (len == 1)
-        ft_print_export(*export);
-    else
+    o_pw = ft_find_envp_id("OLDPWD", shell->export);
+    if (o_pw != -1)
     {
-        while (argv[i])
-        {
-            ft_add_envp_export(argv[i], export, envp);
-            ft_putstr_fd("\n",1);
-            i++;
-        }
-        ft_bubble_sort(*export,(t_arrinfo){ft_arrlen(*export),8},ft_str_cmp,ft_swap_str);
+        pwds = ft_strjoin("OLDPWD=", oldpwd);
+        argv_ex[0] = "export";
+        argv_ex[1] = pwds;
+        argv_ex[2] = NULL;
+        ft_command("export", argv_ex, shell, (t_change_fd){0, 1}); 
+        free(pwds);
     }
     return (0);
 }

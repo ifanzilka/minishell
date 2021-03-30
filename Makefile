@@ -55,7 +55,7 @@ DIR_UNSET = $(addprefix $(DIR_BUILTINS),unset/)
 SRC_UNSET = $(addprefix $(DIR_UNSET), ft_unset.c)
 
 DIR_CD = $(addprefix $(DIR_BUILTINS),cd/)
-SRC_CD = $(addprefix $(DIR_CD), ft_cd.c)
+SRC_CD = $(addprefix $(DIR_CD), ft_cd.c ft_oldpwd.c ft_new_pwd.c )
 
 DIR_PWD = $(addprefix $(DIR_BUILTINS),pwd/)
 SRC_PWD = $(addprefix $(DIR_PWD), ft_pwd.c)
