@@ -69,6 +69,9 @@ SRC_EXIT = $(addprefix $(DIR_EXIT), ft_exit.c)
 DIR_CMD = $(addprefix $(DIR),command/)
 SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c ft_builtin.c)
 
+DIR_PARSER = $(addprefix $(DIR),parser/)
+SRC_PARSER = $(addprefix $(DIR_PARSER), boss_of_gang_parsers.c    gang_of_find_lens.c    ft_get_line.c   gang_of_join_find_check.c gang_of_mini_parsers.c   print_cmds.c)
+
 SRCS = $(DIR)main.c\
 		$(SRC_ERR)\
 		$(SRC_SH)\
@@ -79,7 +82,8 @@ SRCS = $(DIR)main.c\
 		$(SRC_PWD)\
 		$(SRC_ECHO)\
 		$(SRC_EXIT)\
-		$(SRC_CMD)
+		$(SRC_CMD)\
+		$(SRC_PARSER)
 
 SRCS.O = $(SRCS:.c=.o)
 

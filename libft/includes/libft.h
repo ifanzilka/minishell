@@ -83,6 +83,7 @@ int                 ft_str_find(char *str, char c);
 size_t				ft_strlen(const char *str);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
+char 				*ft_strcpy(char * dst, const char * src);
 char				*ft_strnew(size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);

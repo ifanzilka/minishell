@@ -26,19 +26,6 @@
 ** возвращает указатель на нее.
 */
 
-static char	*ft_strcpy(char *dst, const char *s1)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i])
-	{
-		dst[i] = s1[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
-}
 
 char		*ft_strdup(const char *s1)
 {

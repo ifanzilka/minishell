@@ -61,29 +61,6 @@ static void ft_add_shell_lvl(char **envp)
 
 }
 
-// static int ft_add_pwd(t_shell *shell)
-// {
-//     char *argv_ex[3];
-//     char *pwd_pwd;
-//     char *pwd;
-
-//     if (!(pwd = getcwd(NULL,1024)))
-//     {
-//         ft_print_errno();
-//         return (1);
-//     }
-//     else
-//     {
-//         pwd_pwd = ft_strjoin("PWD=", pwd);
-//         argv_ex[0] = "export";
-//         argv_ex[1] = pwd_pwd;
-//         argv_ex[2] = NULL;
-//         ft_command("export",argv_ex,shell, (t_change_fd){0, 1}); 
-//     }
-//     free(pwd);
-//     free(pwd_pwd);
-//     return (0);
-// }
 
 static int ft_add_oldpwd(t_shell *shell)
 {
@@ -93,6 +70,7 @@ static int ft_add_oldpwd(t_shell *shell)
     argv_un[0] = "unset";
     argv_un[1] = "OLDPWD";
     argv_un[2] = NULL;
+     
     ft_command("unset", argv_un, shell, (t_change_fd){0, 1}); 
     argv_ex[0] = "export";
     argv_ex[1] = "OLDPWD";
@@ -112,6 +90,7 @@ void ft_init_shell(t_shell *shell, char **envp)
     shell->comands = NULL;
     shell->status = 0;
     //ft_add_pwd(shell);
+   
     ft_add_oldpwd(shell);
 }
 

@@ -96,7 +96,6 @@ int ft_unset(char **argv,char ***envp, char ***export)
     {
         while (argv[i])
         {
-            printf("str : %s\n", argv[i]);
             ft_unset_envp_export(argv[i], export, envp);
             i++;
         }

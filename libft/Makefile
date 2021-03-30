@@ -39,7 +39,7 @@ TO_DIR = $(addprefix $(DIR),to/)
 SRC_TO = $(addprefix $(TO_DIR), ft_tolower.c ft_toupper.c)
 
 STR_DIR = $(addprefix $(DIR),str/)
-SRC_STR = $(addprefix $(STR_DIR), ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strcmp.c  ft_strnstr.c ft_strrchr.c ft_strncmp.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_split.c ft_strdup.c ft_strnew.c ft_strdel.c ft_create_str.c ft_add_forward.c ft_add_back.c ft_str_find.c)
+SRC_STR = $(addprefix $(STR_DIR), ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strcmp.c  ft_strnstr.c ft_strrchr.c ft_strncmp.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_split.c ft_strdup.c ft_strnew.c ft_strdel.c ft_create_str.c ft_add_forward.c ft_add_back.c ft_str_find.c ft_strcpy.c)
 
 PUT_DIR = $(addprefix $(DIR),put/)
 SRC_PUT = $(addprefix $(PUT_DIR), ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_print_n_char.c)

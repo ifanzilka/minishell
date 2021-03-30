@@ -43,7 +43,6 @@ int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd fd)
     path = ft_find_envp("PATH", (shell->envp));
 	if (ft_find_builtins(comand))
     {
-
 		res = ft_builtin(comand, argv, shell);
     }
     else 

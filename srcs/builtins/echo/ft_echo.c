@@ -19,13 +19,15 @@ int     ft_echo(char **argv, char **envp)
     (void) envp;
     int flag_n;
     int i;
+    int len;
 
-    if (argv == NULL)
+    len = ft_arrlen(envp);
+    if (len == 1)
     {
         write(1, "\n", 1);
         return (0);
     }
-    i = 0;
+    i = 1;
     flag_n = 1;
     while (argv[i])
     {

@@ -6,7 +6,7 @@
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 16:04:39 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/02/22 16:04:40 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/03/31 00:20:50 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,18 @@ int cmp_int(void *a, void *b)
 
 int main(int argc, char **argv, char **envp)
 {
+    t_shell shell;
+    ft_init_shell(&shell,envp);
+    
+    ft_get_line(argc, argv, shell.envp,&shell);    
 
-    printf("str : %s\n",argv[0]);
+
+   // printf("str : %s\n",argv[0]);
 
     (void) argc;
     (void) argv;
     (void) envp;
-    t_shell shell;
-    ft_init_shell(&shell,envp);
+    
 
 
     //ft_print_arr(shell.export);

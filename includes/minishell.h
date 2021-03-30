@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
  #define MINISHELL_H
 
+#include <parser.h> 
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -76,5 +77,8 @@ int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);
 int     ft_dont_path(char *comand, char **argv, char **envp);
 int     ft_with_path(char *csomand, char *path, char **argv, char **envp);
 
+
+t_data 			ft_get_line(int argc, char **argv, char **envp,t_shell *shell);
+void			parse(char *str, char **envp, t_shell *shell);
 
 #endif
