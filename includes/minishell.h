@@ -36,8 +36,9 @@ typedef struct		s_shell
 {
     char            **envp;
     char            **export;
-    t_l_list       *history;
+    t_l_list        *history;
     t_list          *comands;
+    int             status;
 
 }					t_shell;
 
@@ -65,6 +66,7 @@ int     ft_unset(char **argv,char ***envp, char ***export);
 int     ft_cd(char **argv, char **envp);
 int     ft_pwd(char **argv, char **envp);
 int     ft_echo(char **argv, char **envp);
+int     ft_exit(char **argv);
 int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd new_fd);
 
 int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);

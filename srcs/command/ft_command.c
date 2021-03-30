@@ -43,10 +43,13 @@ int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd fd)
     path = ft_find_envp("PATH", (shell->envp));
 	if (ft_find_builtins(comand))
 		res = ft_builtin(comand, argv, &shell->envp, &shell->export);
-    if (path)
-        res = ft_with_path(comand, path, argv, shell->envp);
-    else
-        res = ft_dont_path(comand, argv, shell->envp);
+    else 
+    {
+        if (path)
+            res = ft_with_path(comand, path, argv, shell->envp);
+        else
+            res = ft_dont_path(comand, argv, shell->envp);
+    }
     if (fd.fd_0 != 0 || fd.fd_1 != 1)
     {
         if (fd.fd_0 != 0)

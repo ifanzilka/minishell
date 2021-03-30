@@ -70,5 +70,6 @@ void ft_init_shell(t_shell *shell,char **envp)
                    ft_str_cmp, ft_swap_str);
     //ft_str_bubble_sort(shell->export,ft_arrlen(shell->export));
     shell->comands = NULL;
+    shell->status = 0;
 }
 

@@ -13,14 +13,8 @@
 #include <minishell.h>
 #include <libft.h>
 
-int     ft_env(char **envp);
-int     ft_export(char **argv,char ***envp, char ***export);
-int     ft_unset(char **argv,char ***envp, char ***export);
-int     ft_cd(char **argv, char **envp);
-int     ft_pwd(char **argv, char **envp);
-int     ft_echo(char **argv, char **envp);
-
-static int ft_descendant_bultin(char *comand,char **argv, char ***envp, char ***export)
+static int ft_descendant_bultin(char *comand,char **argv,
+	char ***envp, char ***export)
 {
     int res;
 
@@ -38,7 +32,7 @@ static int ft_descendant_bultin(char *comand,char **argv, char ***envp, char ***
 	if (ft_strcmp(comand, "env") == 0)
 		res = ft_env(*envp);
 	if (ft_strcmp(comand, "exit") == 0)
-		res = 0;
+		res = ft_exit(argv);
     return (res);    
 }
 

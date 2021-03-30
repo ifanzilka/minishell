@@ -76,7 +76,7 @@ char *ft_join_dir(char *dir, char *comand)
 
 int     ft_comand_not_found(char *comand)
 {
-    //minishell: command not found
+
     ft_putstr_fd(comand, 2);
     ft_putstr_fd(": command not found\n",2);
     return (127);

@@ -63,6 +63,9 @@ SRC_PWD = $(addprefix $(DIR_PWD), ft_pwd.c)
 DIR_ECHO = $(addprefix $(DIR_BUILTINS),echo/)
 SRC_ECHO = $(addprefix $(DIR_ECHO), ft_echo.c)
 
+DIR_EXIT = $(addprefix $(DIR_BUILTINS),exit/)
+SRC_EXIT = $(addprefix $(DIR_EXIT), ft_exit.c)
+
 DIR_CMD = $(addprefix $(DIR),command/)
 SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c ft_builtin.c)
 
@@ -75,6 +78,7 @@ SRCS = $(DIR)main.c\
 		$(SRC_CD)\
 		$(SRC_PWD)\
 		$(SRC_ECHO)\
+		$(SRC_EXIT)\
 		$(SRC_CMD)
 
 SRCS.O = $(SRCS:.c=.o)

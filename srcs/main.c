@@ -46,6 +46,9 @@ int cmp_int(void *a, void *b)
 
 int main(int argc, char **argv, char **envp)
 {
+
+    printf("str : %s\n",argv[0]);
+
     (void) argc;
     (void) argv;
     (void) envp;
@@ -57,7 +60,7 @@ int main(int argc, char **argv, char **envp)
     char ** argvls = NULL;
 
     argvls = malloc(sizeof (char *) *3);
-    argvls[0] = "ls";
+    argvls[0] = "/bin/ls";
     argvls[1] = "l";
     argvls[2] = NULL;
 
@@ -84,7 +87,7 @@ int main(int argc, char **argv, char **envp)
 
     //ft_command("unset",argv_unset,&shell);
 
-    ft_print_arr(shell.export);
+    //ft_print_arr(shell.export);
     //ft_command("export", NULL,&shell.envp,&shell.export);
 
     char ** argv_echo = NULL;
@@ -100,20 +103,23 @@ int main(int argc, char **argv, char **envp)
 
     //ft_command("echo",argv_echo, &shell, (t_change_fd){0 , fptr});
 
-    int fd[2];
-    int old_in;
-    int old_out;
+    char **argv_exit = malloc(sizeof (char *) *5);
+    argv_exit[0] = "exit";
+   argv_exit[1] = "1";
+   argv_exit[2] = "2";
+    argv_exit[3] = NULL;
+    argv_exit[4] = NULL;
 
-    int old_in2;
-    int old_out2;
-
-    old_out = dup(1);
-    old_in = dup(0);
+   // ft_command("exit",argv_exit,&shell, (t_change_fd){0 , 1});
     
-    pipe(fd);
-    //close(fd[0]);
-    dup2(fd[1], 1);
+    int fd[2];
+    int old_in = dup(0);
+    int old_out = dup(1);
 
+    pipe(fd);
+
+    dup2(fd[1], 1);
+    
     char ** argv_ls = NULL; 
     argv_ls = malloc(sizeof (char *) *5);
     argv_ls[0] = "ls";
@@ -121,57 +127,55 @@ int main(int argc, char **argv, char **envp)
     argv_ls[2] = NULL;
     argv_ls[3] = NULL;
     argv_ls[4] = NULL;
-    ft_command("ls",argv_ls, &shell, (t_change_fd){0 , fptr});
-    
+    ft_command("ls",argv_ls, &shell, (t_change_fd){0 , 1});
     
     close(fd[1]);
     dup2(old_out, 1);
 
+    
+    // int fd2[2];
 
-    old_out2 = dup(1);
-    old_in2 = dup(0);
-    int fd2[2];
+    // pipe(fd2);
 
-    pipe(fd2);
 
-    dup2(fd2[1], 1);
-
+    // dup2(fd2[1],1);
 
     dup2(fd[0], 0);
-    char ** argv_grep = NULL;
 
+
+    char **argv_grep = NULL;
     argv_grep  = malloc(sizeof (char *) *5);
-    argv_grep [0] = "grep";
-    argv_grep [1] = "in";
-    argv_grep [2] = NULL;
-    argv_grep [3] = NULL;
-    argv_grep [4] = NULL;
-
-    ft_command("grep",argv_grep, &shell, (t_change_fd){0 , 1});
+    argv_grep[0] = "usr/bin/grep";
+    argv_grep[1] =  "in";
+    argv_grep[2] = NULL;
+    argv_grep[3] = NULL;
+    argv_grep[4] = NULL;
+    ft_command("grep", argv_grep, &shell, (t_change_fd){0 , 1});
+    
     
     close(fd[0]);
+
     dup2(old_in, 0);
 
-    close(fd2[1]);
-    dup2(old_out2,1);
+    // //close(fd2[1]);
+    // dup2(old_out,1);
 
 
-    dup2(fd2[0], 0);
+    // dup2(fd2[0],0);
+    // char **argv_wc = NULL;
+    // argv_wc  = malloc(sizeof (char *) *5);
+    // argv_wc [0] = "wc";
+    // argv_wc [1] = "2";
+    // argv_wc [2] = NULL;
+    // argv_wc [3] = NULL;
+    // argv_wc [4] = NULL;
+    // ft_command("wc",argv_wc, &shell, (t_change_fd){0 , 1});
     
-    char **argv_wc = NULL;
+    // close(fd2[0]);
+    // dup2(old_in,0);
 
-    argv_wc  = malloc(sizeof (char *) *5);
-    argv_wc [0] = "wc";
-    argv_wc [1] = NULL;
-    argv_wc [2] = NULL;
-    argv_wc [3] = NULL;
-    argv_wc [4] = NULL;
-
-    ft_command("wc",argv_wc, &shell, (t_change_fd){0 , 1});
     
-    close(fd2[0]);
-    dup2(old_in2,0);
-    // char *argv_ls[3];
+    //char *argv_ls[3];
     // argv_ls[0] = "ls";
     // argv_ls[1] = "-la";
     // argv_ls[2] = NULL;
