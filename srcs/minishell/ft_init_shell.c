@@ -35,13 +35,29 @@ char **ft_copy_envp(char **envp)
     return (envp_copy);
 }
 
-static void ft_add_shell_lvl(char **envp)
+void ft_add_shell_lvl_cmd(int lvl, t_shell *shell)
+{
+    char *argv_un[3];
+	char *shlvl;
+	char *num;
+
+	num = ft_itoa(lvl);
+    argv_un[0] = "export";
+    argv_un[1] = NULL;
+    argv_un[2] = NULL;
+	shlvl = ft_strjoin("SHLVL=", num);
+	argv_un[1] = shlvl;
+    ft_command("export", argv_un, shell, (t_change_fd){0, 1}); 
+	free(num);
+	free(shlvl);
+}
+
+static void ft_add_shell_lvl(char **envp, t_shell *shell)
 {
     char *new;
-    char *str_lvl;
     int i;
     int lvl;
-
+	(void) shell;
     new = "SHLVL=";
     i = 0;
     while (envp[i])
@@ -50,15 +66,12 @@ static void ft_add_shell_lvl(char **envp)
         {
             lvl = ft_atoi(envp[i] + 6);
             lvl++;
-            free(envp[i]);
-            str_lvl = ft_itoa(lvl);
-            envp[i] = ft_strjoin(new, str_lvl);
-            free(str_lvl);
-            break;
+			ft_add_shell_lvl_cmd(lvl, shell);
+            return;
         }
         i++;
     }
-
+	ft_add_shell_lvl_cmd(1, shell);
 }
 
 
@@ -70,7 +83,6 @@ static int ft_add_oldpwd(t_shell *shell)
     argv_un[0] = "unset";
     argv_un[1] = "OLDPWD";
     argv_un[2] = NULL;
-     
     ft_command("unset", argv_un, shell, (t_change_fd){0, 1}); 
     argv_ex[0] = "export";
     argv_ex[1] = "OLDPWD";
@@ -82,15 +94,13 @@ static int ft_add_oldpwd(t_shell *shell)
 void ft_init_shell(t_shell *shell, char **envp)
 {
     shell->envp = ft_copy_envp(envp);
-    ft_add_shell_lvl(shell->envp);
     shell->export = ft_copy_envp(shell->envp);
     ft_bubble_sort(shell->export, (t_arrinfo){ft_arrlen(shell->export) ,sizeof (char **)},
                    ft_str_cmp, ft_swap_str);
+	ft_add_shell_lvl(shell->envp,shell);			   
     //ft_str_bubble_sort(shell->export,ft_arrlen(shell->export));
     shell->comands = NULL;
     shell->status = 0;
-    //ft_add_pwd(shell);
-   
     ft_add_oldpwd(shell);
 }
 

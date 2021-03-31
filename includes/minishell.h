@@ -40,7 +40,6 @@ typedef struct		s_shell
     t_l_list        *history;
     t_list          *comands;
     int             status;
-
 }					t_shell;
 
 typedef struct		s_change_fd

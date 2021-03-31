@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -43,4 +41,6 @@ int				one_of_the_set(char a, char *set);
 char 			*ft_find_envp_2(char *key, char **envp);
 char			*cmd_parse(char *str, char ***cmds, int **fds, char **envp);
 char			*redirection_parse(char *str, int **fds, char **envp);
+
+
 #endif

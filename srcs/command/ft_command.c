@@ -40,6 +40,7 @@ int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd fd)
             close(fd.fd_1);
         }
     }
+	
     path = ft_find_envp("PATH", (shell->envp));
 	if (ft_find_builtins(comand))
     {

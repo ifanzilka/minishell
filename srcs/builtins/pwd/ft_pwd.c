@@ -27,7 +27,7 @@ int     ft_pwd(char **argv, char **envp)
     }
     else
     {
-        ft_putstr_fd(pwd,1);
+        ft_putstr_fd(pwd, 1);
         write(1, "\n",1);
     }
     free(pwd);

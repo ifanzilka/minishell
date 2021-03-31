@@ -55,6 +55,7 @@ int     ft_cd(char **argv, t_shell *shell)
         home = ft_find_envp("HOME", shell->envp);
         if (home == NULL)
             return (ft_not_set());
+		return (ft_change_dir(home, shell));	
     }
     return (0);
 }

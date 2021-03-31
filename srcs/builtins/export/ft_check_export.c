@@ -16,9 +16,9 @@
 static int ft_not_valid_export(char *str)
 {
     write(2, "export: ", 9);
-    write(1,"'",1);
+    write(2,"'",1);
     write(2, str, ft_strlen(str));
-    write(1,"'",1);
+    write(2,"'",1);
     write(2, ": not a valid identifier\n", 25);
     return (1);
 }

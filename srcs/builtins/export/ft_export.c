@@ -29,10 +29,9 @@ int ft_export(char **argv,char ***envp, char ***export)
         while (argv[i])
         {
             ft_add_envp_export(argv[i], export, envp);
-            //ft_putstr_fd("\n",1);
             i++;
         }
-        ft_bubble_sort(*export,(t_arrinfo){ft_arrlen(*export),8},ft_str_cmp,ft_swap_str);
+        ft_bubble_sort(*export,(t_arrinfo){ft_arrlen(*export),8}, ft_str_cmp, ft_swap_str);
     }
     return (0);
 }
