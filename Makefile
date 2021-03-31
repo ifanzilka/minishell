@@ -52,7 +52,7 @@ DIR_ENV = $(addprefix $(DIR_BUILTINS),env/)
 SRC_ENV = $(addprefix $(DIR_ENV), ft_env.c ft_find_envp.c )
 
 DIR_UNSET = $(addprefix $(DIR_BUILTINS),unset/)
-SRC_UNSET = $(addprefix $(DIR_UNSET), ft_unset.c)
+SRC_UNSET = $(addprefix $(DIR_UNSET), ft_unset.c ft_unset_envp_export.c  )
 
 DIR_CD = $(addprefix $(DIR_BUILTINS),cd/)
 SRC_CD = $(addprefix $(DIR_CD), ft_cd.c ft_oldpwd.c ft_new_pwd.c )
@@ -69,6 +69,9 @@ SRC_EXIT = $(addprefix $(DIR_EXIT), ft_exit.c)
 DIR_CMD = $(addprefix $(DIR),command/)
 SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c ft_builtin.c)
 
+DIR_REDIRECT = $(addprefix $(DIR),redirect/)
+SRC_REDIRECT = $(addprefix $(DIR_REDIRECT), ft_change_fd.c ft_return_fd.c)
+
 DIR_PARSER = $(addprefix $(DIR),parser/)
 SRC_PARSER = $(addprefix $(DIR_PARSER), boss_of_gang_parsers.c    gang_of_find_lens.c    ft_get_line.c   gang_of_join_find_check.c gang_of_mini_parsers.c   print_cmds.c)
 
@@ -83,6 +86,7 @@ SRCS = $(DIR)main.c\
 		$(SRC_ECHO)\
 		$(SRC_EXIT)\
 		$(SRC_CMD)\
+		$(SRC_REDIRECT)\
 		$(SRC_PARSER)
 
 SRCS.O = $(SRCS:.c=.o)

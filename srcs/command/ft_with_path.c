@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 static int    ft_check_file_in_dir(char *dir, char *file)
 {

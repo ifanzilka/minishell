@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 static int ft_replace(char *str,char *key, char **envp)
 {
@@ -53,7 +52,10 @@ static int ft_envp_apppend(char *str, char ***envp)
     if (ft_find_envp(key, *envp) == NULL)
     {
         if (ft_append_arr(str, envp) == 1)
-            ft_putstr_fd("ERROR!\n", 2); //malloc
+        {
+            ft_print_errno();
+            return (1);
+        }
     }
     else
     {

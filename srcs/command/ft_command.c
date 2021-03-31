@@ -11,36 +11,14 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
-
-// static void ft_change_fd(t_)
-// {
-
-// }
 
 int     ft_command(char *comand,char **argv, t_shell *shell, int *fds)
 {
-    char *path;
-    int res;
-    int oldstd_in;
-    int oldstd_out;
-
-    if (fds[0] != 0 || fds[1] != 1)
-    {  
-        if (fds[0] != 0 != 0)
-        {
-            oldstd_in = dup(0);
-            dup2(fds[0], 0);
-            close(fds[0]);
-        }
-        if (fds[1] != 1)
-        {
-            oldstd_out = dup(1);
-            dup2(fds[1], 1);
-            close(fds[1]);
-        }
-    }
-	
+    t_redirect  redirect;
+    char        *path;
+    int         res;
+    
+    ft_change_fd(&redirect, fds);
     path = ft_find_envp("PATH", (shell->envp));
 	if (ft_find_builtins(comand))
     {
@@ -53,20 +31,7 @@ int     ft_command(char *comand,char **argv, t_shell *shell, int *fds)
         else
             res = ft_dont_path(comand, argv, shell->envp);
     }
-    if (fds[0]!= 0 || fds[1] != 1)
-    {
-        if (fds[0]!= 0)
-        {
-            dup2(oldstd_in, 0);
-            close(oldstd_in);
-        }
-        if (fds[1] != 1)
-        {
-            dup2(oldstd_out, 1);
-            close(oldstd_out);
-        }
-         
-    }    
+    ft_return_fd(&redirect, fds);        
     return (res);
 }
 

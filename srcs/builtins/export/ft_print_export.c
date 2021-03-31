@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 void ft_print_export(char **export)
 {
@@ -35,7 +34,6 @@ void ft_print_export(char **export)
             ft_putstr_fd((export[i] + j + 1), 1);
             write(1, "\"", 1);
         }
-        //ft_putstr_fd(export[i], 1);
         write(1, "\n" ,1);
         i++;
     }

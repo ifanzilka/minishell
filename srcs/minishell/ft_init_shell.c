@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 static char **ft_copy_envp(char **envp)
 {
@@ -106,7 +105,6 @@ void ft_init_shell(t_shell *shell, char **envp)
     ft_bubble_sort(shell->export,ft_arrlen(shell->export),shell->str_inf);
 	ft_add_shell_lvl(shell->envp,shell);
 	shell->fds = malloc (sizeof(int) * 3);
-
 	shell->fds[0] = 0;
 	shell->fds[1] = 1;
 	shell->fds[2] = 2;

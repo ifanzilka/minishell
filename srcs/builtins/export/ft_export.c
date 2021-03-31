@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
-
-
 
 int ft_export(char **argv,t_shell *shell)
 {

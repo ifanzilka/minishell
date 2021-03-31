@@ -44,11 +44,12 @@ typedef struct		s_shell
     int             status;
 }					t_shell;
 
-typedef struct		s_change_fd
+typedef struct		s_redirect
 {
-    int fd_0;
-    int fd_1;
-}					t_change_fd;
+    int             old_std_in;
+    int             old_std_out;
+    int             old_std_err;
+}					t_redirect;
 
 void ft_print_errno();
 
@@ -67,6 +68,9 @@ int     ft_builtin(char *comand,char **argv, t_shell *shell);
 int     ft_env(char **envp);
 int     ft_export(char **argv,t_shell *shell);
 int     ft_unset(char **argv,char ***envp, char ***export);
+int     ft_unset_envp_export(char *str, char ***export, char ***envp);
+
+
 int     ft_cd(char **argv, t_shell *shell);
 int     ft_pwd(char **argv, char **envp);
 int     ft_echo(char **argv, char **envp);
@@ -78,6 +82,8 @@ int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);
 int     ft_dont_path(char *comand, char **argv, char **envp);
 int     ft_with_path(char *csomand, char *path, char **argv, char **envp);
 
+int     ft_change_fd(t_redirect *red ,int *fds);
+int     ft_return_fd(t_redirect *red, int *fds);
 
 t_data 			ft_get_line(int argc, char **argv, char **envp,t_shell *shell);
 void			parse(char *str, char **envp, t_shell *shell);

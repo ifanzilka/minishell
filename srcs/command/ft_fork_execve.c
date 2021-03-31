@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 static void ft_descendant(char *comand, char **argv, char **envp)
 {

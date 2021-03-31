@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_return_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 14:11:15 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/20 14:11:16 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/31 23:14:40 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/31 23:14:43 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int ft_env(char **envp)
+int     ft_return_fd(t_redirect *red, int *fds)
 {
-    int i;
-
-    i = 0;
-    while (envp[i])
+    if (fds[0]!= 0)
     {
-        ft_putstr_fd(envp[i], 1);
-        write(1, "\n", 1);
-        i++;
+        dup2(red->old_std_in, 0);
+        close(red->old_std_in);
     }
-    return (0);
+    if (fds[1] != 1)
+    {
+        dup2(red->old_std_out, 1);
+        close(red->old_std_out);
+    }
+    if (fds[2] != 2)
+    {
+        dup2(red->old_std_err, 2);
+        close(red->old_std_err);
+    }
+    return (0);  
 }
-

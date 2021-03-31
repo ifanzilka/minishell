@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 int ft_find_envp_id(char *key, char **envp)
 {

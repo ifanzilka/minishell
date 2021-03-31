@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 t_data ft_get_line(int argc, char **argv, char **envp,t_shell *shell)
 {

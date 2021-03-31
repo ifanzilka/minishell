@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 static int ft_descendant_bultin(char *comand,char **argv, t_shell *shell)
 {

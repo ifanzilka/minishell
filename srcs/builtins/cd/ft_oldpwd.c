@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 int ft_oldpwd(char *oldpwd, t_shell *shell)
 {
