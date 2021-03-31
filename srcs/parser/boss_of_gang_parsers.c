@@ -75,9 +75,62 @@ void	parse(char *str, char **envp, t_shell *shell)
 	}
 	cmds[i] = NULL;
 	i = 0;
+
+	int **pipes;
+
+	pipes = NULL;
+	if (data.size > 1)
+	{
+		pipes = malloc(sizeof(int *) * data.size - 1);
+	}
+	int j = 0;
+
+	while (j < data.size - 1)
+	{
+		pipes[j] = malloc(sizeof(int) * 2);
+		j++;
+	}
+
+	
+	int old_in;
+	int old_out;
+
+	old_in = dup(0);
+	old_out = dup(1);
+
+	printf("SIZE : %d\n",data.size);
 	while (i < data.size)
 	{
+		if (i == 0)
+		{
+			// создали пайп
+			pipe(pipes[i]);
+			//заменяем стандартный
+			dup2(pipes[i][1], 1);
+		}
+		if (i == 1)
+		{
+			//заменяем стандартный
+			dup2(pipes[0][0], 0);
+		}
+		
+		write(2,"1\n",2);
 		shell->status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
+		
+
+		if (i == 0)
+		{
+			close(pipes[0][1]);
+			dup2(old_out,1);
+		}
+		if (i == 1)
+		{
+			close(pipes[0][0]);
+			dup2(old_in,0);
+		}
+
+
+
 		i++;
 	}
 	//print_cmds(&data);
