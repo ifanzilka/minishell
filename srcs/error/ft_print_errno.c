@@ -18,7 +18,7 @@ void ft_print_errno()
     char *errorbuf;
 
     errorbuf = strerror(errno);
-    ft_putstr_fd(errorbuf,2);
+    ft_putstr_fd(errorbuf, 2);
     write(2, "\n",1);
 }
 

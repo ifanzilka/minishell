@@ -63,7 +63,7 @@ static int ft_envp_apppend(char *str, char ***envp)
     return (0);
 }
 
-static int ft_export_apppend(char *str, char ***export, char ***envp)
+static int ft_export_apppend(char *str, t_shell *shell)
 {
     char *key;
     int index;
@@ -71,37 +71,37 @@ static int ft_export_apppend(char *str, char ***export, char ***envp)
     if ((index = ft_str_find(str, '=')) != -1)
     {
         key = ft_substr(str, 0, index);
-        if (ft_find_str_in_arr(*export, key) == -1)
+        if (ft_find_str_in_arr(shell->export, key) == -1)
         {
 		
-            if (ft_append_arr(str, export) == 1)
+            if (ft_append_arr(str, &shell->export) == 1)
                 ft_putstr_fd("ERROR!\n", 2);
         }
         else
         {
-            ft_replace(str, key, *export);
+            ft_replace(str, key, shell->export);
         }
     }
-    if (ft_find_str_in_arr(*export, str) == -1 && ft_find_envp(str,*envp) == NULL)
+    if (ft_find_str_in_arr(shell->export, str) == -1 && ft_find_envp(str,shell->envp) == NULL)
     {
-        ft_append_arr(str, export);
+        ft_append_arr(str, &shell->export);
     }
     return (0);
 }
 
-int ft_add_envp_export(char *str,char ***export, char ***envp)
+int ft_add_envp_export(char *str,t_shell *shell)
 {
 
     if (ft_check_export(str) == 1)
         return (1);
-    if (ft_envp_apppend(str, envp) == 1)
+    if (ft_envp_apppend(str, &shell->envp) == 1)
     {	
-        ft_putstr_fd("ERROR!\n", 2); //malloc
+        ft_print_errno();
         return (1);
     }
-    if (ft_export_apppend(str, export,envp) == 1)
+    if (ft_export_apppend(str, shell) == 1)
     {
-        ft_putstr_fd("ERROR!\n", 2); //malloc
+        ft_print_errno();
         return (1);
     }
     return (0);

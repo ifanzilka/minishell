@@ -12,6 +12,20 @@
 
 #include "libft.h"
 
+/*
+** ENG
+*/
+
+/*
+** RUS
+**
+** Функция ft_del_str_ind заменет указатель на массив на новый к котором
+** не будет элемента с индексом index
+**
+** RETURN
+** возвращает индекс в массиве и (-1) еесли не нашел
+*/
+
 void ft_del_str_ind(char ***array, int index)
 {
     char **new;
@@ -22,7 +36,8 @@ void ft_del_str_ind(char ***array, int index)
     i = 0;
     j = 0;
     len = ft_arrlen(*array);
-    new = (char **)malloc(sizeof (char *) * len);
+    if ((new = (char **)malloc(sizeof (char *) * len)) == NULL)
+		return ;
     while (j < len)
     {
         if (j == index)
@@ -30,7 +45,8 @@ void ft_del_str_ind(char ***array, int index)
             j++;
             continue;
         }
-        new[i] = ft_strdup((*array)[j]);
+        if ((new[i] = ft_strdup((*array)[j])) == NULL)
+		 	return ; 
         i++;
         j++;
     }

@@ -12,6 +12,18 @@
 
 #include "libft.h"
 
+/*
+** ENG
+*/
+
+/*
+** RUS
+**
+** Функция ft_swap_str заменяет местами строки в массиве char**
+**
+** RETURN
+*/
+
 void    ft_swap_str(void *p1, void *p2)
 {
     char **s1;

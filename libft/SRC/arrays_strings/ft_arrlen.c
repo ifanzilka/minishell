@@ -12,6 +12,20 @@
 
 #include "libft.h"
 
+/*
+** ENG
+*/
+
+/*
+** RUS
+**
+** Функция ft_arrlen считет размер char **
+**
+** RETURN
+** возвращает int
+*/
+
+
 int     ft_arrlen(char **array)
 {
     int i;

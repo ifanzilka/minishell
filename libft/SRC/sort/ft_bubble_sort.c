@@ -36,20 +36,20 @@
 **
 */
 
-void    ft_bubble_sort(void *arr, t_arrinfo inf, int (*cmp)(void * ,void *), void (*swap_func)(void*, void*))
+void    ft_bubble_sort(void *arr, int len, t_arrinfo inf)
 {
     int i;
     int j;
-
+	
     i = 0;
-    while (i < inf.len)
+    while (i < len)
     {
         j = 0;
-        while (j < inf.len - 1)
+        while (j < len - 1)
         {
-            if (cmp(arr + j * inf.bytes, arr + (j + 1) * inf.bytes ) > 0)
+            if (inf.fun_cmp(arr + j * inf.bytes, arr + (j + 1) * inf.bytes ) > 0)
             {
-                swap_func(arr + (j * inf.bytes), arr + (j + 1) * inf.bytes);
+                inf.fun_swap(arr + (j * inf.bytes), arr + (j + 1) * inf.bytes);
             }
             j++;
         }

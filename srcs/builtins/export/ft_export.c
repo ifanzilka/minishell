@@ -15,7 +15,7 @@
 
 
 
-int ft_export(char **argv,char ***envp, char ***export)
+int ft_export(char **argv,t_shell *shell)
 {
     int i;
     int len;
@@ -23,15 +23,15 @@ int ft_export(char **argv,char ***envp, char ***export)
     i = 1;
     len = ft_arrlen(argv);
     if (len == 1)
-        ft_print_export(*export);
+        ft_print_export(shell->export);
     else
     {
         while (argv[i])
         {
-            ft_add_envp_export(argv[i], export, envp);
+            ft_add_envp_export(argv[i], shell);
             i++;
         }
-        ft_bubble_sort(*export,(t_arrinfo){ft_arrlen(*export),8}, ft_str_cmp, ft_swap_str);
+        ft_bubble_sort(shell->export, ft_arrlen(shell->export), shell->str_inf);
     }
     return (0);
 }

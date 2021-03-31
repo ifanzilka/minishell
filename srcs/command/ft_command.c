@@ -18,26 +18,26 @@
 
 // }
 
-int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd fd)
+int     ft_command(char *comand,char **argv, t_shell *shell, int *fds)
 {
     char *path;
     int res;
     int oldstd_in;
     int oldstd_out;
 
-    if (fd.fd_0 != 0 || fd.fd_1 != 1)
+    if (fds[0] != 0 || fds[1] != 1)
     {  
-        if (fd.fd_0 != 0)
+        if (fds[0] != 0 != 0)
         {
             oldstd_in = dup(0);
-            dup2(fd.fd_0, 0);
-            close(fd.fd_0);
+            dup2(fds[0], 0);
+            close(fds[0]);
         }
-        if (fd.fd_1 != 1)
+        if (fds[1] != 1)
         {
             oldstd_out = dup(1);
-            dup2(fd.fd_1, 1);
-            close(fd.fd_1);
+            dup2(fds[1], 1);
+            close(fds[1]);
         }
     }
 	
@@ -53,14 +53,14 @@ int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd fd)
         else
             res = ft_dont_path(comand, argv, shell->envp);
     }
-    if (fd.fd_0 != 0 || fd.fd_1 != 1)
+    if (fds[0]!= 0 || fds[1] != 1)
     {
-        if (fd.fd_0 != 0)
+        if (fds[0]!= 0)
         {
             dup2(oldstd_in, 0);
             close(oldstd_in);
         }
-        if (fd.fd_1 != 1)
+        if (fds[1] != 1)
         {
             dup2(oldstd_out, 1);
             close(oldstd_out);

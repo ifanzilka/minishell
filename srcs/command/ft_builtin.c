@@ -25,7 +25,7 @@ static int ft_descendant_bultin(char *comand,char **argv, t_shell *shell)
 	if (ft_strcmp(comand, "pwd") == 0)
 		res = ft_pwd(argv, shell->envp);
 	if (ft_strcmp(comand, "export") == 0)
-		res = ft_export(argv, &shell->envp, &shell->export);
+		res = ft_export(argv, shell);
 	if (ft_strcmp(comand, "unset") == 0)
 		res =  ft_unset(argv, &shell->envp, &shell->export);
 	if (ft_strcmp(comand, "env") == 0)

@@ -39,8 +39,8 @@ int ft_copy_arr(char **new, char **old, int len)
     while (i < len)
     {
         new[i] = ft_strdup(old[i]);
-//        if (new[i] == NULL)
-//            return (1);
+		if (new[i] == NULL)
+	            return (1);
         i++;
     }
     new[i] = NULL;

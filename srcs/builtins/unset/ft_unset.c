@@ -23,7 +23,7 @@ static int ft_not_valid_unset(char *str)
     return (1);
 }
 
-int ft_check_unset(char *str)
+static int ft_check_unset(char *str)
 {
     int i;
 
@@ -38,7 +38,6 @@ int ft_check_unset(char *str)
     }
     return (0);
 }
-
 
 int ft_envp_unset(char *str, char ***envp)
 {
@@ -71,13 +70,12 @@ int ft_unset_envp_export(char *str, char ***export, char ***envp)
         return (1);
     if (ft_envp_unset(str, envp) == 1)
     {
-        ft_putstr_fd("ERROR MALLOC!\n", 2); //malloc
+        ft_print_errno();
         return (1);
     }
-
     if (ft_export_unset(str, export) == 1)
     {
-        ft_putstr_fd("ERROR MAllOC!\n", 2); //malloc
+        ft_print_errno();
         return (1);
     }
     return(0);
@@ -99,7 +97,6 @@ int ft_unset(char **argv,char ***envp, char ***export)
             ft_unset_envp_export(argv[i], export, envp);
             i++;
         }
-        //ft_bubble_sort(*export,(t_arrinfo){ft_arrlen(*export),8},ft_str_cmp,ft_swap_str);
     }
     return (0);
 }

@@ -13,13 +13,13 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+#include <minishell.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include "libft.h"
 #include <fcntl.h>
-#include "minishell.h"
 
 typedef struct	s_data
 {

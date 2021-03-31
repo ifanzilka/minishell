@@ -35,6 +35,8 @@
 
 typedef struct		s_shell
 {
+	t_arrinfo		str_inf;
+	int 			*fds;
     char            **envp;
     char            **export;
     t_l_list        *history;
@@ -58,18 +60,18 @@ char    *ft_find_envp(char *key, char **envp);
 int     ft_find_envp_id(char *key, char **envp);
 
 int     ft_check_export(char *str);
-int     ft_add_envp_export(char *str,char ***export, char ***envp);
+int     ft_add_envp_export(char *str,t_shell *shell);
 void    ft_print_export(char **export);
 int		ft_find_builtins(char *comand);
 int     ft_builtin(char *comand,char **argv, t_shell *shell);
 int     ft_env(char **envp);
-int     ft_export(char **argv,char ***envp, char ***export);
+int     ft_export(char **argv,t_shell *shell);
 int     ft_unset(char **argv,char ***envp, char ***export);
 int     ft_cd(char **argv, t_shell *shell);
 int     ft_pwd(char **argv, char **envp);
 int     ft_echo(char **argv, char **envp);
 int     ft_exit(char **argv);
-int     ft_command(char *comand,char **argv, t_shell *shell, t_change_fd new_fd);
+int     ft_command(char *comand,char **argv, t_shell *shell, int *fds);
 
 int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);
 

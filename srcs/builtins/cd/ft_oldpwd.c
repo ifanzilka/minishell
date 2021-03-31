@@ -26,7 +26,7 @@ int ft_oldpwd(char *oldpwd, t_shell *shell)
         argv_ex[0] = "export";
         argv_ex[1] = pwds;
         argv_ex[2] = NULL;
-        ft_command("export", argv_ex, shell, (t_change_fd){0, 1}); 
+        ft_command("export", argv_ex, shell, shell->fds); 
         free(pwds);
     }
     return (0);

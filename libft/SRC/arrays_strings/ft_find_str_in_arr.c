@@ -13,6 +13,19 @@
 #include "libft.h"
 #include <stdio.h>
 
+/*
+** ENG
+*/
+
+/*
+** RUS
+**
+** Функция ft_find_str_in_arr ищет строку str в массиве arr
+**
+** RETURN
+** возвращает индекс в массиве и (-1) еесли не нашел
+*/
+
 int  ft_find_str_in_arr(char **array, char *str)
 {
     size_t len;
@@ -29,6 +42,5 @@ int  ft_find_str_in_arr(char **array, char *str)
         }
         i++;
     }
-
-    return(-1);
+	return(-1);
 }

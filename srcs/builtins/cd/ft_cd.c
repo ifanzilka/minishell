@@ -15,7 +15,7 @@
 
 static int    ft_not_set()
 {
-    write(2, "cd : HOME not set \n",19);
+    write(2, "cd : HOME not set \n", 19);
     return (1);
 }
 

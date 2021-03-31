@@ -13,25 +13,25 @@
 #include <minishell.h>
 #include <libft.h>
 
+static int ft_len_one_echo()
+{
+	write(1, "\n", 1);
+	return (0);
+}
 
 int     ft_echo(char **argv, char **envp)
 {
     (void) envp;
     int flag_n;
     int i;
-    int len;
 
-    len = ft_arrlen(envp);
-    if (len == 1)
-    {
-        write(1, "\n", 1);
-        return (0);
-    }
+    if (ft_arrlen(argv) == 1)
+        return (ft_len_one_echo());
     i = 1;
     flag_n = 1;
     while (argv[i])
     {
-        if (i == 0 && ft_strlen(argv[i]) == 2 &&
+        if (i == 1 && ft_strlen(argv[i]) == 2 &&
             ft_strcmp(argv[i], "-n") == 0)
         {
             flag_n = 0;

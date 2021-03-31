@@ -77,7 +77,7 @@ void	parse(char *str, char **envp, t_shell *shell)
 	i = 0;
 	while (i < data.size)
 	{
-		shell->status = ft_command(data.cmds[i][0], data.cmds[i], shell,(t_change_fd){data.fds[i][0],data.fds[i][1]});
+		shell->status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
 		i++;
 	}
 	//print_cmds(&data);

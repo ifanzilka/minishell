@@ -12,6 +12,19 @@
 
 #include "libft.h"
 
+/*
+** ENG
+*/
+
+/*
+** RUS
+**
+** Функция ft_str_cmp сравнивает два строки пришедшие по адресу
+**
+** RETURN
+** 0 - если равны
+*/
+
 int ft_str_cmp(void *s1, void *s2)
 {
     char *one;

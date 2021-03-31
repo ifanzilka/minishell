@@ -121,11 +121,12 @@ void				free_gc(void *ptr);
 
 typedef struct		s_arrinfo
 {
-    int             len;
     size_t          bytes;
+	int 			(*fun_cmp)(void * ,void *);
+	void 			(*fun_swap)(void*, void*);
 }					t_arrinfo;
 
-void    ft_bubble_sort(void *arr, t_arrinfo inf, int (*cmp)(void * ,void *), void (*swap_func)(void*, void*));
+void    ft_bubble_sort(void *arr, int len, t_arrinfo inf);
 
 /*
 ** Array of string
