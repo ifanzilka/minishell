@@ -72,6 +72,9 @@ SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  f
 DIR_REDIRECT = $(addprefix $(DIR),redirect/)
 SRC_REDIRECT = $(addprefix $(DIR_REDIRECT), ft_change_fd.c ft_return_fd.c)
 
+DIR_PIPE = $(addprefix $(DIR),pipe/)
+SRC_PIPE = $(addprefix $(DIR_PIPE), ft_init_cmd_pipe.c ft_return_standat_fd.c ft_all_pipe.c)
+
 DIR_PARSER = $(addprefix $(DIR),parser/)
 SRC_PARSER = $(addprefix $(DIR_PARSER), boss_of_gang_parsers.c    gang_of_find_lens.c    ft_get_line.c   gang_of_join_find_check.c gang_of_mini_parsers.c   print_cmds.c)
 
@@ -87,6 +90,7 @@ SRCS = $(DIR)main.c\
 		$(SRC_EXIT)\
 		$(SRC_CMD)\
 		$(SRC_REDIRECT)\
+		$(SRC_PIPE)\
 		$(SRC_PARSER)
 
 SRCS.O = $(SRCS:.c=.o)

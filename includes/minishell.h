@@ -51,6 +51,22 @@ typedef struct		s_redirect
     int             old_std_err;
 }					t_redirect;
 
+
+typedef struct		s_cmd_pipe
+{
+    int             **pipes;
+    int             old_in;
+    int             old_out;
+}					t_cmd_pipe;
+
+int     ft_init_cmd_pipe(t_cmd_pipe *cmd_pipe, int size);
+int     ft_return_standat_fd(t_cmd_pipe *cmd_pipe);
+
+int     ft_before_cmd(t_cmd_pipe *cmd_pipe, int num, int cnt);
+int     ft_after_cmd(t_cmd_pipe *cmd_pipe, int num , int cnt);
+
+
+
 void ft_print_errno();
 
 void ft_init_shell(t_shell *shell,char **envp);
