@@ -13,7 +13,7 @@
 #include <minishell.h>
 #include <libft.h>
 
-char *cmd_parse(char *str, char ***cmds, int **fds, char **envp)
+char *cmd_parse(char *str, char ***cmds, int **fds, t_shell *shell)
 {
 	int		len;
 	int		i;
@@ -29,15 +29,9 @@ char *cmd_parse(char *str, char ***cmds, int **fds, char **envp)
 		if (!(*str) || one_of_the_set(*str, "|;"))
 			break;
 		if (*str && one_of_the_set(*str, "><"))
-		{
-			//printf("Redirection_parse call\n");
-			str = redirection_parse(str, &(*fds), envp);  //ВОТ ТУТ!!!!
-		}
+			str = redirection_parse(str, &(*fds), shell);
 		else
-		{
-			str = parse_by_space(str, &((*cmds)[i]), envp);
-			i++;
-		}
+			str = parse_by_space(str, &((*cmds)[i++]), shell);
 	}
 	(*cmds)[i] = NULL;
 	if (!(*str) || *str == ';')
@@ -46,7 +40,33 @@ char *cmd_parse(char *str, char ***cmds, int **fds, char **envp)
 		return (++str);
 }
 
-void	parse(char *str, char **envp, t_shell *shell)
+void	free_data(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	if (data->size == 0)
+	{
+	//	free(data->cmds);
+		return ;
+	}
+	while (data->cmds[i] != NULL)
+	{
+		j = 0;
+		while (data->cmds[i][j])
+			free(data->cmds[i][j++]);
+		free(data->cmds[i++]);
+	}
+	free(data->cmds);
+	i = 0;
+	while (i < data->size)
+		free(data->fds[i++]);
+	free(data->fds);
+	//printf("END FREE\n");
+}
+
+void	parse(char *str, t_shell *shell)
 {
 	int		i;
 	char	***cmds;
@@ -60,6 +80,7 @@ void	parse(char *str, char **envp, t_shell *shell)
 	cmds = (char ***)malloc(sizeof(char **) * len);
 	fds = (int **)malloc(sizeof(int *) * len);
 	//printf("Hello!\n");
+	data.size = 0;
 	while (*str && *str != ';')
 	{
 		fds[i] = (int*)malloc(sizeof(int) * 3);
@@ -67,7 +88,7 @@ void	parse(char *str, char **envp, t_shell *shell)
 		fds[i][1] = 1;
 		fds[i][2] = 2;
 		//printf("Hello!\n");
-		str = cmd_parse(str, &(cmds[i]), &(fds[i]), envp);
+		str = cmd_parse(str, &(cmds[i]), &(fds[i]), shell);
 		data.cmds = cmds;
 		data.fds = fds;		
 		i++;
@@ -101,22 +122,38 @@ void	parse(char *str, char **envp, t_shell *shell)
 			}
 			else
 			{
-				pid_t pid;
-				int status;
+				g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, shell->fds);
+				//pid_t pid;
+				//int status;
 
-				pid = fork();
-				if (pid == 0)
-    			{
+
+				int in;
+				int out;
+				int err;
+
+				in = dup(0);
+				out = dup(1);
+				err = dup(2);
+				//pid = fork();
+				
+				
+				//if (pid == 0)
+    			//{
+					
 					ft_return_standat_fd(&cmd_pipe);
 					g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, data.fds[j]);
-					exit(g_exit_status);
-    			}
-				wait(&status);
-				g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, shell->fds);
+					//exit(g_exit_status);
+    			//}
+				//wait(&status);
+
+					dup2(out,1);
+					dup2(in,0);
+					dup2(err,2);				
 			}
 			ft_after_cmd(&cmd_pipe,j, data.size);
 			if (g_exit_status != 0)
 			{
+					write(2,"ok\n",3);
 					ft_return_standat_fd(&cmd_pipe);
 					j = 0;
 			}
@@ -127,4 +164,5 @@ void	parse(char *str, char **envp, t_shell *shell)
 	ft_return_standat_fd(&cmd_pipe);
 	//write(2,"2\n",2);
 	//print_cmds(&data);
+	free_data(&data);
 }

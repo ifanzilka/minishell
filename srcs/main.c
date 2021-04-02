@@ -26,5 +26,5 @@ int main(int argc, char **argv, char **envp)
     t_shell shell;
     //printf("1\n");
     ft_init_shell(&shell, envp);
-    ft_get_line(argc, argv, shell.envp,&shell);
+    ft_get_line(argc, argv, &shell);
 }

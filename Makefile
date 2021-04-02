@@ -79,7 +79,7 @@ DIR_SIG = $(addprefix $(DIR),signal/)
 SRC_SIG = $(addprefix $(DIR_SIG), ft_signal.c ft_signal_child_process.c)
 
 DIR_PARSER = $(addprefix $(DIR),parser/)
-SRC_PARSER = $(addprefix $(DIR_PARSER), boss_of_gang_parsers.c    gang_of_find_lens.c    ft_get_line.c   gang_of_join_find_check.c gang_of_mini_parsers.c   print_cmds.c)
+SRC_PARSER = $(addprefix $(DIR_PARSER), boss_of_gang_parsers.c    gang_of_find_lens.c    ft_get_line.c   gang_of_join_find_check.c gang_of_mini_parsers.c   print_cmds.c gang_of_redirects.c )
 
 SRCS = $(DIR)main.c\
 		$(SRC_ERR)\

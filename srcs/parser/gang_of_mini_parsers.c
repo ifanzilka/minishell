@@ -13,7 +13,7 @@
 #include <minishell.h>
 #include <libft.h>
 
-char *quotes_parse(char *str, char **cmds, char **envp)
+char *quotes_parse(char *str, char **cmds, t_shell *shell)
 {
 	if (*str && *str == '\'')
 	{
@@ -27,7 +27,7 @@ char *quotes_parse(char *str, char **cmds, char **envp)
 		while (*str && *str != '"')
 		{
 			if (*str && *str == '$')
-				str = dollar_parse(str, &(*cmds), envp);
+				str = dollar_parse(str, &(*cmds), shell);
 			else
 				*cmds = join_symbol(*cmds, *str++);
 		}
@@ -36,30 +36,38 @@ char *quotes_parse(char *str, char **cmds, char **envp)
 	return (str);
 }
 
-char	*dollar_parse(char *str, char **cmds, char **envp)
+char	*dollar_parse(char *str, char **cmds, t_shell *shell)
 {
 	char *env;
 	char *tmp;
 
 	env = NULL;
-	while (*++str && not_one_of_the_set(*str, " |;\\$\"'"))
-		env = join_symbol(env, *str);
 	tmp = *cmds;
-	(*cmds) = ft_strjoin((*cmds), ft_find_envp_2(env, envp));
+	if (*++str == '?')
+	{
+		(*cmds) = ft_strjoin((*cmds), ft_itoa(g_exit_status));
+		str++;
+	}
+	else
+	{
+		while (*str && not_one_of_the_set(*str, " |;\\$\"'?"))
+			env = join_symbol(env, *str++);	
+		(*cmds) = ft_strjoin((*cmds), ft_find_envp_2(env, shell->envp));
+	}
 	free(env);
 	free(tmp);	
 	return (str);
 }
 
-char	*parse_by_space(char *str, char **cmds, char **envp)
+char	*parse_by_space(char *str, char **cmds, t_shell *shell)
 {
 	*cmds = ft_strdup("");
 	while (*str && not_one_of_the_set(*str, " |;><"))
 	{
 		if (*str && (*str == '\'' || *str == '"'))
-			str = quotes_parse(str, &(*cmds), envp);
+			str = quotes_parse(str, &(*cmds), shell);
 		if (*str && *str == '$' )
-			str = dollar_parse(str, &(*cmds), envp);
+			str = dollar_parse(str, &(*cmds), shell);
 		if (*str && *str == '\\')
 		{
 			str++;
@@ -71,49 +79,18 @@ char	*parse_by_space(char *str, char **cmds, char **envp)
 	return (str);
 }
 
-char	*redirection_parse(char *str, int **fds, char **envp)
+char	*redirection_parse(char *str, int **fds, t_shell *shell)
 {
-	char *file_name;
-
-	file_name = ft_strdup("");
-	//printf("Hello from redirection parse!\n%s\n", str);
-	//printf("fds = %d %d %d\n", (*fds)[0], (*fds)[1], (*fds)[2]);
 	while (*str && one_of_the_set(*str, "><"))
 	{
-		if (*str == '>')
-		{
-			str++;
-			//printf("HELLO again!\n");
-			if (*str && *str == '>')
-			{
-				while (*str && *str == ' ')
-					str++;
-				str = parse_by_space(str, &file_name, envp);
-				if ((*fds)[1] != 1)
-					close((*fds)[1]);
-				(*fds)[1] = open(file_name, O_CREAT | O_APPEND | O_WRONLY | O_TRUNC, 0655);
-			}
-			else
-			{
-				while (*str && *str == ' ')
-					str++;
-				str = parse_by_space(str, &file_name, envp);
-				if ((*fds)[1] != 1)
-					close((*fds)[1]);
-				(*fds)[1] = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0655);
-				//printf("HELLOO!!!!!!!!!\n");
-			}
-		}
+		if (*str == '>' && *(str+ 1) && *(str + 1) == '>')
+			str = append_open(str, &((*fds)[1]), shell);
+		if (*str == '>' && *(str + 1) && *(str + 1) != '>')
+			str = write_open(str, &((*fds)[1]), shell);
 		if (*str == '<')
-		{
-			str++;
-			str = parse_by_space(str, &file_name, envp);
-			if ((*fds)[0] != 0)
-				close((*fds)[0]);
-			(*fds)[0] = open(file_name, O_CREAT | O_RDONLY | O_TRUNC, 0655);
-		}
+			str = read_open(str, &((*fds)[0]), shell);
 		while (*str && *str == ' ')
-		str++;
+			str++;
 	}
 	return (str);
 }

@@ -113,8 +113,8 @@ int     ft_dont_path(char *comand, char **argv, char **envp);
 int     ft_with_path(char *csomand, char *path, char **argv, char **envp);
 
 
-t_data 			ft_get_line(int argc, char **argv, char **envp,t_shell *shell);
-void			parse(char *str, char **envp, t_shell *shell);
+// t_data 			ft_get_line(int argc, char **argv, char **envp,t_shell *shell);
+// void			parse(char *str, char **envp, t_shell *shell);
 
 
 //siganal
@@ -122,5 +122,25 @@ void			parse(char *str, char **envp, t_shell *shell);
 int     g_signal;
 void    ft_signal();
 void    ft_signal_child_process();
+
+
+//PARSER
+t_data 			ft_get_line(int argc, char **argv,t_shell *shell);
+void			parse(char *str, t_shell *shell);
+int				find_cmd_len(char *str);
+int				find_cmds_count(char *str);
+void			print_cmds(t_data *data);
+char			*dollar_parse(char *str, char **cmds, t_shell *shell);
+char			*parse_by_space(char *str, char **cmds, t_shell *shell);
+char			*join_symbol(char *str, char a);
+char			*quotes_parse(char *str, char **cmds, t_shell *shell);
+int				not_one_of_the_set(char a, char *set);
+int				one_of_the_set(char a, char *set);
+char 			*ft_find_envp_2(char *key, char **envp);
+char			*cmd_parse(char *str, char ***cmds, int **fds, t_shell *shell);
+char			*redirection_parse(char *str, int **fds, t_shell *shell);
+char			*write_open(char *str, int *fd, t_shell *shell);
+char			*append_open(char *str, int *fd, t_shell *shell);
+char			*read_open(char *str, int *fd, t_shell *shell);
 
 #endif
