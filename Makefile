@@ -70,7 +70,7 @@ DIR_CMD = $(addprefix $(DIR),command/)
 SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c ft_builtin.c)
 
 DIR_REDIRECT = $(addprefix $(DIR),redirect/)
-SRC_REDIRECT = $(addprefix $(DIR_REDIRECT), ft_change_fd.c ft_return_fd.c)
+SRC_REDIRECT = $(addprefix $(DIR_REDIRECT), ft_change_fd.c ft_return_fd.c ft_is_original_fd.c)
 
 DIR_PIPE = $(addprefix $(DIR),pipe/)
 SRC_PIPE = $(addprefix $(DIR_PIPE), ft_init_cmd_pipe.c ft_return_standat_fd.c ft_all_pipe.c)

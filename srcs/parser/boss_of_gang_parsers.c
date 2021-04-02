@@ -84,16 +84,36 @@ void	parse(char *str, char **envp, t_shell *shell)
 	if (data.size == 1)
 	{
 		g_exit_status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
-		printf("Status %d\n",g_exit_status);
+		//printf("Status %d\n",g_exit_status);
 	}
 	else
 	{
 		ft_init_cmd_pipe(&cmd_pipe, data.size);	
 		while (i < data.size)
 		{
-			//if () если есть редирект нужно сделать так чтобы и заридеректилось и запайапало
+			
 			ft_before_cmd(&cmd_pipe,j, data.size);
-			g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, data.fds[j]);
+			if (ft_is_original_fd(data.fds[j]))  //если есть редирект нужно сделать так чтобы и заридеректилось и запайапало
+			{
+
+				g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, data.fds[j]);	
+				
+			}
+			else
+			{
+				pid_t pid;
+				int status;
+
+				pid = fork();
+				if (pid == 0)
+    			{
+					ft_return_standat_fd(&cmd_pipe);
+					g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, data.fds[j]);
+					exit(g_exit_status);
+    			}
+				wait(&status);
+				g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, shell->fds);
+			}
 			ft_after_cmd(&cmd_pipe,j, data.size);
 			if (g_exit_status != 0)
 			{

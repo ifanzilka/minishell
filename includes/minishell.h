@@ -63,13 +63,14 @@ typedef struct		s_redirect
 
 int     ft_change_fd(t_redirect *red ,int *fds);
 int     ft_return_fd(t_redirect *red, int *fds);
-
+int     ft_is_original_fd(int *fds);
 
 typedef struct		s_cmd_pipe
 {
     int             **pipes;
     int             old_in;
     int             old_out;
+    int             old_err;
 }					t_cmd_pipe;
 
 int     ft_init_cmd_pipe(t_cmd_pipe *cmd_pipe, int size);
