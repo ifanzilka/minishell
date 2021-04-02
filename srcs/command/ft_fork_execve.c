@@ -19,8 +19,8 @@ static void ft_descendant(char *comand, char **argv, char **envp)
     res = execve(comand, argv, envp);
     if (res == -1)
     {
-        ft_putstr_fd(comand,2);
-        ft_putstr_fd(": ",2);
+        ft_putstr_fd(comand, 2);
+        ft_putstr_fd(": ", 2);
         ft_print_errno();
         exit(1);
     }
@@ -35,6 +35,8 @@ int     ft_fork_and_execve_command(char *comand, char **argv, char **envp)
 
 
     status = 0;
+    g_signal = 0;
+    ft_signal_child_process();
     pid = fork();
     if (pid == 0)
     {
@@ -49,6 +51,8 @@ int     ft_fork_and_execve_command(char *comand, char **argv, char **envp)
     {
         wait(&status);
     }
+    ft_signal();
+    if (g_signal != 0)
+        return (g_signal);
     return (WEXITSTATUS(status));
 }
-

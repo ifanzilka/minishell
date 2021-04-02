@@ -31,7 +31,7 @@ int     ft_command(char *comand,char **argv, t_shell *shell, int *fds)
         else
             res = ft_dont_path(comand, argv, shell->envp);
     }
-    ft_return_fd(&redirect, fds);        
+    ft_return_fd(&redirect, fds);
     return (res);
 }
 

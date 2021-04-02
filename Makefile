@@ -40,7 +40,7 @@ F_BLUE		= \033[34m
 
 
 DIR_SH = $(addprefix $(DIR),minishell/)
-SRC_SH = $(addprefix $(DIR_SH), ft_init_shell.c)
+SRC_SH = $(addprefix $(DIR_SH), ft_init_shell.c ft_print_shell.c)
 
 DIR_ERR = $(addprefix $(DIR),error/)
 SRC_ERR = $(addprefix $(DIR_ERR), ft_print_errno.c)
@@ -75,6 +75,9 @@ SRC_REDIRECT = $(addprefix $(DIR_REDIRECT), ft_change_fd.c ft_return_fd.c)
 DIR_PIPE = $(addprefix $(DIR),pipe/)
 SRC_PIPE = $(addprefix $(DIR_PIPE), ft_init_cmd_pipe.c ft_return_standat_fd.c ft_all_pipe.c)
 
+DIR_SIG = $(addprefix $(DIR),signal/)
+SRC_SIG = $(addprefix $(DIR_SIG), ft_signal.c ft_signal_child_process.c)
+
 DIR_PARSER = $(addprefix $(DIR),parser/)
 SRC_PARSER = $(addprefix $(DIR_PARSER), boss_of_gang_parsers.c    gang_of_find_lens.c    ft_get_line.c   gang_of_join_find_check.c gang_of_mini_parsers.c   print_cmds.c)
 
@@ -91,6 +94,7 @@ SRCS = $(DIR)main.c\
 		$(SRC_CMD)\
 		$(SRC_REDIRECT)\
 		$(SRC_PIPE)\
+		$(SRC_SIG)\
 		$(SRC_PARSER)
 
 SRCS.O = $(SRCS:.c=.o)

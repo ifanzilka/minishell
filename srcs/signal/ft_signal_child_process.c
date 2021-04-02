@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_signal_child_process.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/22 16:04:39 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/31 00:20:50 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/04/02 01:10:55 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/04/02 01:11:15 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <stdio.h>
 #include <minishell.h>
-#include <fcntl.h>
 
-
-void ft_swap_int(void *a, void *b)
+static void ft_signal_cltr_c(int sig)
 {
-    int tmp;
-
-    tmp = *(int *)b;
-    *(int *)b = *(int *)a;
-    *(int *)a = tmp;
+    (void) sig;
+    write(1,"\n", 1);
+    g_signal = 130;
 }
 
-int cmp_int(void *a, void *b)
+static void    ft_signal_quit(int sig)
 {
-    return (*(int*)a - *(int*)b);
+    write(1, "\b\b  \b\b", 6);
+    write(1,"Quit : ", 7);
+    ft_putnbr_fd(sig, 1);
+    write(1,"\n", 1);
+    g_signal = 131;
 }
 
-
-int main(int argc, char **argv, char **envp)
+void    ft_signal_child_process()
 {
-    t_shell shell;
-    ft_init_shell(&shell, envp);
-    ft_get_line(argc, argv, shell.envp,&shell);
+    signal(SIGINT, ft_signal_cltr_c);
+    signal(SIGQUIT, ft_signal_quit);
 }

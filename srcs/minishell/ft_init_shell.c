@@ -90,6 +90,7 @@ static int ft_add_oldpwd(t_shell *shell)
     return (0);
 }
 
+
 void ft_init_shell(t_shell *shell, char **envp)
 {
     shell->envp = ft_copy_envp(envp);
@@ -102,14 +103,12 @@ void ft_init_shell(t_shell *shell, char **envp)
 	shell->str_inf.bytes = 8;
 	shell->str_inf.fun_cmp =  ft_str_cmp;
 	shell->str_inf.fun_swap =  ft_swap_str;
-    ft_bubble_sort(shell->export,ft_arrlen(shell->export),shell->str_inf);
+    ft_bubble_sort(shell->export, ft_arrlen(shell->export), shell->str_inf);
 	ft_add_shell_lvl(shell->envp,shell);
-	shell->fds = malloc (sizeof(int) * 3);
-	shell->fds[0] = 0;
+    shell->fds[0] = 0;
 	shell->fds[1] = 1;
 	shell->fds[2] = 2;
-    shell->comands = NULL;
-    shell->status = 0;
     ft_add_oldpwd(shell);
+    ft_signal();
 }
 

@@ -78,68 +78,33 @@ void	parse(char *str, char **envp, t_shell *shell)
 
 	
 	t_cmd_pipe  cmd_pipe;
-	
+	int j;
 
+	j = 0;
 	if (data.size == 1)
 	{
-		shell->status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
+		g_exit_status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
+		printf("Status %d\n",g_exit_status);
 	}
 	else
 	{
 		ft_init_cmd_pipe(&cmd_pipe, data.size);	
 		while (i < data.size)
 		{
-			// if (i == 0)
-			// {
-			// 	dup2(pipes[i][1], 1);
-			// }
-
-			// if (i > 0)
-			// {
-			// 	dup2(pipes[i - 1][0], 0);
-
-			// 	if (i  < data.size - 1)
-			// 	{
-			// 		dup2(pipes[i][1], 1);		
-			// 	}
-			// }
-
-			// 	if (i == data.size - 1)
-			// 	{
-			// 		close(pipes[i - 1][0]);
-			// 		dup2(old_out, 1);
-			// 	}
-			//write(2,"1\n",2);
-
 			//if () если есть редирект нужно сделать так чтобы и заридеректилось и запайапало
-
-			ft_before_cmd(&cmd_pipe,i, data.size);
-			shell->status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
-			ft_after_cmd(&cmd_pipe,i, data.size);
-
-			// if (shell->status != 0)
-			// {
-			// 		dup2(old_out, 1);
-			// 		dup2(old_in, 0);
-			// 		break;
-			// }
-			// if (i == 0)
-			// {
-			// 	close(pipes[i][1]);
-			// }
-
-			// if (i > 0)
-			// {
-			// 	close(pipes[i - 1][0]);
-				
-			// 	if (i  < data.size - 1)
-			// 	{
-			// 		close(pipes[i][1]);		
-			// 	}
-			// }
+			ft_before_cmd(&cmd_pipe,j, data.size);
+			g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, data.fds[j]);
+			ft_after_cmd(&cmd_pipe,j, data.size);
+			if (g_exit_status != 0)
+			{
+					ft_return_standat_fd(&cmd_pipe);
+					j = 0;
+			}
+			j++;
 			i++;
 		}
 	}
+	ft_return_standat_fd(&cmd_pipe);
 	//write(2,"2\n",2);
 	//print_cmds(&data);
 }

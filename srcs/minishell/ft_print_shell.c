@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_print_shell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/22 16:04:39 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/31 00:20:50 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/04/01 22:45:33 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/04/01 22:45:35 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <stdio.h>
 #include <minishell.h>
-#include <fcntl.h>
 
-
-void ft_swap_int(void *a, void *b)
+void    ft_print_shell()
 {
-    int tmp;
-
-    tmp = *(int *)b;
-    *(int *)b = *(int *)a;
-    *(int *)a = tmp;
-}
-
-int cmp_int(void *a, void *b)
-{
-    return (*(int*)a - *(int*)b);
-}
-
-
-int main(int argc, char **argv, char **envp)
-{
-    t_shell shell;
-    ft_init_shell(&shell, envp);
-    ft_get_line(argc, argv, shell.envp,&shell);
+    ft_putstr_fd("\033[32m",1);
+	ft_putstr_fd("minishell$> ",1);
+	ft_putstr_fd("\033[37m",1);
 }

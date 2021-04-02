@@ -22,9 +22,7 @@ t_data ft_get_line(int argc, char **argv, char **envp,t_shell *shell)
 	(void)argv;
 	while (1)
 	{
-		ft_putstr_fd("\033[32m",1);
-		ft_putstr_fd("minishell$> ",1);
-		ft_putstr_fd("\033[37m",1);
+		ft_print_shell();
 		str =ft_strdup("");
 		while (read(1, &buf, 1) == 1 && buf != '\n')
 		{

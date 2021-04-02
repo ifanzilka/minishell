@@ -26,23 +26,33 @@
 #include <signal.h>
 #include <libft.h>
 
+
+/*
+**  SHELL
+**
+*/
+
 /*
 **  envp_copy -> is envp
 **  comands -> list comand divided with ";"
 **
 */
 
+int g_exit_status;
 
 typedef struct		s_shell
 {
+    int 		    fds[3];
 	t_arrinfo		str_inf;
-	int 			*fds;
     char            **envp;
     char            **export;
     t_l_list        *history;
-    t_list          *comands;
-    int             status;
+    
 }					t_shell;
+
+void    ft_init_shell(t_shell *shell,char **envp);
+void    ft_print_shell();
+
 
 typedef struct		s_redirect
 {
@@ -50,6 +60,9 @@ typedef struct		s_redirect
     int             old_std_out;
     int             old_std_err;
 }					t_redirect;
+
+int     ft_change_fd(t_redirect *red ,int *fds);
+int     ft_return_fd(t_redirect *red, int *fds);
 
 
 typedef struct		s_cmd_pipe
@@ -69,7 +82,8 @@ int     ft_after_cmd(t_cmd_pipe *cmd_pipe, int num , int cnt);
 
 void ft_print_errno();
 
-void ft_init_shell(t_shell *shell,char **envp);
+
+
 int ft_oldpwd( char *oldpwd, t_shell *shell);
 int ft_new_pwd(t_shell *shell);
 
@@ -98,10 +112,15 @@ int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);
 int     ft_dont_path(char *comand, char **argv, char **envp);
 int     ft_with_path(char *csomand, char *path, char **argv, char **envp);
 
-int     ft_change_fd(t_redirect *red ,int *fds);
-int     ft_return_fd(t_redirect *red, int *fds);
 
 t_data 			ft_get_line(int argc, char **argv, char **envp,t_shell *shell);
 void			parse(char *str, char **envp, t_shell *shell);
+
+
+//siganal
+
+int     g_signal;
+void    ft_signal();
+void    ft_signal_child_process();
 
 #endif
