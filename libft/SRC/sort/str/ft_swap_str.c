@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_swap_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/22 16:04:39 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/31 00:20:50 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/03/20 18:31:08 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/03/20 18:31:21 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <stdio.h>
-#include <minishell.h>
-#include <fcntl.h>
+#include "libft.h"
 
+/*
+** ENG
+*/
 
-int main(int argc, char **argv, char **envp)
+/*
+** RUS
+**
+** Функция ft_swap_str заменяет местами строки в массиве char**
+**
+** RETURN
+*/
+
+void    ft_swap_str(void *p1, void *p2)
 {
+    char **s1;
+    char **s2;
+    char *tmp;
 
-    (void) argc;
-    (void) argv;
-    (void) envp;
-
-    t_shell shell;
-    //printf("1\n");
-    ft_init_shell(&shell, envp);
-    ft_get_line(argc, argv, shell.envp,&shell);
+    s1 = (char **)p1;
+    s2 = (char**)p2;
+    tmp = *s1;
+    *s1 = *s2;
+    *s2 = tmp;
 }
+
+

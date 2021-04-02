@@ -63,10 +63,13 @@ DICT_DIR =  $(addprefix $(DIR),dictonary/)
 SRC_DICT = $(addprefix $(DICT_DIR),ft_cr_dict.c ft_find_key.c)
 
 ARRAY_STRINGS_DIR =  $(addprefix $(DIR),arrays_strings/)
-SRC_ARRAY_STRINGS = $(addprefix $(ARRAY_STRINGS_DIR),ft_arrlen.c ft_print_arr.c ft_append_arr.c ft_copy_arr.c ft_free_arr.c  ft_str_cmp.c ft_str_bubble_sort.c  ft_swap_str.c ft_del_str_ind.c ft_find_str_in_arr.c)
+SRC_ARRAY_STRINGS = $(addprefix $(ARRAY_STRINGS_DIR),ft_arrlen.c ft_print_arr.c ft_append_arr.c ft_copy_arr.c ft_free_arr.c   ft_str_bubble_sort.c   ft_del_str_ind.c ft_find_str_in_arr.c)
 
+DIR_SORT_STR = SRC/sort/str
+DIR_SORT_INT = SRC/sort/int
 SORT_DIR =  $(addprefix $(DIR),sort/)
-SRC_SORT = $(addprefix $(SORT_DIR),ft_bubble_sort.c)
+SRC_SORT = $(addprefix $(SORT_DIR),ft_bubble_sort.c str/ft_str_cmp.c str/ft_swap_str.c  str/ft_str_init_arrinfo.c \
+									int/ft_swap_int.c int/ft_cmp_int.c int/ft_int_init_arrinfo.c )
 
 SRCS	= 	$(SRC_MEM)	\
 			$(SRC_IS) 	\
@@ -110,7 +113,7 @@ $(OBJ_DIR):
 		mkdir $(OBJ_DIR)
 		mkdir  $(addprefix $(OBJ_DIR),$(DIR))
 		mkdir $(addprefix	$(OBJ_DIR), $(MEM_DIR) $(IS_DIR) $(TO_DIR) $(STR_DIR) $(PUT_DIR) \
-						$(NBR_DIR) $(LIST_DIR) $(L_LIST_DIR) $(GNL_DIR) $(MEMORY_DIR) $(DICT_DIR)  $(ARRAY_STRINGS_DIR) $(SORT_DIR))
+						$(NBR_DIR) $(LIST_DIR) $(L_LIST_DIR) $(GNL_DIR) $(MEMORY_DIR) $(DICT_DIR)  $(ARRAY_STRINGS_DIR) $(SORT_DIR) $(DIR_SORT_STR) $(DIR_SORT_INT))
 $(SRCS.O): $(OBJ_DIR)%.o:%.c 
 	$(CC) $(FLAGS) -I$(HEADER) -c $< -o $@
 	@echo "$(F_BLUE)Object files libft in ready! $(F_NONE)"

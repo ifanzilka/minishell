@@ -43,7 +43,6 @@ int g_exit_status;
 typedef struct		s_shell
 {
     int 		    fds[3];
-	t_arrinfo		str_inf;
     char            **envp;
     char            **export;
     t_l_list        *history;

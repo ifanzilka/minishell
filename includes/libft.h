@@ -129,6 +129,24 @@ typedef struct		s_arrinfo
 void    ft_bubble_sort(void *arr, int len, t_arrinfo inf);
 
 /*
+** Str
+*/
+
+int     	ft_str_cmp(void *s1, void *s2);
+void    	ft_swap_str(void *p1, void *p2);
+void    	ft_str_init_arrinfo(t_arrinfo *str_inf);
+t_arrinfo 	ft_param_str();
+
+/*
+** Int
+*/
+
+int 		ft_cmp_int(void *a, void *b);
+void 		ft_swap_int(void *a, void *b);
+void    	ft_int_init_arrinfo(t_arrinfo *str_inf);
+t_arrinfo 	ft_param_int();
+
+/*
 ** Array of string
 */
 
@@ -138,8 +156,6 @@ int     ft_append_arr(char *str, char ***array);
 int     ft_copy_arr(char **new, char **old, int len);
 void    ft_del_str_ind(char ***array, int index);
 void    ft_free_arr(char **arr, int size);
-int     ft_str_cmp(void *s1, void *s2);
-void    ft_swap_str(void *p1, void *p2);
 void    ft_str_bubble_sort(char **array, int len);
 int     ft_find_str_in_arr(char **array, char *str);
 

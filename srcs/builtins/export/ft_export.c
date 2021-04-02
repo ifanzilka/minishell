@@ -28,7 +28,7 @@ int ft_export(char **argv,t_shell *shell)
             ft_add_envp_export(argv[i], shell);
             i++;
         }
-        ft_bubble_sort(shell->export, ft_arrlen(shell->export), shell->str_inf);
+        ft_bubble_sort(shell->export, ft_arrlen(shell->export), ft_param_str());
     }
     return (0);
 }

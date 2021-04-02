@@ -46,7 +46,7 @@ static void ft_add_shell_lvl_cmd(int lvl, t_shell *shell)
     argv_un[2] = NULL;
 	shlvl = ft_strjoin("SHLVL=", num);
 	argv_un[1] = shlvl;
-    ft_command("export", argv_un, shell, shell->fds); 
+    ft_command("export", argv_un, shell, shell->fds);
 	free(num);
 	free(shlvl);
 }
@@ -100,14 +100,11 @@ void ft_init_shell(t_shell *shell, char **envp)
 		ft_print_errno();
 		exit(1);
 	}
-	shell->str_inf.bytes = 8;
-	shell->str_inf.fun_cmp =  ft_str_cmp;
-	shell->str_inf.fun_swap =  ft_swap_str;
-    ft_bubble_sort(shell->export, ft_arrlen(shell->export), shell->str_inf);
-	ft_add_shell_lvl(shell->envp,shell);
     shell->fds[0] = 0;
 	shell->fds[1] = 1;
 	shell->fds[2] = 2;
+    ft_bubble_sort(shell->export, ft_arrlen(shell->export), ft_param_str());
+	ft_add_shell_lvl(shell->envp, shell);
     ft_add_oldpwd(shell);
     ft_signal();
 }
