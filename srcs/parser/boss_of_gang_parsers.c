@@ -66,6 +66,7 @@ void	free_data(t_data *data)
 	//printf("END FREE\n");
 }
 
+
 void	parse(char *str, t_shell *shell)
 {
 	int		i;
@@ -105,55 +106,23 @@ void	parse(char *str, t_shell *shell)
 	if (data.size == 1)
 	{
 		g_exit_status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
-		//printf("Status %d\n",g_exit_status);
 	}
 	else
 	{
 		ft_init_cmd_pipe(&cmd_pipe, data.size);	
 		while (i < data.size)
-		{
-			
+		{			
+		
 			ft_before_cmd(&cmd_pipe,j, data.size);
-			if (ft_is_original_fd(data.fds[j]))  //если есть редирект нужно сделать так чтобы и заридеректилось и запайапало
+			if (!ft_is_original_fd(data.fds[i]))
 			{
-
-				g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, data.fds[j]);	
-				
+				g_exit_status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
 			}
 			else
-			{
-				g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, shell->fds);
-				//pid_t pid;
-				//int status;
-
-
-				int in;
-				int out;
-				int err;
-
-				in = dup(0);
-				out = dup(1);
-				err = dup(2);
-				//pid = fork();
-				
-				
-				//if (pid == 0)
-    			//{
-					
-					ft_return_standat_fd(&cmd_pipe);
-					g_exit_status = ft_command(data.cmds[j][0], data.cmds[j], shell, data.fds[j]);
-					//exit(g_exit_status);
-    			//}
-				//wait(&status);
-
-					dup2(out,1);
-					dup2(in,0);
-					dup2(err,2);				
-			}
+				g_exit_status = ft_command(data.cmds[i][0], data.cmds[i], shell, shell->fds);
 			ft_after_cmd(&cmd_pipe,j, data.size);
 			if (g_exit_status != 0)
 			{
-					write(2,"ok\n",3);
 					ft_return_standat_fd(&cmd_pipe);
 					j = 0;
 			}

@@ -67,6 +67,8 @@ int     ft_is_original_fd(int *fds);
 typedef struct		s_cmd_pipe
 {
     int             **pipes;
+    int             **pipes_redirect;
+    
     int             old_in;
     int             old_out;
     int             old_err;

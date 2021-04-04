@@ -27,5 +27,14 @@ int     ft_init_cmd_pipe(t_cmd_pipe *cmd_pipe, int size)
 		pipe(cmd_pipe->pipes[j]);
 		j++;
 	}
+	j = 0;
+	cmd_pipe->pipes_redirect = malloc(sizeof(int *) * size - 1);
+	while (j < size - 1)
+	{
+		cmd_pipe->pipes_redirect [j] = malloc(sizeof(int) * 2);
+		pipe(cmd_pipe->pipes_redirect[j]);
+		j++;
+	}
+
     return (0);
 }
