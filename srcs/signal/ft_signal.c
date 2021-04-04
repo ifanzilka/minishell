@@ -28,8 +28,14 @@ static void    ft_signal_quit(int sig)
     write(1, "\b\b  \b\b", 6);
 }
 
+static void ft_sigterm(int sig)
+{
+    (void) sig;
+}
+
 void    ft_signal()
 {
     signal(SIGINT, ft_signal_cltr_c);
     signal(SIGQUIT, ft_signal_quit);
+    signal(SIGTERM, ft_sigterm);	
 }

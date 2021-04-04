@@ -24,9 +24,14 @@
 #include <dirent.h>
 #include <errno.h>
 #include <signal.h>
+#include <fcntl.h>
+#include <fcntl.h>
 #include <libft.h>
+#include <term.h>
 
-
+#include <curses.h>
+#include <stdlib.h>
+#include <string.h>
 /*
 **  SHELL
 **

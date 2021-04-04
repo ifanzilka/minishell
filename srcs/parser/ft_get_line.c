@@ -39,6 +39,9 @@ t_data ft_get_line(int argc, char **argv,t_shell *shell)
 
 		//str = malloc(1);
 		//str[0] = '\0';
+
+
+
 		str = ft_strdup("");
 		while (((res = read(1, &buf, 1)) == 1 || res == 0) && buf != '\n')
 		{

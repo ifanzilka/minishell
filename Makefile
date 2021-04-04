@@ -18,7 +18,7 @@ LIB_NAME =	./libft/libft.a
 
 CC		= gcc
 
-FLAGS	= -Wall -Wextra -Werror -g
+FLAGS	= -Wall -Wextra -Werror  -g 
 
 HEADER	= ./includes
 #HEADER_LIB = ./libft/includes
@@ -119,7 +119,7 @@ $(LIB_NAME):
 
 $(NAME_MINISHELL): $(SRCS.O) $(HEADERS)
 		@echo "$(F_CYAN)Compile minishell ...$(F_NONE)"
-		$(CC) $(FLAGS)  -I$(HEADER)  $(SRCS.O) -L. $(LIB_NAME)	-o $(NAME_MINISHELL)
+		$(CC) $(FLAGS)  -I$(HEADER)  $(SRCS.O) -L. $(LIB_NAME) -ltermcap	-o $(NAME_MINISHELL)
 		@echo "$(F_GREEN)minishell is Ready! GOOD LUCK:) $(F_NONE)"
 
 
