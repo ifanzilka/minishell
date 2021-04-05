@@ -33,7 +33,6 @@ int     ft_fork_and_execve_command(char *comand, char **argv, char **envp)
     pid_t pid;
     int status;
 
-
     status = 0;
     g_signal = 0;
     ft_signal_child_process();
@@ -49,8 +48,14 @@ int     ft_fork_and_execve_command(char *comand, char **argv, char **envp)
     }
     else
     {
-        wait(&status);
+        g_forks++;
+        //wait(&status);
     }
+    if (WIFSIGNALED(status) && WTERMSIG(status) == 9)
+    {
+        write(1, "Killed: 9\n",10);
+        exit(137);
+    }        
     ft_signal();
     if (g_signal != 0)
         return (g_signal);

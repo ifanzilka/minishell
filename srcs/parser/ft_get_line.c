@@ -24,8 +24,20 @@ t_data ft_get_line(int argc, char **argv,t_shell *shell)
 	int res;
 	
 	res = 0;
+	//pid_t getppid(void);
+	
+
 	while (1)
 	{
+		pid_t parent = getppid();
+		//printf("Parent ID = %d\n",parent);
+
+		if (parent == 1)
+		{
+			ft_print_shell();
+			write(1,"exit\n",5);
+			exit(137);
+		}
 		ft_print_shell();
 		//str = malloc (1);
 		// str = ft_strdup("");

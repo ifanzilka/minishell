@@ -33,9 +33,22 @@ static void ft_sigterm(int sig)
     (void) sig;
 }
 
+static void ft_signal_sigchld(int sig)
+{
+    (void) sig;
+}
+static void ft_sigcount(int sig)
+{
+    (void) sig;
+    printf("Sig Count\n");
+    exit(0);
+}
+
 void    ft_signal()
 {
     signal(SIGINT, ft_signal_cltr_c);
     signal(SIGQUIT, ft_signal_quit);
-    signal(SIGTERM, ft_sigterm);	
+    signal(SIGCHLD, ft_signal_sigchld);
+    signal(SIGTERM, ft_sigterm);
+    signal(SIGCONT, ft_sigcount);
 }

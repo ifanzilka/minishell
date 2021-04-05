@@ -107,8 +107,5 @@ void ft_init_shell(t_shell *shell, char **envp)
 	ft_add_shell_lvl(shell->envp, shell);
     ft_add_oldpwd(shell);
     ft_signal();
-
-
-
 }
 

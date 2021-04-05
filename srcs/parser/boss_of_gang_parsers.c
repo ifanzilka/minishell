@@ -101,11 +101,31 @@ void	parse(char *str, t_shell *shell)
 	
 	t_cmd_pipe  cmd_pipe;
 	int j;
+	g_forks = 0;
 
 	j = 0;
 	if (data.size == 1)
 	{
+		int status;
 		g_exit_status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
+		
+		int k;
+		k = 0;
+		while (k < g_forks)
+		{
+			wait(&status);
+			if (WIFSIGNALED(status) && WTERMSIG(status) == 9)
+			{
+				write(1, "Killed: 9\n",10);
+				exit(137);
+			}
+			if (WEXITSTATUS(status) == 137)
+			{
+				exit(137);
+			}           
+			k++;
+		}
+		g_forks = 0;
 	}
 	else
 	{
@@ -130,6 +150,25 @@ void	parse(char *str, t_shell *shell)
 			i++;
 		}
 	}
+	int k;
+	int status;
+	k = 0;
+	while (k < g_forks)
+	{
+		wait(&status);
+		if (WIFSIGNALED(status) && WTERMSIG(status) == 9)
+    	{
+        	write(1, "Killed: 9\n",10);
+       		exit(137);
+    	}
+		if (WEXITSTATUS(status) == 137)
+		{
+			exit(137);
+		}   
+		k++;
+	}
+
+	g_forks = 0;
 	ft_return_standat_fd(&cmd_pipe);
 	//write(2,"2\n",2);
 	//print_cmds(&data);

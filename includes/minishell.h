@@ -107,6 +107,7 @@ int     ft_export(char **argv,t_shell *shell);
 int     ft_unset(char **argv,char ***envp, char ***export);
 int     ft_unset_envp_export(char *str, char ***export, char ***envp);
 
+int g_forks;
 
 int     ft_cd(char **argv, t_shell *shell);
 int     ft_pwd(char **argv, char **envp);
