@@ -32,6 +32,9 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>
+#include <termios.h>
+#include <curses.h>
+
 /*
 **  SHELL
 **
@@ -133,7 +136,7 @@ void    ft_signal_child_process();
 
 
 //PARSER
-t_data 			ft_get_line(int argc, char **argv,t_shell *shell);
+t_data 			get_line(t_shell *shell);
 void			parse(char *str, t_shell *shell);
 int				find_cmd_len(char *str);
 int				find_cmds_count(char *str);
@@ -147,8 +150,11 @@ int				one_of_the_set(char a, char *set);
 char 			*ft_find_envp_2(char *key, char **envp);
 char			*cmd_parse(char *str, char ***cmds, int **fds, t_shell *shell);
 char			*redirection_parse(char *str, int **fds, t_shell *shell);
-char			*write_open(char *str, int *fd, t_shell *shell);
-char			*append_open(char *str, int *fd, t_shell *shell);
-char			*read_open(char *str, int *fd, t_shell *shell);
+char			*write_open(char *str, int **fd, t_shell *shell);
+char			*append_open(char *str, int **fd, t_shell *shell);
+char			*read_open(char *str, int **fd, t_shell *shell);
+void			print_syntax_error(int symbol);
+char			*parse_error(int **fds, char *str, int err_code);
+void			malloc_error_exit(void);
 
 #endif

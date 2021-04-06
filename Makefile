@@ -18,7 +18,7 @@ LIB_NAME =	./libft/libft.a
 
 CC		= gcc
 
-FLAGS	= -Wall -Wextra -Werror  -g 
+FLAGS	= -Wall -Wextra -Werror 
 
 HEADER	= ./includes
 #HEADER_LIB = ./libft/includes
@@ -79,7 +79,7 @@ DIR_SIG = $(addprefix $(DIR),signal/)
 SRC_SIG = $(addprefix $(DIR_SIG), ft_signal.c ft_signal_child_process.c)
 
 DIR_PARSER = $(addprefix $(DIR),parser/)
-SRC_PARSER = $(addprefix $(DIR_PARSER), boss_of_gang_parsers.c    gang_of_find_lens.c    ft_get_line.c   gang_of_join_find_check.c gang_of_mini_parsers.c   print_cmds.c gang_of_redirects.c )
+SRC_PARSER = $(addprefix $(DIR_PARSER), parse.c    find_lens.c    get_line.c   join_find_check.c mini_parsers.c   print_cmds.c redirections_parse.c )
 
 SRCS = $(DIR)main.c\
 		$(SRC_ERR)\

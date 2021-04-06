@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 char	*join_symbol(char *str, char a)
 {
@@ -20,14 +19,16 @@ char	*join_symbol(char *str, char a)
 
 	if (!str)
 	{
-		new_str = malloc(2);
+		if ((new_str = malloc(2)) == NULL)
+			malloc_error_exit();
 		new_str[0] = a;
 		new_str[1] = '\0';
 	}
 	else
 	{
 		len = ft_strlen(str);
-		new_str = malloc(len + 2);
+		if ((new_str = malloc(len + 2)) == NULL)
+			malloc_error_exit();
 		new_str = ft_strcpy(new_str, str);
 		new_str[len] = a;
 		new_str[len + 1] = '\0';
@@ -73,9 +74,12 @@ char *ft_find_envp_2(char *key, char **envp)
                 value = ft_strdup((envp[i] + j + 1));
                 if (value != NULL)
                     return (value);
+				malloc_error_exit();
             }
         }
         i++;
     }
-    return (ft_strdup(""));
+	if ((value = ft_strdup("")) == NULL)
+		malloc_error_exit();
+    return (value);
 }

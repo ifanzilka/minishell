@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 void	print_cmds(t_data *data)
 {
@@ -33,4 +32,34 @@ void	print_cmds(t_data *data)
 		printf("\n\n");
 		i++;
 	}
+}
+void	malloc_error_exit(void)
+{
+	ft_print_errno();
+	exit(21);
+}
+void	print_syntax_error(int symbol)
+{
+	write(2, "minishell: syntax error near unexpected token `", 47);
+	if (symbol == 10)
+		write(2, "newline", 7);
+	else
+		write(2, &symbol, 1);
+	write(2, "'\n", 2);
+}
+
+char	*parse_error(int **fds, char *str, int err_code)
+{
+	//ft_print_errno();
+	errno = 0;
+	(*fds)[3] = err_code;
+	if (err_code == 128)
+	{
+		if (!*str)
+			(*fds)[4] = 10;// 10 - new_line
+		else
+			(*fds)[4] = (int)*str;
+	}
+	//print_syntax_error((*fds)[4]);
+	return ("");
 }

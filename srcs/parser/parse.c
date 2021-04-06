@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <libft.h>
 
 char *cmd_parse(char *str, char ***cmds, int **fds, t_shell *shell)
 {
@@ -20,7 +19,8 @@ char *cmd_parse(char *str, char ***cmds, int **fds, t_shell *shell)
 
 	len = find_cmd_len(str);
 	i = 0;
-	*cmds = (char**)malloc(sizeof(char *) * (len + 1));
+	if ((*cmds = (char**)malloc(sizeof(char *) * (len + 1))) == NULL)
+		malloc_error_exit();
 	(*cmds)[len] = NULL;
 	while (*str && not_one_of_the_set(*str, "|;"))
 	{
@@ -47,10 +47,7 @@ void	free_data(t_data *data)
 
 	i = 0;
 	if (data->size == 0)
-	{
-	//	free(data->cmds);
 		return ;
-	}
 	while (data->cmds[i] != NULL)
 	{
 		j = 0;
@@ -63,9 +60,7 @@ void	free_data(t_data *data)
 	while (i < data->size)
 		free(data->fds[i++]);
 	free(data->fds);
-	//printf("END FREE\n");
 }
-
 
 void	parse(char *str, t_shell *shell)
 {
@@ -77,18 +72,20 @@ void	parse(char *str, t_shell *shell)
 
 	i = 0;
 	len = find_cmds_count(str) + 1;
-	//data = (t_data*)malloc(sizeof(t_data));
-	cmds = (char ***)malloc(sizeof(char **) * len);
-	fds = (int **)malloc(sizeof(int *) * len);
-	//printf("Hello!\n");
+	if ((cmds = (char ***)malloc(sizeof(char **) * len)) == NULL)
+		malloc_error_exit();
+	if ((fds = (int **)malloc(sizeof(int *) * len)) == NULL)
+		malloc_error_exit();
 	data.size = 0;
 	while (*str && *str != ';')
 	{
-		fds[i] = (int*)malloc(sizeof(int) * 3);
+		if ((fds[i] = (int*)malloc(sizeof(int) * 5)) == NULL)
+			malloc_error_exit();
 		fds[i][0] = 0;
 		fds[i][1] = 1;
 		fds[i][2] = 2;
-		//printf("Hello!\n");
+		fds[i][3] = 0;
+		fds[i][4] = 0;
 		str = cmd_parse(str, &(cmds[i]), &(fds[i]), shell);
 		data.cmds = cmds;
 		data.fds = fds;		
@@ -104,8 +101,28 @@ void	parse(char *str, t_shell *shell)
 	g_forks = 0;
 
 	j = 0;
+	i = 0;
 	if (data.size == 1)
 	{
+
+		if (data.fds[i][3] != 0)
+			{
+				if (data.fds[i][3] == 128)
+				{
+					print_syntax_error(data.fds[i][4]);
+					
+				}
+				else
+				{
+					errno = data.fds[i][3];
+					ft_print_errno();
+					errno = 0;
+			
+				}
+
+			}
+		else 
+		{
 		int status;
 		g_exit_status = ft_command(data.cmds[i][0], data.cmds[i], shell, data.fds[i]);
 		
@@ -125,14 +142,31 @@ void	parse(char *str, t_shell *shell)
 			}           
 			k++;
 		}
+		}
 		g_forks = 0;
 	}
 	else
 	{
+		i = 0;
 		ft_init_cmd_pipe(&cmd_pipe, data.size);	
 		while (i < data.size)
 		{			
-		
+			if (data.fds[i][3] != 0)
+			{
+				if (data.fds[i][3] == 128)
+				{
+					print_syntax_error(data.fds[i][4]);
+					break ;
+				}
+				else
+				{
+					errno = data.fds[i][3];
+					ft_print_errno();
+					errno = 0;
+					continue ;
+				}
+
+			}
 			ft_before_cmd(&cmd_pipe,j, data.size);
 			if (!ft_is_original_fd(data.fds[i]))
 			{
