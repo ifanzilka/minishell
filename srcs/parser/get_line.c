@@ -17,7 +17,8 @@ t_data	get_line(t_shell *shell)
 	char	buf;
 	char	*str;
 	int		res;
-	
+	//char 	bufs
+
 	res = 0;
 	while (1)
 	{
@@ -25,8 +26,18 @@ t_data	get_line(t_shell *shell)
 		ft_print_shell();
 		if ((str = ft_strdup("")) == NULL)
 			malloc_error_exit();
-		while (((res = read(1, &buf, 1)) == 1) && buf != '\n')
+		
+		//tputs(save_cursor, 1, NULL);
+
+		while (((res = read(1, &buf, 1)) == 1) && buf != '\n' )
+		{
 			str = join_symbol(str, buf);
+			// if (!ft_strcmp(str,key_right))
+			// {
+			// 	printf("up\n");
+			// }
+			// write(1,&buf,1);
+		}
 		if (ft_strlen(str) > 0)
 		{
 			res = open("bash_history", O_WRONLY | O_APPEND | O_CREAT, 0644);
