@@ -26,21 +26,20 @@
 ** возвращает индекс в массиве и (-1) еесли не нашел
 */
 
-int  ft_find_str_in_arr(char **array, char *str)
+int	ft_find_str_in_arr(char **array, char *str)
 {
-    size_t len;
-    int i;
+	size_t	len;
+	int		i;
 
-    i = 0;
-    len = ft_strlen(str);
-    while (array[i])
-    {
-		
-        if (ft_strncmp(str, array[i], len) == 0)
-        {
-            return (i);
-        }
-        i++;
-    }
-	return(-1);
+	i = 0;
+	len = ft_strlen(str);
+	while (array[i])
+	{
+		if (ft_strncmp(str, array[i], len) == 0)
+		{
+			return (i);
+		}
+		i++;
+	}
+	return (-1);
 }

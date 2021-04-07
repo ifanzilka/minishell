@@ -25,15 +25,14 @@
 ** возвращает int
 */
 
-
-int     ft_arrlen(char **array)
+int	ft_arrlen(char **array)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (array == NULL)
-        return (0);
-    while (array[i] != NULL)
-        i++;
-    return (i);
+	i = 0;
+	if (array == NULL)
+		return (0);
+	while (array[i] != NULL)
+		i++;
+	return (i);
 }

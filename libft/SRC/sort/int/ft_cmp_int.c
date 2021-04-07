@@ -6,14 +6,13 @@
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 04:09:20 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/02 04:09:24 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/07 21:21:25 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_cmp_int(void *a, void *b)
+int	ft_cmp_int(void *a, void *b)
 {
-    return (*(int*)a - *(int*)b);
+	return (*(int*)a - *(int*)b);
 }
-

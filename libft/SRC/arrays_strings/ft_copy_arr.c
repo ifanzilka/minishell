@@ -6,7 +6,7 @@
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:39:07 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/20 14:39:08 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/07 21:02:19 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,18 @@
 ** и 1 если произошла ошибка
 */
 
-int ft_copy_arr(char **new, char **old, int len)
+int	ft_copy_arr(char **new, char **old, int len)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (i < len)
-    {
-        new[i] = ft_strdup(old[i]);
+	i = 0;
+	while (i < len)
+	{
+		new[i] = ft_strdup(old[i]);
 		if (new[i] == NULL)
-	            return (1);
-        i++;
-    }
-    new[i] = NULL;
-    return (0);
+			return (1);
+		i++;
+	}
+	new[i] = NULL;
+	return (0);
 }
-

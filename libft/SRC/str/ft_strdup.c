@@ -26,8 +26,7 @@
 ** возвращает указатель на нее.
 */
 
-
-char		*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	int		len;
 	char	*ptr;

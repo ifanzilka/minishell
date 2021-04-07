@@ -12,15 +12,15 @@
 
 #include "libft.h"
 
-void    ft_print_arr(char **arr)
+void	ft_print_arr(char **arr)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while(arr[i])
-    {
-        ft_putstr_fd(arr[i], 1);
-        write(1, "\n" ,1);
-        i++;
-    }
+	i = 0;
+	while (arr[i])
+	{
+		ft_putstr_fd(arr[i], 1);
+		write(1, "\n", 1);
+		i++;
+	}
 }

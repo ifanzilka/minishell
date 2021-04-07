@@ -79,11 +79,11 @@ void				ft_putnbr_fd(int n, int fd);
 int					ft_add_forward(char **str, char c, int n);
 int					ft_add_back(char **str, char c, int n);
 char				*ft_create_str(char c, int n);
-int                 ft_str_find(char *str, char c);
+int					ft_str_find(char *str, char c);
 size_t				ft_strlen(const char *str);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
-char 				*ft_strcpy(char * dst, const char * src);
+char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strnew(size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
@@ -121,43 +121,43 @@ void				free_gc(void *ptr);
 
 typedef struct		s_arrinfo
 {
-    size_t          bytes;
-	int 			(*fun_cmp)(void * ,void *);
-	void 			(*fun_swap)(void*, void*);
+	size_t			bytes;
+	int				(*fun_cmp)(void*, void*);
+	void			(*fun_swap)(void*, void*);
 }					t_arrinfo;
 
-void    ft_bubble_sort(void *arr, int len, t_arrinfo inf);
+void				ft_bubble_sort(void *arr, int len, t_arrinfo inf);
 
 /*
 ** Str
 */
 
-int     	ft_str_cmp(void *s1, void *s2);
-void    	ft_swap_str(void *p1, void *p2);
-void    	ft_str_init_arrinfo(t_arrinfo *str_inf);
-t_arrinfo 	ft_param_str();
+int					ft_str_cmp(void *s1, void *s2);
+void				ft_swap_str(void *p1, void *p2);
+void				ft_str_init_arrinfo(t_arrinfo *str_inf);
+t_arrinfo			ft_param_str();
 
 /*
 ** Int
 */
 
-int 		ft_cmp_int(void *a, void *b);
-void 		ft_swap_int(void *a, void *b);
-void    	ft_int_init_arrinfo(t_arrinfo *str_inf);
-t_arrinfo 	ft_param_int();
+int					ft_cmp_int(void *a, void *b);
+void				ft_swap_int(void *a, void *b);
+void				ft_int_init_arrinfo(t_arrinfo *str_inf);
+t_arrinfo			ft_param_int();
 
 /*
 ** Array of string
 */
 
-int     ft_arrlen(char **array);
-void    ft_print_arr(char **arr);
-int     ft_append_arr(char *str, char ***array);
-int     ft_copy_arr(char **new, char **old, int len);
-void    ft_del_str_ind(char ***array, int index);
-void    ft_free_arr(char **arr, int size);
-void    ft_str_bubble_sort(char **array, int len);
-int     ft_find_str_in_arr(char **array, char *str);
+int					ft_arrlen(char **array);
+void				ft_print_arr(char **arr);
+int					ft_append_arr(char *str, char ***array);
+int					ft_copy_arr(char **arr, char **old, int len);
+void				ft_del_str_ind(char ***array, int index);
+void				ft_free_arr(char **arr, int size);
+void				ft_str_bubble_sort(char **array, int len);
+int					ft_find_str_in_arr(char **array, char *str);
 
 /*
 ** List
@@ -212,11 +212,12 @@ t_l_list			*ft_l_lst_cr_back(t_l_list **lst, void *content);
 
 typedef struct		s_dict
 {
-    void			*key;
-    void            *value;
+	void			*key;
+	void			*value;
 }					t_dict;
 
-t_dict              *ft_cr_dict(void *key, void *value);
-void               *ft_find_key(t_list *dict, void *key, int (*cmp)(void *, void *));
+t_dict				*ft_cr_dict(void *key, void *value);
+void				*ft_find_key(t_list *dict, void *key,
+	int (*cmp)(void *, void *));
 
 #endif
