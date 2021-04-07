@@ -83,6 +83,7 @@ typedef struct		s_cmd_pipe
 }					t_cmd_pipe;
 
 int     ft_init_cmd_pipe(t_cmd_pipe *cmd_pipe, int size);
+int 	ft_free_cmd_pipe(t_cmd_pipe *cmd_pipe, int size);
 int     ft_return_standat_fd(t_cmd_pipe *cmd_pipe);
 
 int     ft_before_cmd(t_cmd_pipe *cmd_pipe, int num, int cnt);
@@ -117,6 +118,7 @@ int     ft_pwd(char **argv, char **envp);
 int     ft_echo(char **argv, char **envp);
 int     ft_exit(char **argv);
 int     ft_command(char *comand,char **argv, t_shell *shell, int *fds);
+void    ft_cmd_in_pipe(t_data *data, t_shell *shell);
 
 int     ft_fork_and_execve_command(char *comand, char **argv, char **envp);
 

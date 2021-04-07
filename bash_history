@@ -78,3 +78,190 @@ ojiijijuhuygyuguyguyvyuexit
 [Aexit
 exit
 exit
+dk[D
+ls
+exit
+ls
+ls
+ls
+exot
+exit
+ls
+exit
+ls
+ls
+ls
+echo 123
+exut
+exit
+ls
+exit
+ls | grep in
+exit
+ls
+ls > 123
+cat 123
+rm 123
+ls > 123
+cat 123
+ls
+exit
+ls
+ls
+ls
+ls -l
+ls -la
+exit
+sdkfn
+sdkfn k| ls
+sdfnk | ls | grep in
+exit
+./minishell
+./minishell
+./minishell
+./minishell
+./minishell
+./minishell
+./minishell
+./minisehll
+./minishell
+./minishell
+./minishell
+ls
+ls
+exit
+ls > 123
+ls
+ls
+cat < 123
+ls | grep in > 123
+ls | grep in > 123
+ls
+exit
+ls
+ls
+ls > 123
+ls
+ls
+ls
+pwd
+ls | grep in
+exit
+ls
+ls
+ls
+ls | grep in
+exit
+ls
+ls
+ls
+ls | grep in 
+exit
+export HOME=my
+exit
+exit
+ls
+ls
+ls
+ls;ls
+export HOME
+export HOME=1
+unset HOME
+export my=344
+unset my
+exit
+env
+make
+exit
+exit
+exit
+export HOME=2324
+unset HOME
+exit
+ls
+ls
+export abc=dfg
+unset abc
+export
+cd libft
+exit
+exit
+ls
+ls
+ls
+cd libft
+exit
+ls
+ls
+cd
+ls
+exit
+ls -la
+env
+export A=b
+unset A
+export HOME=4
+cd 
+cd 
+cd 
+cd 
+exit
+cd 
+cd 
+cd libft
+unset HOME
+cd 
+cd 
+cd 
+cd 
+cd 
+cd
+cd
+cd 
+cd 
+exi
+exit
+cd libft
+exit
+[C[D[C[D[C[D[A[B[D
+exit
+cat
+exit
+nsjdfn >
+ls > | ls -la
+ls -la > 123 | echo 123
+chmod 777 123
+ls -la > 123 | echo 123
+ls -la > 456 | ls > 123
+ls -la > 456 | ls > 
+cat 456
+rm 456
+ls -la > 456 | ls >
+cat 456
+rm 456
+exit
+ls | grep in > 1234 | wc
+cat 1234
+exit
+ls
+ls
+ls -la
+ls
+ls\
+ls | grep in
+exit
+ls | grep in
+ls
+ls | grep in | wc
+exit
+ls | grep in
+ls | grep in | wc
+exit
+ls | grep in | wc
+exit
+ls | grep in | wc
+ls
+ls
+ls
+ls
+exit

@@ -46,11 +46,11 @@ void ft_del_str_ind(char ***array, int index)
             continue;
         }
         if ((new[i] = ft_strdup((*array)[j])) == NULL)
-		 	return ; 
+		 	return ;
         i++;
         j++;
     }
     new[i] = NULL;
-    ft_free_arr(*array,len);
+    ft_free_arr(*array, len);
     *array = new;
 }

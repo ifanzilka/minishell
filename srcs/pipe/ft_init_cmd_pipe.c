@@ -12,6 +12,24 @@
 
 #include <minishell.h>
 
+
+int 	ft_free_cmd_pipe(t_cmd_pipe *cmd_pipe, int size)
+{
+	int i;
+
+	i = 0;
+	if (size > 1)
+	{
+		while (i < size - 1)
+		{
+			free(cmd_pipe->pipes[i]);
+			i++;
+		}
+		free(cmd_pipe->pipes);
+	}
+	return (0);
+}
+
 int     ft_init_cmd_pipe(t_cmd_pipe *cmd_pipe, int size)
 {
     int j;
@@ -27,14 +45,5 @@ int     ft_init_cmd_pipe(t_cmd_pipe *cmd_pipe, int size)
 		pipe(cmd_pipe->pipes[j]);
 		j++;
 	}
-	j = 0;
-	cmd_pipe->pipes_redirect = malloc(sizeof(int *) * size - 1);
-	while (j < size - 1)
-	{
-		cmd_pipe->pipes_redirect [j] = malloc(sizeof(int) * 2);
-		pipe(cmd_pipe->pipes_redirect[j]);
-		j++;
-	}
-
     return (0);
 }

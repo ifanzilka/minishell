@@ -14,9 +14,9 @@
 
 static int    ft_check_file_in_dir(char *dir, char *file)
 {
-    struct dirent *dir_point;
-    DIR *dir_descript;
-    size_t len_file;
+    struct dirent   *dir_point;
+    DIR             *dir_descript;
+    size_t          len_file;
 
     len_file = ft_strlen(file);
     dir_descript = opendir(dir);
@@ -56,7 +56,7 @@ char      *ft_find_bin(char *path, char *comand)
         }
         i++;
     }
-    ft_free_arr(bins,ft_arrlen(bins));
+    ft_free_arr(bins, ft_arrlen(bins));
     return (dir);
 }
 
@@ -85,13 +85,16 @@ int     ft_with_path(char *comand, char *path, char **argv, char **envp)
 {
     char *dir;
     char *way;
+    int res;
 
     if ((dir = ft_find_bin(path,comand)) != NULL)
     {
         way = ft_join_dir(dir, comand);
-        return (ft_fork_and_execve_command(way,argv,envp));
+        res = ft_fork_and_execve_command(way, argv, envp);
+        free(way);
+        free(dir);
+        return (res);
     }
-
     if (ft_strncmp("./", comand, 2) != 0)
     {
         return (ft_comand_not_found(comand));

@@ -22,6 +22,16 @@ t_data	get_line(t_shell *shell)
 	res = 0;
 	while (1)
 	{
+		pid_t parent = getppid();
+		//printf("Parent ID = %d\n",parent);
+
+		if (parent == 1)
+		{
+			ft_print_shell();
+			write(1,"exit\n",5);
+			exit(137);
+		}
+
 		errno = 0;
 		ft_print_shell();
 		if ((str = ft_strdup("")) == NULL)

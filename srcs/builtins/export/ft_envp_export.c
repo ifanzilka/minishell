@@ -23,11 +23,8 @@ static int ft_replace(char *str,char *key, char **envp)
     {
         if (ft_strncmp(key, envp[i], len) == 0)
         {
-            //printf("rep : %s\n",envp[i]);
-			
             free(envp[i]);
             envp[i] = ft_strdup(str);
-            //printf("rep : %s\n",envp[i]);
             if (envp[i] == NULL)
 			{
                 return (1);
@@ -45,11 +42,11 @@ static int ft_envp_apppend(char *str, char ***envp)
     char *key;
     int index;
 
-
+    key = NULL;
     if ((index = ft_str_find(str, '=')) == -1)
         return (0);
-    key = ft_substr(str,0,index);
-    if (ft_find_envp(key, *envp) == NULL)
+    key = ft_substr(str, 0, index);
+    if (ft_find_envp_id(key, *envp) == -1)
     {
         if (ft_append_arr(str, envp) == 1)
         {
@@ -70,12 +67,12 @@ static int ft_export_apppend(char *str, t_shell *shell)
     char *key;
     int index;
 
+    key = NULL;
     if ((index = ft_str_find(str, '=')) != -1)
     {
         key = ft_substr(str, 0, index);
         if (ft_find_str_in_arr(shell->export, key) == -1)
         {
-		
             if (ft_append_arr(str, &shell->export) == 1)
                 ft_putstr_fd("ERROR!\n", 2);
         }
@@ -88,6 +85,7 @@ static int ft_export_apppend(char *str, t_shell *shell)
     {
         ft_append_arr(str, &shell->export);
     }
+    free(key);
     return (0);
 }
 

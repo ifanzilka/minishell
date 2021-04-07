@@ -45,9 +45,9 @@ static void ft_add_shell_lvl_cmd(int lvl, t_shell *shell)
     argv_un[1] = NULL;
     argv_un[2] = NULL;
 	shlvl = ft_strjoin("SHLVL=", num);
+    free(num);
 	argv_un[1] = shlvl;
     ft_command("export", argv_un, shell, shell->fds);
-	free(num);
 	free(shlvl);
 }
 

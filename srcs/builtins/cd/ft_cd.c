@@ -43,7 +43,7 @@ static int     ft_change_dir(char *dir, t_shell *shell)
 int     ft_cd(char **argv, t_shell *shell)
 {
     char *home;
-
+    int     res;
     home = NULL;
     if (ft_arrlen(argv) > 1)
     {
@@ -54,7 +54,9 @@ int     ft_cd(char **argv, t_shell *shell)
         home = ft_find_envp("HOME", shell->envp);
         if (home == NULL)
             return (ft_not_set());
-		return (ft_change_dir(home, shell));	
+        res = ft_change_dir(home, shell);
+        free(home);
+		return (res);	
     }
     return (0);
 }

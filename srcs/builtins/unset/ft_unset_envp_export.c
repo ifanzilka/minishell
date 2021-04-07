@@ -44,7 +44,7 @@ static int ft_envp_unset(char *str, char ***envp)
 
     
     arr = *envp;
-    if (ft_find_envp(str, *envp) == NULL)
+    if (ft_find_envp_id(str, *envp) == -1)
         return (0);
     id = ft_find_envp_id(str,*envp);
     ft_del_str_ind(envp,id);
@@ -55,7 +55,7 @@ static int ft_export_unset(char *str, char ***export)
 {
     int id;
 
-    if (ft_find_envp(str, *export) == NULL)
+    if (ft_find_envp_id(str, *export) == -1)
         return (0);
     id = ft_find_envp_id(str,*export);
     ft_del_str_ind(export,id);

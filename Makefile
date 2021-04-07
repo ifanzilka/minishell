@@ -67,7 +67,7 @@ DIR_EXIT = $(addprefix $(DIR_BUILTINS),exit/)
 SRC_EXIT = $(addprefix $(DIR_EXIT), ft_exit.c)
 
 DIR_CMD = $(addprefix $(DIR),command/)
-SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c ft_builtin.c)
+SRC_CMD = $(addprefix $(DIR_CMD), ft_command.c  ft_dont_path.c ft_with_path.c  ft_fork_execve.c  ft_find_builtins.c ft_builtin.c ft_cmd_in_pipe.c)
 
 DIR_REDIRECT = $(addprefix $(DIR),redirect/)
 SRC_REDIRECT = $(addprefix $(DIR_REDIRECT), ft_change_fd.c ft_return_fd.c ft_is_original_fd.c)
