@@ -20,7 +20,7 @@ int     ft_putchar(int c)
 int main(int argc, char **argv, char **envp)
 {
     (void) argc;
-    (void) argv;
+    (void) argv;	
     // char str[1000];
 
     // struct termios term;
