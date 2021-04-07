@@ -265,3 +265,13 @@ ls
 ls
 ls
 exit
+echo 123 ; echo 345
+echo 123 ; echo 345 ; echo 453
+echo 123 ; echo 345 ; echo 453 ; echo 45
+vecho 123 ; echo 345 ; echo 453
+echo 123 ; echo 345 ; echo 453
+echo 123 ; echo 345 ; echo 453
+echo 123 ; echo 345 ; echo 453
+echo 123 ; echo 345 ; echo 453
+echo 123 ; echo 345 ; echo 453
+exit

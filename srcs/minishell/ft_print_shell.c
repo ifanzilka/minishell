@@ -12,9 +12,9 @@
 
 #include <minishell.h>
 
-void    ft_print_shell()
+void	ft_print_shell(void)
 {
-    ft_putstr_fd("\033[32m",1);
-	ft_putstr_fd("minishell$> ",1);
-	ft_putstr_fd("\033[37m",1);
+	ft_putstr_fd("\033[32m", 1);
+	ft_putstr_fd("minishell$> ", 1);
+	ft_putstr_fd("\033[37m", 1);
 }

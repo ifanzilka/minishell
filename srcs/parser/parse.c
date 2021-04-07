@@ -70,34 +70,39 @@ void	parse(char *str, t_shell *shell)
 	int		len;
 	int		**fds;
 
-	i = 0;
-	len = find_cmds_count(str) + 1;
-	if ((cmds = (char ***)malloc(sizeof(char **) * len)) == NULL)
-		malloc_error_exit();
-	if ((fds = (int **)malloc(sizeof(int *) * len)) == NULL)
-		malloc_error_exit();
-	data.size = 0;
-	while (*str && *str != ';')
+	//сделать зануление
+	while (*str)
 	{
-		if ((fds[i] = (int*)malloc(sizeof(int) * 5)) == NULL)
+		i = 0;
+		len = find_cmds_count(str) + 1;
+		if ((cmds = (char ***)malloc(sizeof(char **) * len)) == NULL)
 			malloc_error_exit();
-		fds[i][0] = 0;
-		fds[i][1] = 1;
-		fds[i][2] = 2;
-		fds[i][3] = 0;
-		fds[i][4] = 0;
-		str = cmd_parse(str, &(cmds[i]), &(fds[i]), shell);
-		data.cmds = cmds;
-		data.fds = fds;		
-		i++;
-		data.size = i;
-	}
-	cmds[i] = NULL;
-	i = 0;
+		if ((fds = (int **)malloc(sizeof(int *) * len)) == NULL)
+			malloc_error_exit();
+		data.size = 0;
+		while (*str && *str != ';')
+		{
+				if ((fds[i] = (int*)malloc(sizeof(int) * 5)) == NULL)
+					malloc_error_exit();
+				fds[i][0] = 0;
+				fds[i][1] = 1;
+				fds[i][2] = 2;
+				fds[i][3] = 0;
+				fds[i][4] = 0;
+				str = cmd_parse(str, &(cmds[i]), &(fds[i]), shell);
+				data.cmds = cmds;
+				data.fds = fds;		
+				i++;
+				data.size = i;
+			}
+			cmds[i] = NULL;
+			i = 0;
 
-	
-	ft_cmd_in_pipe(&data, shell);
-	//write(2,"2\n",2);
-	//print_cmds(&data);
-	free_data(&data);
+			
+			ft_cmd_in_pipe(&data, shell);
+			//write(2,"2\n",2);
+			//print_cmds(&data);
+			free_data(&data);
+			str++;
+		}
 }
