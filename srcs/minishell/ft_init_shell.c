@@ -101,6 +101,9 @@ void			ft_init_shell(t_shell *shell, char **envp)
 	shell->fds[0] = 0;
 	shell->fds[1] = 1;
 	shell->fds[2] = 2;
+	ft_read_history(shell,"history");
+	printf("size %d\n",ft_l_lstsize(shell->history));
+	printf("str : %s\n",ft_history_down(shell));
 	ft_bubble_sort(shell->export, ft_arrlen(shell->export), ft_param_str());
 	ft_add_shell_lvl(shell->envp, shell);
 	ft_add_oldpwd(shell);

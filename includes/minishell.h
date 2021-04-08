@@ -53,13 +53,20 @@ typedef struct		s_shell
     int 		    fds[3];
     char            **envp;
     char            **export;
-    t_l_list        *history;
-    
+    t_l_list		*history;
+	t_l_list		*current;
+    int				fd_history;
 }					t_shell;
 
 void    ft_init_shell(t_shell *shell,char **envp);
 void    ft_print_shell();
 
+
+// history
+char			*ft_history_up(t_shell *shell);
+char 			*ft_history_down(t_shell *shell);
+int				ft_read_history(t_shell *shell, const char *filename);
+int 			ft_add_history(t_shell *shell, const char *filename, char *str);
 
 typedef struct		s_redirect
 {

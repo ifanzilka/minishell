@@ -220,4 +220,6 @@ t_dict				*ft_cr_dict(void *key, void *value);
 void				*ft_find_key(t_list *dict, void *key,
 	int (*cmp)(void *, void *));
 
+
+int					get_next_line(int fd, char **line);
 #endif

@@ -50,10 +50,20 @@ t_data	get_line(t_shell *shell)
 		}
 		if (ft_strlen(str) > 0)
 		{
-			res = open("bash_history", O_WRONLY | O_APPEND | O_CREAT, 0644);
-			write(res, str, ft_strlen(str));
-			write(res, "\n", 1);
-			close(res);
+			// res = open("history", O_WRONLY | O_APPEND | O_CREAT, 0644);
+			// write(res, str, ft_strlen(str));
+			// write(res, "\n", 1);
+			// close(res);
+			ft_add_history(shell, "history", str);
+			printf("str up: %s\n",ft_history_up(shell));
+			printf("str up: %s\n",ft_history_up(shell));
+			printf("str up: %s\n",ft_history_up(shell));
+			printf("\n\n");
+			printf("str down: %s\n",ft_history_down(shell));
+			printf("str down: %s\n",ft_history_down(shell));
+			printf("str down: %s\n",ft_history_down(shell));
+			printf("str down: %s\n",ft_history_down(shell));
+			printf("str down: %s\n",ft_history_down(shell));
 		}	
 		if (errno == 0)	
 		{

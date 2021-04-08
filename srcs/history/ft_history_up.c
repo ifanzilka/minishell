@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_bubble_sort.c                               :+:      :+:    :+:   */
+/*   ft_history_up.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 18:23:55 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/07 21:09:54 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/04/08 16:12:18 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/04/08 16:12:20 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-void	ft_str_bubble_sort(char **array, int len)
+char 	*ft_history_up(t_shell *shell)
 {
-	int		i;
-	int		j;
+	t_l_list	*ll_hist;
+	char 		*str;
 
-	i = 0;
-	j = 0;
-	while (i < len)
+	if (shell->current == NULL)
 	{
-		j = 0;
-		while (j < len - 1)
-		{
-			if (ft_str_cmp((array + j), (array + j + 1)) > 0)
-			{
-				ft_swap_str(&array[j], &array[j + 1]);
-			}
-			j++;
-		}
-		i++;
+		printf("1\n");
+		shell->current = shell->history;
+		return (shell->current->content);
 	}
+	ll_hist = shell->current;
+	if (ll_hist->next == NULL)
+		return (NULL);
+	else
+	{
+		printf("2\n");
+		str = (shell->current->next->content);
+		shell->current = shell->current->next;
+	}	
+	return (str);
 }

@@ -78,6 +78,9 @@ SRC_PIPE = $(addprefix $(DIR_PIPE), ft_init_cmd_pipe.c ft_return_standat_fd.c ft
 DIR_SIG = $(addprefix $(DIR),signal/)
 SRC_SIG = $(addprefix $(DIR_SIG), ft_signal.c ft_signal_child_process.c)
 
+DIR_HISTORY = $(addprefix $(DIR),history/)
+SRC_HISTORY = $(addprefix $(DIR_HISTORY), ft_read_history.c ft_history_up.c  ft_history_down.c ft_add_history.c)
+
 DIR_PARSER = $(addprefix $(DIR),parser/)
 SRC_PARSER = $(addprefix $(DIR_PARSER), parse.c    find_lens.c    get_line.c   join_find_check.c mini_parsers.c   print_cmds.c redirections_parse.c )
 
@@ -95,6 +98,7 @@ SRCS = $(DIR)main.c\
 		$(SRC_REDIRECT)\
 		$(SRC_PIPE)\
 		$(SRC_SIG)\
+		$(SRC_HISTORY)\
 		$(SRC_PARSER)
 
 SRCS.O = $(SRCS:.c=.o)
