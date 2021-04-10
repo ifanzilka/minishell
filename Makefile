@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: exenia <exenia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/20 13:45:18 by bmarilli          #+#    #+#              #
-#    Updated: 2021/02/20 14:40:08 by bmarilli         ###   ########.fr        #
+#    Updated: 2021/04/10 04:45:12 by bmarilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIB_NAME =	./libft/libft.a
 
 CC		= gcc
 
-FLAGS	= -Wall -Wextra -Werror 
+FLAGS	= -Wall -Wextra -Werror -g 
 
 HEADER	= ./includes
 #HEADER_LIB = ./libft/includes
@@ -82,7 +82,7 @@ DIR_HISTORY = $(addprefix $(DIR),history/)
 SRC_HISTORY = $(addprefix $(DIR_HISTORY), ft_read_history.c ft_history_up.c  ft_history_down.c ft_add_history.c)
 
 DIR_PARSER = $(addprefix $(DIR),parser/)
-SRC_PARSER = $(addprefix $(DIR_PARSER), parse.c    find_lens.c    get_line.c   join_find_check.c mini_parsers.c   print_cmds.c redirections_parse.c )
+SRC_PARSER = $(addprefix $(DIR_PARSER), parse.c    find_lens.c    get_line.c   join_find_check.c mini_parsers.c   print_cmds.c redirections_parse.c term_caps.c escapes1.c escapes2.c syntax_error_parser.c)
 
 SRCS = $(DIR)main.c\
 		$(SRC_ERR)\

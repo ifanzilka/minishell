@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   boss_of_gang_parsers.c                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 20:29:29 by exenia            #+#    #+#             */
-/*   Updated: 2021/03/30 21:10:09 by exenia           ###   ########.fr       */
+/*   Updated: 2021/04/10 04:06:22 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,102 @@ void	free_data(t_data *data)
 	free(data->fds);
 }
 
+char	*get_new_line(char *str_orig, char **flags)
+{
+	char *new_str;
+	char *str;
+
+	str = str_orig;
+	new_str = ft_strdup("");
+	*flags = ft_strdup("");
+	while (*str)
+	{
+		if (*str && *str == '\\')
+		{
+			new_str = join_symbol(new_str, *str++);
+			new_str = join_symbol(new_str, *str++);
+		}
+		if (*str && *str == '"')
+		{
+			new_str = join_symbol(new_str, *str++);
+			while (*str && *str != '"')
+			{
+				new_str = join_symbol(new_str, *str++);
+				if (*str && *str == '\\')
+				{
+					new_str = join_symbol(new_str, *str++);
+					new_str = join_symbol(new_str, *str++);
+				}		
+			}
+			new_str = join_symbol(new_str, *str++);
+		}
+		if (*str && *str == '\'')
+		{
+			new_str = join_symbol(new_str, *str++);
+			while (*str && *str != '\'')
+				new_str = join_symbol(new_str, *str++);
+			new_str = join_symbol(new_str, *str++);
+		}
+		if (*str && *str == '|') 
+		{
+			if (*(str + 1) && *(str + 1) == '|')
+			{
+				new_str = join_symbol(new_str, ';');
+				str += 2;
+				*flags = join_symbol(*flags, '|');
+			}
+			else
+				new_str = join_symbol(new_str, *str++);
+		}
+		if (*str && *str == '&' && *(str + 1) && *(str + 1) == '&')
+		{
+			new_str = join_symbol(new_str, ';');
+			str += 2;
+			*flags = join_symbol(*flags, '&');
+		}
+		if (*str && *str == ';')
+		{
+			new_str = join_symbol(new_str, *str++);
+			*flags = join_symbol(*flags, ';');
+		}
+		if (*str && not_one_of_the_set(*str, "\\'\"&|"))
+			new_str = join_symbol(new_str, *str++);
+	}
+	//free(str_orig);
+	return (new_str);
+}
+
+char	*skip_command(char *str)
+{
+	str++;
+	while (*str && *str != ';')
+	{
+		if (*str && *str == '\\')
+			str += 2;
+		if (*str && *str == '"')
+		{
+			str++;
+			while (*str && *str != '"')
+			{
+				if (*str && *str == '\\')
+					str += 1;
+				str++;		
+			}
+			str++;
+		}
+		if (*str && *str == '\'')
+		{
+			str++;
+			while (*str && *str != '\'')
+				str++;		
+			str++;
+		}
+		if (*str && not_one_of_the_set(*str, ";\"'\\"))
+			str++;
+	}
+	return (str);
+}
+
 void	parse(char *str, t_shell *shell)
 {
 	int		i;
@@ -69,8 +165,15 @@ void	parse(char *str, t_shell *shell)
 	t_data	data;
 	int		len;
 	int		**fds;
+	int m;
+	m = 0;
 
 	//сделать зануление
+	
+	str = get_new_line(str, &(data.flags));
+//	printf("new str: |-|%s|-|\n", str);
+//	printf("flags: %s\n", data.flags);
+//	exit(1);
 	while (*str)
 	{
 		i = 0;
@@ -94,15 +197,48 @@ void	parse(char *str, t_shell *shell)
 				data.fds = fds;		
 				i++;
 				data.size = i;
-			}
-			cmds[i] = NULL;
-			i = 0;
-
-			
-			ft_cmd_in_pipe(&data, shell);
-			//write(2,"2\n",2);
-			//print_cmds(&data);
-			free_data(&data);
-			str++;
 		}
+		cmds[i] = NULL;
+		i = 0;
+		
+		//if (!(data.size == 1 && data.cmds[0][0] && data.cmds[0][0][0] == '\0') || data.cmds[0] == NULL)
+		ft_cmd_in_pipe(&data, shell);
+		// while(1)
+		// ;
+		//write(2,"2\n",2);
+		//printf("Hello!\n");
+		free_data(&data);
+		
+		//printf("Hello!2\n");
+		//printf("status %d\n", g_exit_status);
+		if (*str == ';')
+		{
+				while (1)
+				
+				{
+					//if (!*str)
+						//break ;
+					if (*str && data.flags[m] == '|' && g_exit_status == 0)
+					{
+						str = skip_command(str);
+						m++;
+					}
+					else if ( *str && data.flags[m] == '&' && g_exit_status != 0)
+					{
+						str = skip_command(str);
+						m++;
+					}
+					else
+					{
+						m++;
+						//free(str);
+						break ;
+					}
+					//m++;
+				}
+			if (*str)
+				str++;
+		}
+	}
+	//free(str);
 }

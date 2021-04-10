@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_shell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 18:22:05 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/07 23:13:05 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/08 18:59:55 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void			ft_init_shell(t_shell *shell, char **envp)
 	shell->fds[0] = 0;
 	shell->fds[1] = 1;
 	shell->fds[2] = 2;
-	ft_read_history(shell,"history");
-	printf("size %d\n",ft_l_lstsize(shell->history));
-	printf("str : %s\n",ft_history_down(shell));
+	ft_read_history(shell, "history");
+	//printf("size %d\n",ft_l_lstsize(shell->history));
+	//printf("str : %s\n",ft_history_down(shell));
 	ft_bubble_sort(shell->export, ft_arrlen(shell->export), ft_param_str());
 	ft_add_shell_lvl(shell->envp, shell);
 	ft_add_oldpwd(shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 14:40:24 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/02/20 14:40:27 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/10 01:28:07 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 #include <string.h>
 #include <termios.h>
 #include <curses.h>
+#include <get_next_line.h>
 
 /*
 **  SHELL
@@ -145,6 +146,8 @@ void    ft_signal_child_process();
 
 
 //PARSER
+
+
 t_data 			get_line(t_shell *shell);
 void			parse(char *str, t_shell *shell);
 int				find_cmd_len(char *str);
@@ -162,8 +165,31 @@ char			*redirection_parse(char *str, int **fds, t_shell *shell);
 char			*write_open(char *str, int **fd, t_shell *shell);
 char			*append_open(char *str, int **fd, t_shell *shell);
 char			*read_open(char *str, int **fd, t_shell *shell);
-void			print_syntax_error(int symbol);
+int				print_syntax_error(int symbol);
 char			*parse_error(int **fds, char *str, int err_code);
 void			malloc_error_exit(void);
+
+/// TERM_CAPS
+typedef struct	s_term
+{
+	char		line[2000];
+	int			iter;
+	int			i;
+	char		buf[2000];
+	char		str1[1000];
+	int			l;
+    char		*term_name;
+}				t_term;
+char			*term_caps(t_shell *shell);
+void			move_end(t_term *tc);
+void			move_home(t_term *tc);
+void			move_right(t_term *tc);
+void			move_left(t_term *tc);
+void			insert_symbol(t_term *tc);
+void			back_space(t_term *tc);
+void			history_up(t_term *tc, t_shell *shell);
+void			history_down(t_term *tc, t_shell *shell);
+int     		ft_putchar(int c); // В ЛИБУ!!!!
+int				syntax_error_detect(char *str);
 
 #endif

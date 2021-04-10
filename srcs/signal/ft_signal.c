@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 19:51:39 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/07 23:21:26 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/10 03:50:53 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static	void	ft_signal_cltr_c(int sig)
 {
 	(void)sig;
 	g_exit_status = 1;
-	write(1, "\b\b  \b\b", 6);
 	write(1, "\n", 1);
 	g_exit_status = 1;
 	ft_print_shell();

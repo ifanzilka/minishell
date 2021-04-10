@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_in_pipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:21:43 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/07 16:21:45 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/10 04:02:31 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static void ft_wait_child_process()
 static int ft_check_fd_errno(t_data *data , int i)
 {
 	if (data->fds[i][3] != 0)
-	{
+	{	
 		if (data->fds[i][3] == 128)
 		{
 			print_syntax_error(data->fds[i][4]);
 			return (1);
 		}	
 		else
-		{
+		{	
 			errno = data->fds[i][3];
 			ft_print_errno();
 			errno = 0;
@@ -77,7 +77,10 @@ static void ft_cicle_pipe(t_cmd_pipe *cmd_pipe, t_data *data, t_shell *shell)
 	{			
 		err = ft_check_fd_errno(data, i);
 		if (err == 1)
+		{
+			g_exit_status = 1;
 			break;
+		}
 		else if (err == 2)
 		{
 			i++;
@@ -105,12 +108,28 @@ void    ft_cmd_in_pipe(t_data *data, t_shell *shell)
     if (data->size == 1)
 	{
 		err = ft_check_fd_errno(data, 0);
-		if (!err) 
+		if (data->cmds[i][0] == NULL)
+		{
+			g_exit_status = 1;
+			return ;
+		}
+		if (!err)
+		{
+
 		    g_exit_status = ft_command(data->cmds[i][0], data->cmds[i], shell, data->fds[i]);
+			//printf("int : %d\n", g_exit_status);
+		}
+		else
+		{	
+			//printf("int : %d\n", g_exit_status);
+			g_exit_status = 1;
+			return ;
+		}	
 	}
 	else
 		ft_cicle_pipe(&cmd_pipe, data, shell);
     ft_wait_child_process();
 	ft_free_cmd_pipe(&cmd_pipe, data->size);
     ft_return_standat_fd(&cmd_pipe);
+	
 }

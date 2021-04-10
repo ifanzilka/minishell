@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gang_of_mini_parsers.c                             :+:      :+:    :+:   */
+/*   mini_parsers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 20:29:42 by exenia            #+#    #+#             */
-/*   Updated: 2021/03/30 21:10:02 by exenia           ###   ########.fr       */
+/*   Updated: 2021/04/09 03:43:07 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ char *quotes_parse(char *str, char **cmds, t_shell *shell)
 		str++;
 		while (*str && *str != '"')
 		{
-			if (*str && *str == '$')
+			if (*str && *str == '\\')
+			{
+				str++;
+				*cmds = join_symbol(*cmds, *str++);
+			}
+			else if (*str && *str == '$')
 				str = dollar_parse(str, &(*cmds), shell);
 			else
 				*cmds = join_symbol(*cmds, *str++);

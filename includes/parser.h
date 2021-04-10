@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:43:02 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/30 21:43:05 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/09 22:04:12 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_data
 	char		***cmds;
 	int			**fds;
 	int			size;
+	char		*flags;
 }				t_data;
 
 
