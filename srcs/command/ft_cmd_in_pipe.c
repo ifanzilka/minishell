@@ -99,11 +99,9 @@ void    ft_cmd_in_pipe(t_data *data, t_shell *shell)
 {
     t_cmd_pipe  cmd_pipe;
 	int         i;
-    int         j;
 	int 		err;
 
     g_forks = 0;
-	j = 0;
 	i = 0;
     if (data->size == 1)
 	{

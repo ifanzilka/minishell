@@ -39,11 +39,8 @@ static int ft_check_unset(char *str)
 }
 static int ft_envp_unset(char *str, char ***envp)
 {
-    char **arr;
     int id;
 
-    
-    arr = *envp;
     if (ft_find_envp_id(str, *envp) == -1)
         return (0);
     id = ft_find_envp_id(str,*envp);

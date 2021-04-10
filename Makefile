@@ -18,7 +18,7 @@ LIB_NAME =	./libft/libft.a
 
 CC		= gcc
 
-FLAGS	= -Wall -Wextra -Werror -g 
+FLAGS	= -Wall -Wextra -Werror 
 
 HEADER	= ./includes
 #HEADER_LIB = ./libft/includes

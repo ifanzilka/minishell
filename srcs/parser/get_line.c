@@ -16,10 +16,8 @@ t_data	get_line(t_shell *shell)
 {
 	//char	buf;
 	char	*str;
-	int		res;
 	//char 	bufs
 
-	res = 0;
 	while (1)
 	{
 		pid_t parent = getppid();
