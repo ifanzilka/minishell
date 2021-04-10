@@ -18,7 +18,8 @@ int	ft_read_history(t_shell *shell, const char *filename)
 
 	str = NULL;
 	shell->fd_history = open(filename, O_RDONLY, 0644);
-	if (shell->fd_history != -1)
+	shell->history = NULL;
+	if (shell->fd_history != -1)	
 	{
 		while (get_next_line(shell->fd_history, &str) == 1)
 		{
