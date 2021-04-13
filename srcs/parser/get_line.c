@@ -31,6 +31,7 @@ t_data	get_line(t_shell *shell)
 		str = term_caps(shell);
 		if (ft_strlen(str) > 0)
 			ft_add_history(shell, "history", str);
+		shell->j = 0;
 		if (syntax_error_detect(str))
 			;
 		else if (errno == 0)
