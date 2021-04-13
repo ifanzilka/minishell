@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gang_of_join_find_check.c                          :+:      :+:    :+:   */
+/*   join_find_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 20:29:38 by exenia            #+#    #+#             */
-/*   Updated: 2021/03/30 20:29:39 by exenia           ###   ########.fr       */
+/*   Updated: 2021/04/12 23:52:33 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*join_symbol(char *str, char a)
 {
-	char *new_str;
-	int len;
+	char	*new_str;
+	int		len;
 
 	if (!str)
 	{
@@ -53,33 +53,31 @@ int		one_of_the_set(char a, char *set)
 	return (0);
 }
 
-char *ft_find_envp_2(char *key, char **envp)
+char	*ft_find_envp_2(char *key, char **envp)
 {
-    char	*value;
-    int		i;
-    size_t	len;
-    int		j;
+	char	*value;
+	int		i;
+	size_t	len;
+	int		j;
 
 	len = ft_strlen(key);
-    i = 0;
-    while(envp[i])
-    {
-        j = 0;
-        if (ft_strncmp(key, envp[i], len) == 0)
-        {
-            while (envp[i][j] != 0 && envp[i][j] != '=')
-                j++;
-            if ((size_t)j == len)
-            {
-                value = ft_strdup((envp[i] + j + 1));
-                if (value != NULL)
-                    return (value);
+	i = -1;
+	while (envp[++i])
+	{
+		j = 0;
+		if (ft_strncmp(key, envp[i], len) == 0)
+		{
+			while (envp[i][j] != 0 && envp[i][j] != '=')
+				j++;
+			if ((size_t)j == len)
+			{
+				if ((value = ft_strdup((envp[i] + j + 1))) != NULL)
+					return (value);
 				malloc_error_exit();
-            }
-        }
-        i++;
-    }
+			}
+		}
+	}
 	if ((value = ft_strdup("")) == NULL)
 		malloc_error_exit();
-    return (value);
+	return (value);
 }

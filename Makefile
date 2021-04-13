@@ -6,7 +6,7 @@
 #    By: exenia <exenia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/20 13:45:18 by bmarilli          #+#    #+#              #
-#    Updated: 2021/04/10 04:45:12 by bmarilli         ###   ########.fr        #
+#    Updated: 2021/04/12 23:53:35 by exenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,10 @@ DIR_HISTORY = $(addprefix $(DIR),history/)
 SRC_HISTORY = $(addprefix $(DIR_HISTORY), ft_read_history.c ft_history_up.c  ft_history_down.c ft_add_history.c)
 
 DIR_PARSER = $(addprefix $(DIR),parser/)
-SRC_PARSER = $(addprefix $(DIR_PARSER), parse.c    find_lens.c    get_line.c   join_find_check.c mini_parsers.c   print_cmds.c redirections_parse.c term_caps.c escapes1.c escapes2.c syntax_error_parser.c)
+SRC_PARSER = $(addprefix $(DIR_PARSER), and_or.c  parse.c    find_lens.c    get_line.c   join_find_check.c mini_parsers.c   parse_error.c redirections_parse.c  syntax_error_parser.c)
+
+DIR_TERMCAPS = $(addprefix $(DIR),term_caps/)
+SRC_TERMCAPS = $(addprefix $(DIR_TERMCAPS), escapes1.c     escapes2.c     term_caps.c)
 
 SRCS = $(DIR)main.c\
 		$(SRC_ERR)\
@@ -99,7 +102,8 @@ SRCS = $(DIR)main.c\
 		$(SRC_PIPE)\
 		$(SRC_SIG)\
 		$(SRC_HISTORY)\
-		$(SRC_PARSER)
+		$(SRC_PARSER) \
+		$(SRC_TERMCAPS)
 
 SRCS.O = $(SRCS:.c=.o)
 

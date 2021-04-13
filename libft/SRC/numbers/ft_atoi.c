@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:55:44 by bmarilli          #+#    #+#             */
-/*   Updated: 2020/10/31 05:25:26 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/13 00:48:29 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,27 @@ int	ft_atoi(const char *ptr)
 		res = res * 10 + *ptr - '0';
 		if (last_res > res)
 			return (sign > 0 ? -1 : 0);
+		ptr++;
+	}
+	return (res * sign);
+}
+
+int	ft_atoi_overflow(const char *ptr)
+{
+	unsigned	res;
+	int			sign;
+
+	res = 0;
+	sign = 1;
+	while ((9 <= *ptr && *ptr <= 13) || *ptr == 32)
+		ptr++;
+	if (*ptr == '-')
+		sign = -1;
+	if (*ptr == '-' || *ptr == '+')
+		ptr++;
+	while (ft_isdigit(*ptr))
+	{
+		res = res * 10 + *ptr - '0';
 		ptr++;
 	}
 	return (res * sign);

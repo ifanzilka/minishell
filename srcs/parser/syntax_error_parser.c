@@ -6,7 +6,7 @@
 /*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 03:33:45 by exenia            #+#    #+#             */
-/*   Updated: 2021/04/09 20:50:51 by exenia           ###   ########.fr       */
+/*   Updated: 2021/04/12 23:35:47 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	*double_symbol_error(char *str)
 		print_syntax_error(777);
 	else if (*str == '|' && *(str + 1) == '|')
 		print_syntax_error(888);
-	else if (*str == ';' && *(str + 1) == ';')	
+	else if (*str == ';' && *(str + 1) == ';')
 		print_syntax_error(999);
 	else
 		print_syntax_error(*str);
-	return (NULL);	
+	return (NULL);
 }
 
 char	*error_near_token(char *str, int command)
@@ -39,7 +39,7 @@ char	*error_near_token(char *str, int command)
 			print_syntax_error(999);
 		else
 			print_syntax_error(*str);
-		return (NULL) ;
+		return (NULL);
 	}
 	if (*str == '>' && *(str + 1) == '>')
 		str += 2;
@@ -52,7 +52,7 @@ char	*error_near_token(char *str, int command)
 	while (*str && *str == ' ')
 		str++;
 	if (!*str || one_of_the_set(*str, "><|;&"))
-		return (double_symbol_error(str));	
+		return (double_symbol_error(str));
 	return (str);
 }
 

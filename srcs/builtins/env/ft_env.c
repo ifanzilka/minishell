@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:11:15 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/20 14:11:16 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/13 00:34:29 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int ft_env(char **envp)
+int	ft_env(char **envp)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (envp[i])
-    {
-        ft_putstr_fd(envp[i], 1);
-        write(1, "\n", 1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (envp[i])
+	{
+		ft_putstr_fd(envp[i], 1);
+		write(1, "\n", 1);
+		i++;
+	}
+	return (0);
 }
-

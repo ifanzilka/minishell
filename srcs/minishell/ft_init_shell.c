@@ -6,7 +6,7 @@
 /*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 18:22:05 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/08 18:59:55 by exenia           ###   ########.fr       */
+/*   Updated: 2021/04/13 15:30:34 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void			ft_init_shell(t_shell *shell, char **envp)
 {
 	shell->envp = ft_copy_envp(envp);
 	shell->export = ft_copy_envp(shell->envp);
+	shell->flags = NULL;
 	if (!shell->envp || !shell->export)
 	{
 		ft_print_errno();
@@ -102,12 +103,8 @@ void			ft_init_shell(t_shell *shell, char **envp)
 	shell->fds[1] = 1;
 	shell->fds[2] = 2;
 	ft_read_history(shell, "history");
-
-	//printf("size %d\n",ft_l_lstsize(shell->history));
-	//printf("str : %s\n",ft_history_down(shell));
 	ft_bubble_sort(shell->export, ft_arrlen(shell->export), ft_param_str());
-
 	ft_add_shell_lvl(shell->envp, shell);
 	ft_add_oldpwd(shell);
-	ft_signal();
+	ft_signal_child_process();
 }

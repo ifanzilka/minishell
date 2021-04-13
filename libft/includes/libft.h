@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 15:51:44 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/03/27 14:56:39 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/13 00:48:53 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 */
 
 int					ft_atoi(const char *str);
+int					ft_atoi_overflow(const char *ptr);
 size_t				ft_intlen(long long n);
 int					ft_atoi_base(char *str, char *base);
 double				ft_atof(char *str);
@@ -68,6 +69,7 @@ int					ft_pow(int a, int n);
 
 int					ft_print_n_char(int num, char c, int fd);
 void				ft_putchar_fd(char c, int fd);
+int					ft_putchar(int c);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);

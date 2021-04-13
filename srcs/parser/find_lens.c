@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gang_of_find_lens.c                                :+:      :+:    :+:   */
+/*   find_lens.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 20:29:35 by exenia            #+#    #+#             */
-/*   Updated: 2021/03/30 20:29:36 by exenia           ###   ########.fr       */
+/*   Updated: 2021/04/12 23:42:37 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ char	*some_ifs(char *str)
 		str++;
 		while (*str && *str != '\'')
 			str++;
-		str++;	
+		str++;
 	}
 	if (*str && not_one_of_the_set(*str, " |;"))
 		str++;
 	return (str);
 }
 
-char *skip_redirection(char *str)
+char	*skip_redirection(char *str)
 {
 	while (*++str && *str == ' ')
 		;
@@ -71,7 +71,7 @@ char	*some_if_elses(char *str, int *len)
 	return (str);
 }
 
-int	find_cmd_len(char *str)
+int		find_cmd_len(char *str)
 {
 	int len;
 
@@ -86,12 +86,11 @@ int	find_cmd_len(char *str)
 				;
 			str++;
 		}
-		else 
+		else
 			str = some_if_elses(str, &len);
 	}
 	if (*str == '|' && *(str - 1) && *(str - 1) == ' ')
 		len--;
-	//printf("len = %d\n", len);
 	return (len);
 }
 
@@ -117,9 +116,8 @@ int		find_cmds_count(char *str)
 		if (*str && *str == '|')
 			len++;
 		if (*str && *str == ';')
-			break;
+			break ;
 		str++;
 	}
 	return (len);
 }
-

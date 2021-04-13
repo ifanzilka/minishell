@@ -6,13 +6,13 @@
 /*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 16:16:18 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/10 03:33:51 by exenia           ###   ########.fr       */
+/*   Updated: 2021/04/13 15:28:49 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int ft_add_file(const char *filename, char *str)
+static int	ft_add_file(const char *filename, char *str)
 {
 	int fd;
 
@@ -28,16 +28,16 @@ static int ft_add_file(const char *filename, char *str)
 	return (0);
 }
 
-static int ft_add_list(t_shell *shell, char *str)
+static int	ft_add_list(t_shell *shell, char *str)
 {
 	ft_l_lst_cr_front(&(shell->history), ft_strdup(str));
 	return (0);
 }
 
-int 	ft_add_history(t_shell *shell, const char *filename, char *str)
+int			ft_add_history(t_shell *shell, const char *filename, char *str)
 {
 	ft_add_file(filename, str);
 	ft_add_list(shell, str);
 	shell->current = NULL;
-	return (0);	
+	return (0);
 }

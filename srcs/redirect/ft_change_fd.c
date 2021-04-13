@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_change_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:07:36 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/07 23:25:02 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:12:28 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_change_fd(t_redirect *red, int *fds)
+int	ft_change_fd(t_redirect *red, long long int *fds)
 {
 	if (fds[0] != 0)
 	{

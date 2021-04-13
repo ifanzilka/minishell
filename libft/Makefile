@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: exenia <exenia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/29 23:36:03 by bmarilli          #+#    #+#              #
-#    Updated: 2021/03/27 14:57:28 by bmarilli         ###   ########.fr        #
+#    Updated: 2021/04/13 00:10:33 by exenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ STR_DIR = $(addprefix $(DIR),str/)
 SRC_STR = $(addprefix $(STR_DIR), ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strcmp.c  ft_strnstr.c ft_strrchr.c ft_strncmp.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_split.c ft_strdup.c ft_strnew.c ft_strdel.c ft_create_str.c ft_add_forward.c ft_add_back.c ft_str_find.c ft_strcpy.c)
 
 PUT_DIR = $(addprefix $(DIR),put/)
-SRC_PUT = $(addprefix $(PUT_DIR), ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_print_n_char.c)
+SRC_PUT = $(addprefix $(PUT_DIR), ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_print_n_char.c ft_putchar.c)
 
 NBR_DIR =  $(addprefix $(DIR),numbers/)
 SRC_NBR= $(addprefix $(NBR_DIR), ft_atoi.c ft_itoa.c ft_atof.c ft_itoa_base_x.c ft_itoa_ll.c ft_itoa_unsig_base.c ft_itoa_unsigned_ll.c ft_itoa_with_zero.c ft_pow.c ft_atoi_base.c)

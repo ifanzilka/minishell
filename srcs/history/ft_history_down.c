@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_history_down.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 16:16:55 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/08 16:16:59 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:29:57 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char 	*ft_history_down(t_shell *shell)
+char	*ft_history_down(t_shell *shell)
 {
 	t_l_list	*ll_hist;
-	char 		*str;
+	char		*str;
 
 	if (shell->current == NULL)
 	{
@@ -28,6 +28,6 @@ char 	*ft_history_down(t_shell *shell)
 	{
 		str = (shell->current->prev->content);
 		shell->current = shell->current->prev;
-	}	
+	}
 	return (str);
 }

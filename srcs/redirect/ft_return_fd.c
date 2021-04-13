@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_return_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: exenia <exenia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 23:14:40 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/04/07 23:27:18 by bmarilli         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:12:36 by exenia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_return_fd(t_redirect *red, int *fds)
+int	ft_return_fd(t_redirect *red, long long int *fds)
 {
 	if (fds[0] != 0)
 	{
