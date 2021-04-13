@@ -32,6 +32,7 @@ int		print_syntax_error(int symbol)
 	else
 		write(2, &symbol, 1);
 	write(2, "'\n", 2);
+	g_exit_status = 258;
 	return (1);
 }
 
