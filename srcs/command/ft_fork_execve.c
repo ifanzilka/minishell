@@ -54,7 +54,7 @@ int			ft_fork_and_execve_command(char *comand, char **argv, char **envp)
 		write(1, "Killed: 9\n", 10);
 		exit(137);
 	}
-	ft_signal_child_process();
+	ft_signal();
 	if (g_signal != 0)
 		return (g_signal);
 	return (WEXITSTATUS(status));

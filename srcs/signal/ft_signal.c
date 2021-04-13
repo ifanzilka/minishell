@@ -23,9 +23,11 @@ void			ft_signal_cltr_c(int sig)
 
 static	void	ft_signal_quit(int sig)
 {
-	(void)sig;
-	printf("hello\n");
 	write(1, "\b\b  \b\b", 6);
+	write(1, "^\\Quit: ", 8);
+	ft_putnbr_fd(sig, 1);
+	write(1, "\n", 1);
+	g_signal = 131;
 }
 
 static	void	ft_sigterm(int sig)
