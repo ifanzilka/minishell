@@ -58,3 +58,18 @@ unset NHOME
 unset HOME
 cd 
 exit
+echo $FOO
+env
+usr/bin/env
+/usr/bin/env
+env
+unset PATH
+export PATH=/bin:/usr/bin
+ls
+pwc
+top
+gcc 
+unset PATH
+ls
+/bin/ls
+/usr/bin/emacs
