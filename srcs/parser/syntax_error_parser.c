@@ -88,7 +88,7 @@ int		syntax_error_detect(char *str)
 		str = skip_quotes(str, &command);
 		if (*str && not_one_of_the_set(*str, "><|&;"))
 			command = 1;
-		if (*str && one_of_the_set(*str, "><|;&"))
+		if (*str && one_of_the_set(*str, "|;&"))
 		{
 			if (!(str = error_near_token(str, command)))
 				return (1);
